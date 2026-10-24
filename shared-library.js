@@ -1,4 +1,4 @@
-// v89: 独立ファイルで動作する静的共有ライブラリ。ユーザーの個人データは送信しない。
+// v91: 静的共有ライブラリ。公開サンプルと投稿問題集を区別し、個人データは送信しない。
 let sharedLibrarySets = [];
 let sharedLibraryLoaded = false;
 let sharedLibraryLoadPromise = null;
@@ -55,8 +55,11 @@ function renderSharedLibraryCards(){
   if(!filtered.length){grid.innerHTML='<div class="shared-library-status">条件に合う問題集がありません。検索語や教科を変更してください。</div>';return;}
   grid.innerHTML=filtered.map(set=>{
     const isSelected=sharedLibrarySelectedSet===set.id;
+    const isInitialSample=String(set.reviewStatus||"").includes("初期サンプル");
+    const badgeText=isInitialSample?"初期サンプル":"投稿問題集";
+    const badgeClass=isInitialSample?"demo":"published";
     const preview=isSelected?`<div class="shared-set-preview" aria-label="問題と解答のプレビュー">${set.questions.slice(0,5).map((q,i)=>`<div class="shared-preview-row"><div class="shared-preview-q"><span class="shared-preview-index">${i+1}.</span>${escapeHtml(q.question)}</div><div class="shared-preview-a">答え：${escapeHtml(q.answer)}</div></div>`).join("")}${set.questions.length>5?`<p>ほか${set.questions.length-5}問あります。</p>`:""}<p class="shared-library-count">作成：${escapeHtml(set.author||"不明")} · ${escapeHtml(set.rightsNote||"")}</p></div>`:"";
-    return `<article class="shared-set-card" data-shared-set="${escapeHtml(set.id)}"><div class="shared-set-meta"><span class="shared-set-chip">${escapeHtml(set.subject||"その他")}</span><span class="shared-set-chip">${escapeHtml(set.grade||"学年指定なし")}</span><span class="shared-set-chip">${set.questions.length}問</span><span class="shared-set-chip demo">初期サンプル</span></div><h3>${escapeHtml(set.title)}</h3><p>${escapeHtml(set.description||"")}</p><p>単元：${escapeHtml(set.topic||"未分類")} · 難易度：${escapeHtml(set.level||"標準")}</p><div class="shared-set-actions"><button class="action sub" type="button" data-shared-action="preview" data-set-id="${escapeHtml(set.id)}">${isSelected?"プレビューを閉じる":"内容を確認"}</button><button class="action main" type="button" data-shared-action="copy" data-set-id="${escapeHtml(set.id)}">自分の問題集に追加</button></div>${preview}</article>`;
+    return `<article class="shared-set-card" data-shared-set="${escapeHtml(set.id)}"><div class="shared-set-meta"><span class="shared-set-chip">${escapeHtml(set.subject||"その他")}</span><span class="shared-set-chip">${escapeHtml(set.grade||"学年指定なし")}</span><span class="shared-set-chip">${set.questions.length}問</span><span class="shared-set-chip ${badgeClass}">${badgeText}</span></div><h3>${escapeHtml(set.title)}</h3><p>${escapeHtml(set.description||"")}</p><p>単元：${escapeHtml(set.topic||"未分類")} · 難易度：${escapeHtml(set.level||"標準")}</p><div class="shared-set-actions"><button class="action sub" type="button" data-shared-action="preview" data-set-id="${escapeHtml(set.id)}">${isSelected?"プレビューを閉じる":"内容を確認"}</button><button class="action main" type="button" data-shared-action="copy" data-set-id="${escapeHtml(set.id)}">自分の問題集に追加</button></div>${preview}</article>`;
   }).join("");
 }
 

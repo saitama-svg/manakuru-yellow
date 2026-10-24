@@ -1,4 +1,4 @@
-const CACHE_NAME = 'manakuru-yellow-v90-shared-library-fix';
+const CACHE_NAME = 'manakuru-yellow-v91-vocab-shared-set';
 const APP_SHELL = [
   './',
   './index.html',
