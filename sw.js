@@ -1,4 +1,4 @@
-const CACHE_NAME = 'manakuru-yellow-v86';
+const CACHE_NAME = 'manakuru-yellow-v87-neutral-titlebar';
 const APP_SHELL = [
   './',
   './manifest.webmanifest',
