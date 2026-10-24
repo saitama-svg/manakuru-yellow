@@ -1,0 +1,248 @@
+{
+  "format": "manakuru-shared-library",
+  "version": 1,
+  "updatedAt": "2026-10-24",
+  "note": "初期サンプルの自作問題集。共有ライブラリの動作確認用。",
+  "sets": [
+    {
+      "id": "history-modern-japan-001",
+      "title": "中学歴史・近代日本の基礎",
+      "subject": "社会",
+      "grade": "中学3年",
+      "topic": "近代日本",
+      "level": "基礎",
+      "description": "明治維新から近代日本の主な出来事を確認する自作サンプル問題集です。",
+      "author": "マナクル YELLOW 初期サンプル",
+      "reviewStatus": "初期サンプル・内容確認用",
+      "rightsNote": "本問題集はこの共有ライブラリの掲載例として作成した自作問題です。",
+      "questions": [
+        {
+          "question": "明治政府が新しい国づくりを進めるきっかけとなった1868年の政治的変革は？",
+          "answer": "明治維新"
+        },
+        {
+          "question": "明治政府が1871年に藩を廃止して府県を置いた改革は？",
+          "answer": "廃藩置県"
+        },
+        {
+          "question": "1873年に始まった、満20歳以上の男子に兵役の義務を課す制度は？",
+          "answer": "徴兵令"
+        },
+        {
+          "question": "1873年に導入された、土地の所有者が地価に応じて地租を現金で納める制度は？",
+          "answer": "地租改正"
+        },
+        {
+          "question": "自由民権運動で、国会の開設を求める運動を進めた代表的人物は？",
+          "answer": "板垣退助"
+        },
+        {
+          "question": "1889年に発布された日本初の近代的な憲法は？",
+          "answer": "大日本帝国憲法"
+        },
+        {
+          "question": "1894年に日本と清の間で始まった戦争は？",
+          "answer": "日清戦争"
+        },
+        {
+          "question": "1904年に日本とロシアの間で始まった戦争は？",
+          "answer": "日露戦争"
+        },
+        {
+          "question": "1910年に日本が併合した国・地域は？",
+          "answer": "韓国（大韓帝国）"
+        },
+        {
+          "question": "1918年、米の価格上昇をきっかけに全国へ広がった出来事は？",
+          "answer": "米騒動"
+        }
+      ]
+    },
+    {
+      "id": "math-linear-functions-001",
+      "title": "中学数学・一次関数の基礎",
+      "subject": "数学",
+      "grade": "中学2年",
+      "topic": "一次関数",
+      "level": "基礎",
+      "description": "一次関数の式、傾き、切片を確認する自作サンプル問題集です。",
+      "author": "マナクル YELLOW 初期サンプル",
+      "reviewStatus": "初期サンプル・内容確認用",
+      "rightsNote": "本問題集はこの共有ライブラリの掲載例として作成した自作問題です。",
+      "questions": [
+        {
+          "question": "一次関数を表す一般的な式は？",
+          "answer": "y=ax+b（a≠0）"
+        },
+        {
+          "question": "y=3x+2 の傾きは？",
+          "answer": "3"
+        },
+        {
+          "question": "y=−2x+5 の切片は？",
+          "answer": "5"
+        },
+        {
+          "question": "y=4x のグラフは、どの点を通る？",
+          "answer": "原点（0, 0）"
+        },
+        {
+          "question": "y=2x+1 で x=3 のとき、yはいくつ？",
+          "answer": "7"
+        },
+        {
+          "question": "y=−x+4 で x=2 のとき、yはいくつ？",
+          "answer": "2"
+        },
+        {
+          "question": "xが1増えるとyが5増える一次関数の傾きは？",
+          "answer": "5"
+        },
+        {
+          "question": "グラフが右上がりになる一次関数の傾きは正・負のどちら？",
+          "answer": "正"
+        },
+        {
+          "question": "グラフが右下がりになる一次関数の傾きは正・負のどちら？",
+          "answer": "負"
+        },
+        {
+          "question": "y=2x−3 のグラフがy軸と交わる点は？",
+          "answer": "(0, −3)"
+        },
+        {
+          "question": "2点 (0, 1) と (1, 4) を通る一次関数の傾きは？",
+          "answer": "3"
+        },
+        {
+          "question": "一次関数のグラフは、基本的にどのような形？",
+          "answer": "直線"
+        }
+      ]
+    },
+    {
+      "id": "english-irregular-verbs-001",
+      "title": "中学英語・不規則動詞の過去形",
+      "subject": "英語",
+      "grade": "中学1〜3年",
+      "topic": "不規則動詞",
+      "level": "基礎",
+      "description": "よく使う不規則動詞の原形と過去形を確認する自作サンプルです。",
+      "author": "マナクル YELLOW 初期サンプル",
+      "reviewStatus": "初期サンプル・内容確認用",
+      "rightsNote": "本問題集はこの共有ライブラリの掲載例として作成した自作問題です。",
+      "questions": [
+        {
+          "question": "go の過去形は？",
+          "answer": "went"
+        },
+        {
+          "question": "come の過去形は？",
+          "answer": "came"
+        },
+        {
+          "question": "see の過去形は？",
+          "answer": "saw"
+        },
+        {
+          "question": "eat の過去形は？",
+          "answer": "ate"
+        },
+        {
+          "question": "have の過去形は？",
+          "answer": "had"
+        },
+        {
+          "question": "make の過去形は？",
+          "answer": "made"
+        },
+        {
+          "question": "take の過去形は？",
+          "answer": "took"
+        },
+        {
+          "question": "write の過去形は？",
+          "answer": "wrote"
+        },
+        {
+          "question": "buy の過去形は？",
+          "answer": "bought"
+        },
+        {
+          "question": "do の過去形は？",
+          "answer": "did"
+        },
+        {
+          "question": "get の過去形は？",
+          "answer": "got"
+        },
+        {
+          "question": "speak の過去形は？",
+          "answer": "spoke"
+        }
+      ]
+    },
+    {
+      "id": "science-weather-pressure-001",
+      "title": "中学理科・天気と気圧の基礎",
+      "subject": "理科",
+      "grade": "中学2年",
+      "topic": "天気・気圧",
+      "level": "基礎",
+      "description": "気圧や風、雲のでき方に関する自作サンプル問題集です。",
+      "author": "マナクル YELLOW 初期サンプル",
+      "reviewStatus": "初期サンプル・内容確認用",
+      "rightsNote": "本問題集はこの共有ライブラリの掲載例として作成した自作問題です。",
+      "questions": [
+        {
+          "question": "空気が地表を押す力を何という？",
+          "answer": "気圧"
+        },
+        {
+          "question": "気圧の単位としてよく使われるものは？",
+          "answer": "hPa（ヘクトパスカル）"
+        },
+        {
+          "question": "空気の密度が小さくなり、上昇しやすくなるのは一般に気温が高い空気・低い空気のどちら？",
+          "answer": "気温が高い空気"
+        },
+        {
+          "question": "上昇した空気が冷えて水滴や氷の粒ができると、何ができる？",
+          "answer": "雲"
+        },
+        {
+          "question": "風は基本的に気圧の高いところから低いところへ、どのように吹く？",
+          "answer": "気圧差を埋めるように吹く"
+        },
+        {
+          "question": "周囲より気圧が低い部分を何という？",
+          "answer": "低気圧"
+        },
+        {
+          "question": "周囲より気圧が高い部分を何という？",
+          "answer": "高気圧"
+        },
+        {
+          "question": "空気中の水蒸気が水滴に変わることを何という？",
+          "answer": "凝結"
+        },
+        {
+          "question": "空気が上昇すると、周囲の気圧が低くなるため一般にどうなる？",
+          "answer": "膨張して温度が下がる"
+        },
+        {
+          "question": "天気図で気圧の等しい地点を結んだ線は？",
+          "answer": "等圧線"
+        },
+        {
+          "question": "等圧線の間隔が狭い場所では、一般に風は強い・弱いのどちら？",
+          "answer": "強い"
+        },
+        {
+          "question": "雲ができやすいのは、空気が上昇するとき・下降するときのどちら？",
+          "answer": "上昇するとき"
+        }
+      ]
+    }
+  ]
+}

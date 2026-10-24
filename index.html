@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<!-- MANAKURU-YELLOW-BUILD: v88-shared-library -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="一問一答、復習、成績・弱点分析、問題集、白紙勉強法、模擬テストをまとめた学習ツール「マナクル YELLOW」です。">
@@ -3489,6 +3490,22 @@ body.mock-test-active .mascot{display:none!important;}
   .nav-simplified .nav-primary-group button[data-view="roulette"]{font-size:12px!important}
 }
 </style>
+
+/* v88: みんなの問題集（管理者確認済みの静的ライブラリ） */
+.shared-library-hero{display:flex;align-items:center;gap:16px;padding:22px;border-radius:22px;background:linear-gradient(135deg,#fff4bd,#fffaf0);border:1px solid #f3df8a;margin:0 0 20px}
+.shared-library-hero-icon{width:58px;height:58px;flex:0 0 58px;border-radius:18px;background:#ffdf55;display:grid;place-items:center;font-size:28px;box-shadow:0 5px 14px rgba(171,127,0,.13)}
+.shared-library-hero h3{margin:0 0 5px;color:#34332a;font-size:21px}.shared-library-hero p{margin:0;color:#66614a;line-height:1.65}
+.shared-library-controls{display:grid;grid-template-columns:minmax(0,1fr) minmax(150px,220px);gap:12px;align-items:end;margin:18px 0}
+.shared-library-controls label{margin:0}.shared-library-controls input,.shared-library-controls select{width:100%;min-height:43px;border:1px solid #d8dfde;border-radius:12px;padding:10px 12px;background:#fff;color:#253330;font:inherit}
+.shared-library-count{font-size:13px;color:#687470;margin:8px 0 12px}
+.shared-library-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.shared-set-card{border:1px solid #e1e8e5;border-radius:18px;padding:18px;background:#fff;display:flex;flex-direction:column;gap:10px;min-width:0;box-shadow:0 3px 12px rgba(16,56,48,.035)}
+.shared-set-card h3{font-size:18px;line-height:1.4;margin:0;color:#243430}.shared-set-card p{margin:0;color:#66736f;line-height:1.55;font-size:13px}
+.shared-set-meta{display:flex;flex-wrap:wrap;gap:6px}.shared-set-chip{font-size:11px;border-radius:999px;background:#f1f5f3;color:#4b6059;padding:5px 8px;font-weight:750}.shared-set-chip.demo{background:#fff2bc;color:#785d00}
+.shared-set-actions{display:flex;gap:8px;margin-top:auto}.shared-set-actions .action{flex:1;min-width:0;font-size:13px;padding:10px 12px}
+.shared-set-preview{border-top:1px solid #e7ecea;padding-top:12px;margin-top:3px}.shared-preview-row{padding:10px 0;border-bottom:1px solid #eef1ef}.shared-preview-row:last-child{border-bottom:0}.shared-preview-q{font-weight:800;color:#263632;line-height:1.5}.shared-preview-a{margin-top:5px;color:#31724f;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}.shared-preview-index{font-size:11px;color:#89948f;margin-right:6px}.shared-library-status{padding:13px;border-radius:12px;background:#f5f7f6;color:#5b6b65;font-size:13px;line-height:1.6}.shared-library-status.error{background:#fff0ef;color:#9b3028}.shared-library-note{margin-top:18px;border-left:4px solid #e5bd36;padding:10px 12px;background:#fffaf0;border-radius:0 12px 12px 0;font-size:12px;color:#655d3b;line-height:1.7}
+@media(max-width:700px){.shared-library-hero{align-items:flex-start;padding:16px}.shared-library-hero h3{font-size:18px}.shared-library-controls{grid-template-columns:1fr}.shared-library-grid{grid-template-columns:1fr}.shared-set-card{padding:15px}.shared-set-actions{flex-direction:column}}
+
 </head>
 
 <body>
@@ -3525,6 +3542,7 @@ body.mock-test-active .mascot{display:none!important;}
     <div class="nav-common-group" aria-label="よく使う共通機能">
       <button id="statsTab" data-view="stats" title="学習成績と苦手な問題を確認する">📊 成績・弱点</button>
       <button id="libraryTab" data-view="library" title="問題集を切り替え、管理する">📚 問題集</button>
+      <button id="sharedLibraryTab" data-view="sharedLibrary" title="みんなが作った問題集を探す">🌐 みんなの問題集</button>
       <button id="registerTab" data-view="register" title="問題と答えを登録する">✍ 問題登録</button>
       <button id="settingsTab" data-view="settings" title="学習方法や操作を設定する">⚙ 学習設定</button>
     </div>
@@ -4469,6 +4487,22 @@ Q2. 鎌倉幕府を開いた人物は？ → 源頼朝"></textarea>
       </div>
       <div class="library-list" id="libraryList"></div>
       <div class="library-note">問題集を開くと、その問題集の成績・弱点・学習履歴も一緒に切り替わります。複製すると問題内容だけを引き継ぎ、成績は新しく始められます。</div>
+    </section>
+
+    <section id="sharedLibraryView" class="panel" aria-labelledby="sharedLibraryHeading">
+      <h2 id="sharedLibraryHeading">🌐 みんなの問題集</h2>
+      <div class="shared-library-hero">
+        <div class="shared-library-hero-icon" aria-hidden="true">📚</div>
+        <div><h3>みんなの知識を、みんなの学習に。</h3><p>共有されている問題集を確認し、自分の問題集にコピーできます。コピーした後は、自分用に編集しても元の問題集には影響しません。</p></div>
+      </div>
+      <div class="shared-library-status" id="sharedLibraryStatus" role="status" aria-live="polite">共有ライブラリを読み込んでいます。</div>
+      <div id="sharedLibraryControls" class="shared-library-controls" hidden>
+        <label>問題集を検索<input id="sharedLibrarySearch" type="search" placeholder="問題集名・単元・説明で検索" autocomplete="off"></label>
+        <label>教科<select id="sharedLibrarySubject"><option value="all">すべての教科</option></select></label>
+      </div>
+      <div id="sharedLibraryCount" class="shared-library-count" hidden></div>
+      <div id="sharedLibraryGrid" class="shared-library-grid"></div>
+      <div class="shared-library-note"><strong>掲載方針：</strong>ここに掲載されているのは、初期動作確認用の自作サンプルです。今後は、内容・正確さ・著作権・個人情報を確認した問題集だけを掲載します。個人用の問題集が自動で公開されることはありません。</div>
     </section>
 
     <section id="statsView" class="panel">
@@ -10928,6 +10962,7 @@ function updatePageGuide(view){
     manage:{group:"作成・管理",title:"問題管理",hint:"登録済みの問題を探して、内容を編集・整理できます。",needsPairs:true},
     tag:{group:"作成・管理",title:"分野・タグ",hint:"問題にタグを付けると、分野別や複数分野の学習に使えます。",needsPairs:true},
     library:{group:"問題集",title:"問題集",hint:"問題集を切り替えたり、登録済みの問題集を管理したりできます。"},
+    sharedLibrary:{group:"共有",title:"みんなの問題集",hint:"内容を確認した問題集を探して、自分用にコピーできます。"},
     url:{group:"作成・管理",title:"URL生成",hint:"問題セットを共有するURLを作成できます。",needsPairs:true},
     print:{group:"設定・データ",title:"印刷",hint:"問題と答えの印刷レイアウトを確認してから印刷します。",needsPairs:true},
     settings:{group:"設定・データ",title:"学習設定",hint:"キー操作や学習の動作を自分に合うよう調整します。"},
@@ -11018,6 +11053,7 @@ function switchView(view){
   document.getElementById("statsView").style.display=view==="stats"?"block":"none";
   spacedView.style.display=view==="spaced"?"block":"none";
   document.getElementById("libraryView").style.display=view==="library"?"block":"none";
+  document.getElementById("sharedLibraryView").style.display=view==="sharedLibrary"?"block":"none";
   document.getElementById("timeAttackView").style.display=view==="timeAttack"?"block":"none";
   document.getElementById("mockTestView").style.display=view==="mockTest"?"block":"none";
   document.body.classList.toggle("mock-test-active",view==="mockTest");
@@ -11038,6 +11074,7 @@ function switchView(view){
   document.getElementById("statsTab").classList.toggle("active",view==="stats");
   spacedTab.classList.toggle("active",view==="spaced");
   document.getElementById("libraryTab").classList.toggle("active",view==="library");
+  document.getElementById("sharedLibraryTab").classList.toggle("active",view==="sharedLibrary");
   document.getElementById("timeAttackTab").classList.toggle("active",view==="timeAttack");
   document.getElementById("mockTestTab").classList.toggle("active",view==="mockTest");
   whiteRecallTab.classList.toggle("active",view==="whiteRecall");
@@ -11055,6 +11092,7 @@ function switchView(view){
   if(view==="manage") renderProblemManagement();
   if(view==="tag") renderTagPage();
   if(view==="library") renderLibrary();
+  if(view==="sharedLibrary") renderSharedLibrary();
   if(view==="timeAttack") loadTimeAttackRecords();
   if(view==="mockTest") renderMockTestPage();
   if(view==="whiteRecall") renderWhiteRecallPage();
@@ -13521,6 +13559,112 @@ document.getElementById("blankStudyCanvas")?.addEventListener("lostpointercaptur
 window.addEventListener("resize",()=>{if(document.getElementById("blankStudyEditor")&&!document.getElementById("blankStudyEditor").hidden)blankStudyResizeCanvas();});
 document.addEventListener("keydown",event=>{if(event.key==="Escape"&&blankStudyFullscreenFallback){blankStudyRestoreFallbackWorkspace();}});
 
+
+
+
+// v88: 公開済みの静的共有ライブラリ。ユーザーの個人データは送信しない。
+let sharedLibrarySets = [];
+let sharedLibraryLoaded = false;
+let sharedLibraryLoadPromise = null;
+let sharedLibrarySelectedSet = "";
+
+async function loadSharedLibraryData(){
+  if(sharedLibraryLoaded) return sharedLibrarySets;
+  if(sharedLibraryLoadPromise) return sharedLibraryLoadPromise;
+  sharedLibraryLoadPromise=(async()=>{
+    const status=document.getElementById("sharedLibraryStatus");
+    try{
+      const response=await fetch("./shared-sets.json",{cache:"no-store"});
+      if(!response.ok) throw new Error(`共有ファイルを読み込めませんでした（HTTP ${response.status}）。`);
+      const payload=await response.json();
+      if(!payload||payload.format!=="manakuru-shared-library"||Number(payload.version)!==1||!Array.isArray(payload.sets)) throw new Error("共有ファイルの形式が正しくありません。");
+      sharedLibrarySets=payload.sets.filter(set=>set&&typeof set.id==="string"&&typeof set.title==="string"&&Array.isArray(set.questions)&&set.questions.length>0&&set.questions.length<=MAX&&set.questions.every(q=>q&&typeof q.question==="string"&&typeof q.answer==="string"&&q.question.trim()&&q.answer.trim()));
+      sharedLibraryLoaded=true;
+      const subjects=[...new Set(sharedLibrarySets.map(s=>String(s.subject||"その他")))].sort((a,b)=>a.localeCompare(b,"ja"));
+      const select=document.getElementById("sharedLibrarySubject");
+      if(select){const previous=select.value;select.innerHTML='<option value="all">すべての教科</option>'+subjects.map(s=>`<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join(""); if(subjects.includes(previous))select.value=previous;}
+      if(status){status.classList.remove("error");status.textContent=`${sharedLibrarySets.length}種類の問題集を読み込みました。気になる問題集を開いて、内容を確認できます。`;}
+      document.getElementById("sharedLibraryControls").hidden=false;
+      document.getElementById("sharedLibraryCount").hidden=false;
+      renderSharedLibraryCards();
+      return sharedLibrarySets;
+    }catch(error){
+      if(status){status.classList.add("error");status.textContent=`共有ライブラリを読み込めませんでした。インターネット接続を確認して、もう一度開いてください。${String(error?.message||"")}`;}
+      document.getElementById("sharedLibraryGrid").innerHTML='<button class="action sub" type="button" id="sharedLibraryRetryBtn">もう一度読み込む</button>';
+      document.getElementById("sharedLibraryRetryBtn")?.addEventListener("click",()=>{sharedLibraryLoaded=false;sharedLibraryLoadPromise=null;document.getElementById("sharedLibraryGrid").innerHTML="";renderSharedLibrary();});
+      throw error;
+    }finally{sharedLibraryLoadPromise=null;}
+  })();
+  return sharedLibraryLoadPromise;
+}
+
+function renderSharedLibrary(){
+  if(!sharedLibraryLoaded){loadSharedLibraryData().catch(()=>{});return;}
+  renderSharedLibraryCards();
+}
+
+function renderSharedLibraryCards(){
+  const search=(document.getElementById("sharedLibrarySearch")?.value||"").trim().toLocaleLowerCase("ja");
+  const subject=document.getElementById("sharedLibrarySubject")?.value||"all";
+  const grid=document.getElementById("sharedLibraryGrid");
+  const count=document.getElementById("sharedLibraryCount");
+  if(!grid||!count)return;
+  const filtered=sharedLibrarySets.filter(set=>{
+    if(subject!=="all"&&String(set.subject||"その他")!==subject)return false;
+    const haystack=[set.title,set.subject,set.grade,set.topic,set.level,set.description,set.author].join(" ").toLocaleLowerCase("ja");
+    return !search||haystack.includes(search);
+  });
+  count.textContent=`${filtered.length}件の問題集`;
+  if(!filtered.length){grid.innerHTML='<div class="shared-library-status">条件に合う問題集がありません。検索語や教科を変更してください。</div>';return;}
+  grid.innerHTML=filtered.map(set=>{
+    const isSelected=sharedLibrarySelectedSet===set.id;
+    const preview=isSelected?`<div class="shared-set-preview" aria-label="問題と解答のプレビュー">${set.questions.slice(0,5).map((q,i)=>`<div class="shared-preview-row"><div class="shared-preview-q"><span class="shared-preview-index">${i+1}.</span>${escapeHtml(q.question)}</div><div class="shared-preview-a">答え：${escapeHtml(q.answer)}</div></div>`).join("")}${set.questions.length>5?`<p>ほか${set.questions.length-5}問あります。</p>`:""}<p class="shared-library-count">作成：${escapeHtml(set.author||"不明")} · ${escapeHtml(set.rightsNote||"")}</p></div>`:"";
+    return `<article class="shared-set-card" data-shared-set="${escapeHtml(set.id)}"><div class="shared-set-meta"><span class="shared-set-chip">${escapeHtml(set.subject||"その他")}</span><span class="shared-set-chip">${escapeHtml(set.grade||"学年指定なし")}</span><span class="shared-set-chip">${set.questions.length}問</span><span class="shared-set-chip demo">初期サンプル</span></div><h3>${escapeHtml(set.title)}</h3><p>${escapeHtml(set.description||"")}</p><p>単元：${escapeHtml(set.topic||"未分類")} · 難易度：${escapeHtml(set.level||"標準")}</p><div class="shared-set-actions"><button class="action sub" type="button" data-shared-action="preview" data-set-id="${escapeHtml(set.id)}">${isSelected?"プレビューを閉じる":"内容を確認"}</button><button class="action main" type="button" data-shared-action="copy" data-set-id="${escapeHtml(set.id)}">自分の問題集に追加</button></div>${preview}</article>`;
+  }).join("");
+}
+
+function copySharedSetToPersonalLibrary(setId){
+  const shared=sharedLibrarySets.find(set=>set.id===setId);
+  if(!shared)return;
+  if(!Array.isArray(deckLibrary)){alert("問題集一覧を読み込めません。データ管理からバックアップを確認してください。");return;}
+  const proposedTitle=safeDeckTitle(shared.title+"（共有コピー）");
+  const name=prompt("自分の問題集に追加します。名前を確認してください。",proposedTitle);
+  if(name===null)return;
+  const title=safeDeckTitle(name);
+  if(!title){alert("問題集名を入力してください。");return;}
+  const words=shared.questions.slice(0,MAX).map(q=>`${String(q.question).replace(/[\r\n\t]+/g," ").trim()}\t${String(q.answer).replace(/[\r\n\t]+/g," ").trim()}`).filter(line=>line.split("\t")[0]&&line.split("\t")[1]).join("\n");
+  if(!words){alert("取り込める問題がありません。");return;}
+  const deck={id:makeDeckId(),title,words,direction:"forward",questionCount:"all",testDate:"",spacedReviewEnabled:true,spacedReviewPausedAt:0,hints:{},redParts:{},redSheetPrintEdits:{},folder:"",archived:false,sortOrder:getNewDeckSortOrder(""),createdAt:Date.now(),updatedAt:Date.now()};
+  deckLibrary.push(deck);
+  if(!saveDeckLibrary()){
+    deckLibrary=deckLibrary.filter(item=>item.id!==deck.id);
+    alert("問題集を保存できませんでした。端末の保存領域を確認してください。共有元は変更されていません。");
+    return;
+  }
+  if(!setActiveDeckId(deck.id)){
+    alert("問題集は追加しましたが、現在の問題集として設定できませんでした。問題集一覧から開いてください。");
+    renderLibrary();
+    return;
+  }
+  // openDeckが新しい問題数に合わせてタグ配列を初期化する。既存セットのタグ状態を誤って流用しない。
+  openDeck(deck,false);
+  renderLibrary();
+  if(typeof renderDataManagement==="function")renderDataManagement();
+  switchView("roulette");
+  alert(`「${deck.title}」を自分の問題集にコピーしました。\n\n共有ライブラリの元データは変更されません。`);
+}
+
+document.getElementById("sharedLibrarySearch")?.addEventListener("input",renderSharedLibraryCards);
+document.getElementById("sharedLibrarySubject")?.addEventListener("change",renderSharedLibraryCards);
+document.getElementById("sharedLibraryGrid")?.addEventListener("click",event=>{
+  const button=event.target.closest("button[data-shared-action]");
+  if(!button)return;
+  const id=button.dataset.setId;
+  if(button.dataset.sharedAction==="preview"){
+    sharedLibrarySelectedSet=sharedLibrarySelectedSet===id?"":id;
+    renderSharedLibraryCards();
+  }else if(button.dataset.sharedAction==="copy")copySharedSetToPersonalLibrary(id);
+});
 
 </script>
 <!-- v56: toolbar button and Ctrl/Command+Z mark selected text pink; pasted bold content remains pink. -->

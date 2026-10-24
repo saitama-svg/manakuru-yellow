@@ -1,7 +1,8 @@
-const CACHE_NAME = 'manakuru-yellow-v87-neutral-titlebar';
+const CACHE_NAME = 'manakuru-yellow-v88-shared-library';
 const APP_SHELL = [
   './',
   './manifest.webmanifest',
+  './shared-sets.json',
   './icon-192.png',
   './icon-512.png',
   './apple-touch-icon-180.png',
