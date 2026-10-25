@@ -3571,10 +3571,91 @@ body.mock-test-active .mascot{display:none!important;}
 }
 </style>
 
+<style id="v96StartupExitBurst">
+/* v96：画面への切り替え時、ロゴを中心に光が外側へはじけて消える */
+.startup-splash{
+  transition:opacity .68s cubic-bezier(.18,.72,.22,1),transform .68s cubic-bezier(.18,.72,.22,1),filter .58s ease-out;
+}
+.startup-splash.is-leaving{
+  opacity:0;transform:scale(1.025);filter:blur(1.5px);pointer-events:none;
+  transition:opacity .68s cubic-bezier(.18,.72,.22,1),transform .68s cubic-bezier(.18,.72,.22,1),filter .58s ease-out;
+}
+/* 大きな放射状の光がロゴの位置から画面の外へ広がる */
+.startup-splash-exit-burst{
+  position:absolute;z-index:3;pointer-events:none;
+  width:200vmax;height:200vmax;left:50%;top:calc(50% - 38px);
+  transform:translate(-50%,-50%) scale(.035) rotate(-10deg);
+  transform-origin:center;
+  opacity:0;
+  background:repeating-conic-gradient(from -5deg,
+    rgba(255,255,255,0) 0deg 7deg,
+    rgba(255,194,35,.94) 7deg 8deg,
+    rgba(255,255,255,.58) 8deg 9.5deg,
+    rgba(255,255,255,0) 9.5deg 20deg);
+  -webkit-mask-image:radial-gradient(circle,transparent 0 5%,#000 8% 100%);
+  mask-image:radial-gradient(circle,transparent 0 5%,#000 8% 100%);
+}
+.startup-splash.is-leaving .startup-splash-exit-burst{
+  animation:v96FullBurst .66s cubic-bezier(.12,.66,.16,1) both;
+}
+.startup-splash.is-leaving .startup-splash-mark{
+  animation:v96MarkBurst .6s cubic-bezier(.12,.7,.18,1) both;
+}
+.startup-splash.is-leaving .startup-splash-title{
+  animation:v96TitleBurst .53s cubic-bezier(.16,.68,.2,1) both;
+}
+.startup-splash.is-leaving .startup-splash-subtitle{
+  animation:v96SubtitleBurst .48s cubic-bezier(.16,.68,.2,1) both;
+}
+.startup-splash.is-leaving .startup-splash-burst::before{
+  animation:v96ExitRing .66s cubic-bezier(.12,.66,.16,1) both;
+}
+.startup-splash.is-leaving .startup-splash-burst::after{
+  animation:v96ExitRays .66s cubic-bezier(.12,.66,.16,1) both;
+}
+@keyframes v96FullBurst{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.035) rotate(-10deg)}
+  14%{opacity:.92}
+  58%{opacity:.76}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(1.14) rotate(8deg)}
+}
+@keyframes v96MarkBurst{
+  0%{opacity:1;transform:scale(1) rotate(0);filter:blur(0)}
+  18%{opacity:1;transform:scale(1.2) rotate(-3deg);filter:blur(0)}
+  100%{opacity:0;transform:scale(2.45) rotate(18deg);filter:blur(7px)}
+}
+@keyframes v96TitleBurst{
+  0%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
+  100%{opacity:0;transform:translateY(-17px) scale(1.12);filter:blur(5px)}
+}
+@keyframes v96SubtitleBurst{
+  0%{opacity:1;transform:translateY(0) scale(1)}
+  100%{opacity:0;transform:translateY(18px) scale(1.12)}
+}
+@keyframes v96ExitRing{
+  0%{opacity:0;transform:scale(.28)}
+  12%{opacity:.95}
+  100%{opacity:0;transform:scale(34)}
+}
+@keyframes v96ExitRays{
+  0%{opacity:0;transform:scale(.22) rotate(-14deg)}
+  16%{opacity:.96}
+  100%{opacity:0;transform:scale(23) rotate(13deg)}
+}
+@media(prefers-reduced-motion:reduce){
+  .startup-splash,.startup-splash-exit-burst,.startup-splash::before,.startup-splash::after,
+  .startup-splash-content,.startup-splash-mark,.startup-splash-title,.startup-splash-subtitle,
+  .startup-splash-burst::before,.startup-splash-burst::after,.app{
+    animation:none!important;transition:none!important;
+  }
+}
+</style>
+
 </head>
 
 <body>
 <div class="startup-splash" id="startupSplash" aria-hidden="true">
+  <div class="startup-splash-exit-burst" aria-hidden="true"></div>
   <div class="startup-splash-content">
     <div class="startup-splash-emblem-wrap" aria-hidden="true">
       <div class="startup-splash-burst"></div>
@@ -13791,7 +13872,7 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 
 
 <script>
-// v95: ロゴが徐々に現れて弾ける余韻を残してから、通常画面へ移行する。
+// v96: ロゴの周りから光が外側へはじけて消えた後、通常画面へ移行する。
 (function finishStartupSplash(){
   const splash = document.getElementById('startupSplash');
   if (!splash) return;
@@ -13800,7 +13881,7 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
   // ロゴ・文字の出現が終わり、弾ける演出を少し見せてから閉じる。
   window.setTimeout(() => {
     splash.classList.add('is-leaving');
-    window.setTimeout(() => splash.remove(), 440);
+    window.setTimeout(() => splash.remove(), 700);
   }, 2240);
 })();
 </script>
