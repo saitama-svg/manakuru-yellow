@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<!-- MANAKURU-YELLOW-BUILD: v94-startup-animation -->
+<!-- MANAKURU-YELLOW-BUILD: v95-startup-burst-animation -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="一問一答、復習、成績・弱点分析、問題集、白紙勉強法、模擬テストをまとめた学習ツール「マナクル YELLOW」です。">
@@ -3511,30 +3511,63 @@ body.mock-test-active .mascot{display:none!important;}
 </style>
 
 
-<style id="v94StartupAnimation">
-/* v94: short, lightweight app-opening animation */
+<style id="v95StartupBurstAnimation">
+/* v95: ゆっくり現れて、最後に弾ける起動演出 */
 .startup-splash{
   position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;
-  padding:24px;background:linear-gradient(145deg,#fff8d5 0%,#fffdf4 48%,#d9f8ef 100%);
-  opacity:1;transition:opacity .22s ease;pointer-events:auto;
+  overflow:hidden;padding:24px;
+  background:radial-gradient(circle at 50% 43%,rgba(255,255,255,.98) 0%,rgba(255,251,229,.98) 33%,transparent 67%),
+             linear-gradient(145deg,#fff4bf 0%,#fffdf5 48%,#d8f7ed 100%);
+  opacity:1;transition:opacity .42s cubic-bezier(.22,.75,.25,1),transform .42s ease,filter .42s ease;
+  pointer-events:auto;isolation:isolate;
 }
-.startup-splash.is-leaving{opacity:0;pointer-events:none}
-.startup-splash-content{display:flex;flex-direction:column;align-items:center;gap:13px;text-align:center;animation:v94SplashContentIn .48s cubic-bezier(.2,.75,.25,1) both}
+.startup-splash::before,.startup-splash::after{
+  content:"";position:absolute;z-index:-1;border-radius:50%;pointer-events:none;
+  filter:blur(2px);opacity:0;animation:v95AmbientGlow 2.05s ease-out both;
+}
+.startup-splash::before{width:min(68vw,430px);aspect-ratio:1;background:radial-gradient(circle,rgba(255,218,82,.28),rgba(255,218,82,0) 70%);left:calc(50% - min(34vw,215px));top:calc(50% - min(34vw,215px));}
+.startup-splash::after{width:min(54vw,340px);aspect-ratio:1;background:radial-gradient(circle,rgba(100,224,189,.19),rgba(100,224,189,0) 70%);left:calc(50% - min(27vw,170px));top:calc(50% - min(27vw,170px));animation-delay:.12s;}
+.startup-splash.is-leaving{opacity:0;transform:scale(1.018);filter:blur(2px);pointer-events:none}
+.startup-splash-content{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;position:relative;width:min(100%,420px)}
+.startup-splash-emblem-wrap{position:relative;display:grid;place-items:center;width:132px;height:132px;margin-bottom:1px;isolation:isolate}
+.startup-splash-burst{position:absolute;inset:0;pointer-events:none;z-index:0}
+.startup-splash-burst::before{
+  content:"";position:absolute;inset:24px;border:2px solid rgba(246,190,30,.75);border-radius:50%;
+  opacity:0;transform:scale(.25);animation:v95BurstRing .86s .76s cubic-bezier(.12,.7,.2,1) both;
+}
+.startup-splash-burst::after{
+  content:"";position:absolute;inset:5px;border-radius:50%;opacity:0;
+  background:repeating-conic-gradient(from -7deg,rgba(255,190,26,0) 0deg 12deg,rgba(255,190,26,.88) 12deg 14deg,rgba(255,190,26,0) 14deg 30deg);
+  -webkit-mask-image:radial-gradient(circle,transparent 0 24%,#000 28% 53%,transparent 72%);
+  mask-image:radial-gradient(circle,transparent 0 24%,#000 28% 53%,transparent 72%);
+  animation:v95BurstRays .9s .72s cubic-bezier(.15,.68,.25,1) both;
+}
 .startup-splash-mark{
-  width:82px;height:82px;border-radius:27px;display:grid;place-items:center;
-  background:linear-gradient(145deg,#ffe36d,#ffc928);color:#51431a;
-  box-shadow:0 12px 28px rgba(181,137,13,.2);font-size:38px;font-weight:900;
-  transform-origin:center;animation:v94SplashMarkIn .62s cubic-bezier(.17,.84,.24,1.2) both;
+  position:relative;z-index:1;width:84px;height:84px;border-radius:28px;display:grid;place-items:center;
+  background:linear-gradient(145deg,#ffe873 0%,#ffd43c 52%,#ffc42b 100%);color:#51431a;
+  border:1px solid rgba(255,255,255,.78);font-size:39px;font-weight:950;line-height:1;
+  box-shadow:0 7px 18px rgba(181,137,13,.12),inset 0 1px 0 rgba(255,255,255,.75);
+  transform-origin:center;opacity:0;animation:v95MarkBuild 1.42s cubic-bezier(.2,.76,.2,1) both;
 }
-.startup-splash-title{margin:0;color:#20243a;font-size:clamp(24px,5vw,31px);font-weight:900;letter-spacing:.025em;line-height:1.25}
-.startup-splash-subtitle{margin:0;color:#61716d;font-size:13px;font-weight:700;letter-spacing:.07em;animation:v94SplashTextIn .42s .12s ease both}
-.app{animation:v94AppEntrance .48s ease-out}
-@keyframes v94SplashContentIn{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
-@keyframes v94SplashMarkIn{0%{opacity:0;transform:scale(.72) rotate(-9deg)}72%{opacity:1;transform:scale(1.045) rotate(1.5deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
-@keyframes v94SplashTextIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
-@keyframes v94AppEntrance{from{opacity:.82;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.startup-splash-title{margin:0;color:#20243a;font-size:clamp(24px,5vw,32px);font-weight:900;letter-spacing:.025em;line-height:1.25;opacity:0;animation:v95TitleReveal .62s 1.03s cubic-bezier(.2,.75,.25,1) both}
+.startup-splash-subtitle{margin:0;color:#61716d;font-size:13px;font-weight:700;letter-spacing:.07em;opacity:0;animation:v95SubtitleReveal .55s 1.34s ease-out both}
+.app{animation:v95AppEntrance .48s ease-out}
+@keyframes v95AmbientGlow{0%{opacity:0;transform:scale(.7)}38%{opacity:1;transform:scale(1.03)}100%{opacity:.75;transform:scale(1)}}
+@keyframes v95MarkBuild{
+  0%{opacity:0;transform:scale(.16) rotate(-14deg);filter:blur(9px);box-shadow:0 0 0 rgba(255,202,42,0)}
+  22%{opacity:.7;transform:scale(.58) rotate(-7deg);filter:blur(2px);box-shadow:0 0 32px rgba(255,202,42,.34)}
+  45%{opacity:1;transform:scale(.94) rotate(2deg);filter:blur(0);box-shadow:0 0 42px rgba(255,202,42,.42),0 8px 20px rgba(181,137,13,.12)}
+  67%{opacity:1;transform:scale(1.19) rotate(-1.5deg);box-shadow:0 0 54px rgba(255,202,42,.58),0 12px 26px rgba(181,137,13,.14)}
+  82%{opacity:1;transform:scale(.94) rotate(.5deg);box-shadow:0 0 27px rgba(255,202,42,.25),0 7px 18px rgba(181,137,13,.1)}
+  100%{opacity:1;transform:scale(1) rotate(0);filter:blur(0);box-shadow:0 7px 18px rgba(181,137,13,.12),inset 0 1px 0 rgba(255,255,255,.75)}
+}
+@keyframes v95BurstRing{0%{opacity:0;transform:scale(.24)}20%{opacity:.9}100%{opacity:0;transform:scale(1.75)}}
+@keyframes v95BurstRays{0%{opacity:0;transform:scale(.24) rotate(-14deg)}25%{opacity:.92}100%{opacity:0;transform:scale(1.08) rotate(8deg)}}
+@keyframes v95TitleReveal{0%{opacity:0;transform:translateY(13px);filter:blur(3px)}100%{opacity:1;transform:translateY(0);filter:blur(0)}}
+@keyframes v95SubtitleReveal{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+@keyframes v95AppEntrance{from{opacity:.84;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){
-  .startup-splash,.startup-splash-content,.startup-splash-mark,.startup-splash-subtitle,.app{animation:none!important;transition:none!important}
+  .startup-splash,.startup-splash::before,.startup-splash::after,.startup-splash-content,.startup-splash-mark,.startup-splash-title,.startup-splash-subtitle,.startup-splash-burst::before,.startup-splash-burst::after,.app{animation:none!important;transition:none!important}
 }
 </style>
 
@@ -3543,7 +3576,10 @@ body.mock-test-active .mascot{display:none!important;}
 <body>
 <div class="startup-splash" id="startupSplash" aria-hidden="true">
   <div class="startup-splash-content">
-    <div class="startup-splash-mark" aria-hidden="true">M</div>
+    <div class="startup-splash-emblem-wrap" aria-hidden="true">
+      <div class="startup-splash-burst"></div>
+      <div class="startup-splash-mark">M</div>
+    </div>
     <p class="startup-splash-title">マナクル YELLOW</p>
     <p class="startup-splash-subtitle">学びを、もっと楽しく。</p>
   </div>
@@ -13755,16 +13791,17 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 
 
 <script>
-// v94: 起動演出は短時間で終了し、動きを減らす設定では即座に閉じる。
+// v95: ロゴが徐々に現れて弾ける余韻を残してから、通常画面へ移行する。
 (function finishStartupSplash(){
   const splash = document.getElementById('startupSplash');
   if (!splash) return;
   const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduceMotion) { splash.remove(); return; }
+  // ロゴ・文字の出現が終わり、弾ける演出を少し見せてから閉じる。
   window.setTimeout(() => {
     splash.classList.add('is-leaving');
-    window.setTimeout(() => splash.remove(), 260);
-  }, 720);
+    window.setTimeout(() => splash.remove(), 440);
+  }, 2240);
 })();
 </script>
 
