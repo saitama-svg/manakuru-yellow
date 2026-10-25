@@ -3771,6 +3771,102 @@ body.mock-test-active .mascot{display:none!important;}
 }
 </style>
 
+
+<style id="v98ElegantParticleDissolve">
+/* v98：筋状の閃光を除き、柔らかな光の粒が静かに広がる起動終了演出 */
+.startup-splash{
+  transition:opacity .36s .60s ease-out,transform .92s cubic-bezier(.2,.7,.25,1),filter .48s .28s ease-out;
+}
+.startup-splash.is-leaving{
+  opacity:0;transform:scale(1.006);filter:blur(.7px);pointer-events:none;
+  transition:opacity .36s .60s ease-out,transform .92s cubic-bezier(.2,.7,.25,1),filter .48s .28s ease-out;
+}
+/* これまでの大きな放射線レイヤーは無効化 */
+.startup-splash-exit-burst{display:none!important;}
+.startup-splash-exit-flash{
+  background:radial-gradient(ellipse at 50% calc(50% - 38px),
+    rgba(255,255,255,.68) 0%,rgba(255,247,211,.46) 5%,
+    rgba(255,212,102,.18) 13%,rgba(173,244,223,.07) 23%,transparent 42%);
+  filter:blur(4px);mix-blend-mode:screen;
+}
+.startup-splash.is-leaving .startup-splash-exit-flash{
+  animation:v98SoftBloom .72s ease-out both;
+}
+/* マーク周囲は線ではなく、淡い面状の光に変更 */
+.startup-splash-burst::before{
+  border:1px solid rgba(246,190,30,.36);
+  box-shadow:0 0 16px rgba(255,215,95,.12);
+}
+.startup-splash-burst::after{
+  background:radial-gradient(circle,rgba(255,231,165,.20) 0%,rgba(255,231,165,.08) 38%,transparent 70%);
+  -webkit-mask-image:none;mask-image:none;
+  filter:blur(2px);
+}
+.startup-splash.is-leaving .startup-splash-burst::before,
+.startup-splash.is-leaving .startup-splash-burst::after{
+  animation:none!important;opacity:0!important;
+}
+.startup-splash-particles{overflow:hidden;pointer-events:none;contain:layout paint;}
+.startup-splash-particle{
+  width:var(--size,3px);height:var(--size,3px);border-radius:50%;
+  opacity:0;transform:translate(-50%,-50%) translate3d(0,0,0) scale(.38);
+  filter:saturate(.92);will-change:transform,opacity;
+  box-shadow:0 0 5px currentColor,0 0 10px rgba(255,214,112,.40);
+}
+.startup-splash-particle--gold{color:#e9b936;background:#f5cf68;}
+.startup-splash-particle--white{color:#fff;background:#fff;box-shadow:0 0 5px rgba(255,255,255,.95),0 0 11px rgba(255,229,167,.72);}
+.startup-splash-particle--mint{color:#83d7c0;background:#a3e6d5;box-shadow:0 0 5px rgba(131,215,192,.68),0 0 10px rgba(100,224,189,.35);}
+.startup-splash-particle--amber{color:#e6a34b;background:#f0b45f;box-shadow:0 0 5px rgba(230,163,75,.62),0 0 10px rgba(255,190,100,.30);}
+.startup-splash-particle.is-soft{filter:blur(.7px);}
+.startup-splash.is-leaving .startup-splash-particle{
+  animation:v98ParticleDrift var(--duration,.88s) cubic-bezier(.16,.58,.26,1) var(--delay,0s) both;
+}
+.startup-splash.is-leaving .startup-splash-mark{
+  animation:v98MarkDissolve .72s cubic-bezier(.2,.64,.28,1) both;
+}
+.startup-splash.is-leaving .startup-splash-title{
+  animation:v98TextDissolve .54s ease-out both;
+}
+.startup-splash.is-leaving .startup-splash-subtitle{
+  animation:v98SubtitleDissolve .48s ease-out both;
+}
+@keyframes v98SoftBloom{
+  0%{opacity:0;transform:scale(.78)}
+  20%{opacity:.48;transform:scale(.94)}
+  48%{opacity:.20;transform:scale(1.08)}
+  100%{opacity:0;transform:scale(1.22)}
+}
+@keyframes v98ParticleDrift{
+  0%{opacity:0;transform:translate(-50%,-50%) translate3d(0,0,0) scale(.38)}
+  16%{opacity:.88;transform:translate(-50%,-50%) translate3d(calc(var(--dx,0px)*.13),calc(var(--dy,0px)*.13),0) scale(1)}
+  53%{opacity:.76;transform:translate(-50%,-50%) translate3d(calc(var(--dx,0px)*.63 + var(--curve-x,0px)),calc(var(--dy,0px)*.63 + var(--curve-y,0px)),0) scale(.86)}
+  100%{opacity:0;transform:translate(-50%,-50%) translate3d(var(--dx,0px),var(--dy,0px),0) scale(.28)}
+}
+@keyframes v98MarkDissolve{
+  0%{opacity:1;transform:scale(1) rotate(0);filter:blur(0);}
+  18%{opacity:1;transform:scale(1.10) rotate(-1deg);filter:blur(0);box-shadow:0 0 34px rgba(255,215,100,.58),0 0 62px rgba(255,255,255,.32);}
+  100%{opacity:0;transform:scale(1.48) rotate(5deg);filter:blur(5px);}
+}
+@keyframes v98TextDissolve{
+  0%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
+  100%{opacity:0;transform:translateY(-8px) scale(1.035);filter:blur(3px)}
+}
+@keyframes v98SubtitleDissolve{
+  0%{opacity:1;transform:translateY(0)}
+  100%{opacity:0;transform:translateY(7px)}
+}
+@media(max-width:620px){
+  .startup-splash-particle{box-shadow:0 0 4px currentColor,0 0 8px rgba(255,214,112,.34);}
+  .startup-splash-exit-flash{filter:blur(3px);}
+}
+@media(prefers-reduced-motion:reduce){
+  .startup-splash,.startup-splash-exit-burst,.startup-splash-exit-flash,.startup-splash-particle,
+  .startup-splash::before,.startup-splash::after,.startup-splash-content,.startup-splash-mark,
+  .startup-splash-title,.startup-splash-subtitle,.startup-splash-burst::before,
+  .startup-splash-burst::after,.app{animation:none!important;transition:none!important;}
+}
+</style>
+
 </head>
 
 <body>
@@ -3788,7 +3884,7 @@ body.mock-test-active .mascot{display:none!important;}
   </div>
 </div>
 
-<!-- MANAKURU-YELLOW-BUILD: v86-branding-pwa -->
+<!-- MANAKURU-YELLOW-BUILD: v98-soft-particle-burst -->
 <div class="app">
   <div class="mode-switcher-shell" aria-label="学習モード">
     <div class="mode-intro">
@@ -13994,47 +14090,47 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 
 
 <script>
-// v97: 起動終了時に光の粒を放射状に飛ばし、スマートフォンでも同じ演出を行う。
+// v98: 放射線や筋状の粒をやめ、柔らかな光の粒がランダムに漂って消える演出。
 (function finishStartupSplash(){
   const splash = document.getElementById('startupSplash');
   if (!splash) return;
   const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduceMotion) { splash.remove(); return; }
 
-  // CSSだけで動く小さな粒を生成。低幅画面では数を少し抑えて軽量化する。
   const particleLayer = document.getElementById('startupSplashParticles');
   if (particleLayer) {
     const isSmallScreen = window.matchMedia && window.matchMedia('(max-width: 620px)').matches;
-    const count = isSmallScreen ? 30 : 46;
+    const count = isSmallScreen ? 32 : 48;
     const minDimension = Math.min(window.innerWidth || 390, window.innerHeight || 800);
-    const colors = ['gold','gold','white','mint','amber'];
+    const colors = ['gold','gold','gold','white','white','mint','amber'];
     for (let i = 0; i < count; i++) {
-      const angle = (Math.PI * 2 * i / count) + (Math.random() - 0.5) * 0.16;
-      const distance = Math.round(minDimension * (0.30 + Math.random() * 0.48));
-      const dx = Math.round(Math.cos(angle) * distance);
-      const dy = Math.round(Math.sin(angle) * distance);
-      const size = (2.2 + Math.random() * 3.9).toFixed(1);
-      const delay = (Math.random() * 0.105).toFixed(3);
-      const duration = (0.63 + Math.random() * 0.18).toFixed(3);
-      const spin = Math.round((Math.random() - 0.5) * 300);
+      // 角度と距離を個別にランダム化し、放射線のような整列を避ける。
+      const angle = Math.random() * Math.PI * 2;
+      const distance = Math.round(minDimension * (0.20 + Math.random() * 0.32));
+      const curve = Math.round((Math.random() - 0.5) * minDimension * 0.085);
+      const dx = Math.round(Math.cos(angle) * distance + curve);
+      const dy = Math.round(Math.sin(angle) * distance - curve * 0.36);
+      const size = (i % 11 === 0 ? 4.4 + Math.random() * 2.1 : 1.8 + Math.random() * 3.1).toFixed(1);
+      const delay = (Math.random() * 0.19).toFixed(3);
+      const duration = (0.76 + Math.random() * 0.22).toFixed(3);
       const particle = document.createElement('span');
       particle.className = 'startup-splash-particle startup-splash-particle--' + colors[Math.floor(Math.random() * colors.length)];
-      if (i % 4 === 0) particle.classList.add('is-streak');
+      if (i % 6 === 0) particle.classList.add('is-soft');
       particle.style.setProperty('--dx', dx + 'px');
       particle.style.setProperty('--dy', dy + 'px');
+      particle.style.setProperty('--curve-x', Math.round((Math.random() - 0.5) * 24) + 'px');
+      particle.style.setProperty('--curve-y', Math.round((Math.random() - 0.5) * 20) + 'px');
       particle.style.setProperty('--size', size + 'px');
       particle.style.setProperty('--delay', delay + 's');
       particle.style.setProperty('--duration', duration + 's');
-      particle.style.setProperty('--angle', (angle * 180 / Math.PI + 90) + 'deg');
-      particle.style.setProperty('--spin', spin + 'deg');
       particleLayer.appendChild(particle);
     }
   }
 
-  // ロゴと文字の出現後、派手なフラッシュと粒の飛び散りを見せてから画面を開く。
+  // ロゴの光を少しだけ膨らませてから、粒が漂うように散り、背景が静かに消える。
   window.setTimeout(() => {
     splash.classList.add('is-leaving');
-    window.setTimeout(() => splash.remove(), 1000);
+    window.setTimeout(() => splash.remove(), 1180);
   }, 2240);
 })();
 </script>
