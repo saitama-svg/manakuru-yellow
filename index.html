@@ -4753,6 +4753,7 @@ Q2. 鎌倉幕府を開いた人物は？ → 源頼朝"></textarea>
       </div>
       <button type="button" class="action main mock-test-start" id="mockTestStartBtn">🎯 模擬テストを開始</button>
     </div>
+    <p class="mock-test-note">出題方向：<strong id="mockTestDirectionLabel">言葉 → 意味</strong>（「学習設定」の出題方向を使用します。ランダムでは問題ごとに向きが変わります。）</p>
     <p class="mock-test-note">同じ問題は1回のテスト中に重複しません。指定数が問題集の問題数を超える場合は、登録されている全問題を出題します。制限時間は設けず、落ち着いて解答できます。</p>
   </div>
   <div id="mockTestSession" class="mock-test-session" hidden>
@@ -10707,6 +10708,10 @@ function renderMockTestPage(){
   if(!hasQuestions){session.hidden=true;grading.hidden=true;result.hidden=true;document.getElementById("mockTestDeckTitle").textContent=deck?.title||"問題集未選択";document.getElementById("mockTestAvailableCount").textContent=`利用できる問題：${items.length}問`;return;}
   document.getElementById("mockTestDeckTitle").textContent=deck.title;
   document.getElementById("mockTestAvailableCount").textContent=`利用できる問題：${items.length}問`;
+  const directionLabels={forward:"言葉 → 意味",reverse:"意味 → 言葉",random:"ランダム"};
+  const currentDirection=(directionSelect&&["forward","reverse","random"].includes(directionSelect.value))?directionSelect.value:( ["forward","reverse","random"].includes(deck.direction)?deck.direction:"forward" );
+  const directionLabel=document.getElementById("mockTestDirectionLabel");
+  if(directionLabel)directionLabel.textContent=directionLabels[currentDirection]||directionLabels.forward;
   const countSel=document.getElementById("mockTestQuestionCount");
   for(const opt of countSel.options){if(opt.value!=="all")opt.disabled=Number(opt.value)>items.length;}
   if(mockTestState){
@@ -10730,7 +10735,8 @@ function mockTestStart(){
   const wanted=countValue==="all"?available.length:Math.max(1,Number(countValue)||10);
   const chosen=shuffleArray(available.slice()).slice(0,Math.min(wanted,available.length));
   const deck=getCurrentDeck();
-  mockTestState={format:"word-roulette-mock-test",version:1,deckId:deck.id,deckTitle:deck.title,phase:"answering",questions:chosen.map(({pair,index,key})=>({pairKey:key,question:pair[0],answer:pair[1],sourceIndex:index,answerText:"",strokes:[],canvasOpen:false,verdict:null})),startedAt:Date.now(),submittedAt:0,createdAt:Date.now()};
+  const directionMode=(directionSelect&&["forward","reverse","random"].includes(directionSelect.value))?directionSelect.value:( ["forward","reverse","random"].includes(deck.direction)?deck.direction:"forward" );
+  mockTestState={format:"word-roulette-mock-test",version:1,deckId:deck.id,deckTitle:deck.title,phase:"answering",direction:directionMode,questions:chosen.map(({pair,index,key})=>{const orientation=directionMode==="random"?(Math.random()<0.5?"forward":"reverse"):directionMode;const reverse=orientation==="reverse";return {pairKey:key,question:reverse?pair[1]:pair[0],answer:reverse?pair[0]:pair[1],sourceIndex:index,answerText:"",strokes:[],canvasOpen:false,verdict:null};}),startedAt:Date.now(),submittedAt:0,createdAt:Date.now()};
   mockTestSaveDraft(false);renderMockTestPage();
   // v81: セッション内部への自動スクロールでページ上部のナビが隠れるのを防ぐ。
   mockTestRestorePageViewport();

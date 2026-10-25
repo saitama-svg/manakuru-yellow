@@ -1,4 +1,4 @@
-const CACHE_NAME = 'manakuru-yellow-v92-url-import';
+const CACHE_NAME = 'manakuru-yellow-v93-mock-direction';
 const APP_SHELL = [
   './',
   './index.html',
