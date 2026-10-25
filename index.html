@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<!-- MANAKURU-YELLOW-BUILD: v97-dramatic-particle-burst -->
+<!-- MANAKURU-YELLOW-BUILD: v99-polished-particle-dissolve -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="一問一答、復習、成績・弱点分析、問題集、白紙勉強法、模擬テストをまとめた学習ツール「マナクル YELLOW」です。">
@@ -3511,359 +3511,104 @@ body.mock-test-active .mascot{display:none!important;}
 </style>
 
 
-<style id="v95StartupBurstAnimation">
-/* v95: ゆっくり現れて、最後に弾ける起動演出 */
+<style id="v99PolishedParticleDissolve">
+/* v99：光の粒に自然な軌道と時間差を持たせ、粒の余韻と画面切り替えを同期 */
 .startup-splash{
   position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;
-  overflow:hidden;padding:24px;
-  background:radial-gradient(circle at 50% 43%,rgba(255,255,255,.98) 0%,rgba(255,251,229,.98) 33%,transparent 67%),
+  overflow:hidden;padding:24px;background:transparent;isolation:isolate;pointer-events:auto;
+}
+.startup-splash::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:1;
+  background:radial-gradient(circle at 50% 43%,rgba(255,255,255,.99) 0%,rgba(255,251,229,.98) 34%,rgba(255,250,231,.93) 63%,rgba(226,247,238,.96) 100%),
              linear-gradient(145deg,#fff4bf 0%,#fffdf5 48%,#d8f7ed 100%);
-  opacity:1;transition:opacity .42s cubic-bezier(.22,.75,.25,1),transform .42s ease,filter .42s ease;
-  pointer-events:auto;isolation:isolate;
+  transition:opacity 1.38s cubic-bezier(.18,.68,.22,1);
 }
-.startup-splash::before,.startup-splash::after{
-  content:"";position:absolute;z-index:-1;border-radius:50%;pointer-events:none;
-  filter:blur(2px);opacity:0;animation:v95AmbientGlow 2.05s ease-out both;
+.startup-splash::after{
+  content:"";position:absolute;z-index:0;pointer-events:none;border-radius:50%;
+  width:min(70vw,460px);aspect-ratio:1;left:calc(50% - min(35vw,230px));top:calc(50% - min(35vw,230px));
+  background:radial-gradient(circle,rgba(255,217,103,.27) 0%,rgba(255,232,160,.16) 32%,rgba(255,255,255,0) 72%);
+  opacity:0;transform:scale(.74);animation:v99AmbientGather 1.95s cubic-bezier(.2,.72,.22,1) both;
+  transition:opacity .8s ease-out,transform .8s ease-out;
 }
-.startup-splash::before{width:min(68vw,430px);aspect-ratio:1;background:radial-gradient(circle,rgba(255,218,82,.28),rgba(255,218,82,0) 70%);left:calc(50% - min(34vw,215px));top:calc(50% - min(34vw,215px));}
-.startup-splash::after{width:min(54vw,340px);aspect-ratio:1;background:radial-gradient(circle,rgba(100,224,189,.19),rgba(100,224,189,0) 70%);left:calc(50% - min(27vw,170px));top:calc(50% - min(27vw,170px));animation-delay:.12s;}
-.startup-splash.is-leaving{opacity:0;transform:scale(1.018);filter:blur(2px);pointer-events:none}
-.startup-splash-content{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;position:relative;width:min(100%,420px)}
+.startup-splash.is-leaving{pointer-events:none}
+.startup-splash.is-leaving::before{opacity:0}
+.startup-splash.is-leaving::after{opacity:0;transform:scale(1.18);animation:none}
+.startup-splash-exit-burst,.startup-splash-exit-flash,
+.startup-splash-burst::before,.startup-splash-burst::after{display:none!important}
+.startup-splash-content{
+  position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;gap:12px;
+  text-align:center;width:min(100%,420px);will-change:opacity,transform;
+}
 .startup-splash-emblem-wrap{position:relative;display:grid;place-items:center;width:132px;height:132px;margin-bottom:1px;isolation:isolate}
 .startup-splash-burst{position:absolute;inset:0;pointer-events:none;z-index:0}
-.startup-splash-burst::before{
-  content:"";position:absolute;inset:24px;border:2px solid rgba(246,190,30,.75);border-radius:50%;
-  opacity:0;transform:scale(.25);animation:v95BurstRing .86s .76s cubic-bezier(.12,.7,.2,1) both;
-}
-.startup-splash-burst::after{
-  content:"";position:absolute;inset:5px;border-radius:50%;opacity:0;
-  background:repeating-conic-gradient(from -7deg,rgba(255,190,26,0) 0deg 12deg,rgba(255,190,26,.88) 12deg 14deg,rgba(255,190,26,0) 14deg 30deg);
-  -webkit-mask-image:radial-gradient(circle,transparent 0 24%,#000 28% 53%,transparent 72%);
-  mask-image:radial-gradient(circle,transparent 0 24%,#000 28% 53%,transparent 72%);
-  animation:v95BurstRays .9s .72s cubic-bezier(.15,.68,.25,1) both;
-}
 .startup-splash-mark{
   position:relative;z-index:1;width:84px;height:84px;border-radius:28px;display:grid;place-items:center;
   background:linear-gradient(145deg,#ffe873 0%,#ffd43c 52%,#ffc42b 100%);color:#51431a;
-  border:1px solid rgba(255,255,255,.78);font-size:39px;font-weight:950;line-height:1;
-  box-shadow:0 7px 18px rgba(181,137,13,.12),inset 0 1px 0 rgba(255,255,255,.75);
-  transform-origin:center;opacity:0;animation:v95MarkBuild 1.42s cubic-bezier(.2,.76,.2,1) both;
+  border:1px solid rgba(255,255,255,.82);font-size:39px;font-weight:950;line-height:1;
+  box-shadow:0 7px 18px rgba(181,137,13,.12),inset 0 1px 0 rgba(255,255,255,.78);
+  transform-origin:center;opacity:0;animation:v99MarkBuild 1.42s cubic-bezier(.2,.76,.2,1) both;
 }
-.startup-splash-title{margin:0;color:#20243a;font-size:clamp(24px,5vw,32px);font-weight:900;letter-spacing:.025em;line-height:1.25;opacity:0;animation:v95TitleReveal .62s 1.03s cubic-bezier(.2,.75,.25,1) both}
-.startup-splash-subtitle{margin:0;color:#61716d;font-size:13px;font-weight:700;letter-spacing:.07em;opacity:0;animation:v95SubtitleReveal .55s 1.34s ease-out both}
-.app{animation:v95AppEntrance .48s ease-out}
-@keyframes v95AmbientGlow{0%{opacity:0;transform:scale(.7)}38%{opacity:1;transform:scale(1.03)}100%{opacity:.75;transform:scale(1)}}
-@keyframes v95MarkBuild{
-  0%{opacity:0;transform:scale(.16) rotate(-14deg);filter:blur(9px);box-shadow:0 0 0 rgba(255,202,42,0)}
-  22%{opacity:.7;transform:scale(.58) rotate(-7deg);filter:blur(2px);box-shadow:0 0 32px rgba(255,202,42,.34)}
-  45%{opacity:1;transform:scale(.94) rotate(2deg);filter:blur(0);box-shadow:0 0 42px rgba(255,202,42,.42),0 8px 20px rgba(181,137,13,.12)}
-  67%{opacity:1;transform:scale(1.19) rotate(-1.5deg);box-shadow:0 0 54px rgba(255,202,42,.58),0 12px 26px rgba(181,137,13,.14)}
-  82%{opacity:1;transform:scale(.94) rotate(.5deg);box-shadow:0 0 27px rgba(255,202,42,.25),0 7px 18px rgba(181,137,13,.1)}
-  100%{opacity:1;transform:scale(1) rotate(0);filter:blur(0);box-shadow:0 7px 18px rgba(181,137,13,.12),inset 0 1px 0 rgba(255,255,255,.75)}
-}
-@keyframes v95BurstRing{0%{opacity:0;transform:scale(.24)}20%{opacity:.9}100%{opacity:0;transform:scale(1.75)}}
-@keyframes v95BurstRays{0%{opacity:0;transform:scale(.24) rotate(-14deg)}25%{opacity:.92}100%{opacity:0;transform:scale(1.08) rotate(8deg)}}
-@keyframes v95TitleReveal{0%{opacity:0;transform:translateY(13px);filter:blur(3px)}100%{opacity:1;transform:translateY(0);filter:blur(0)}}
-@keyframes v95SubtitleReveal{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
-@keyframes v95AppEntrance{from{opacity:.84;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
-@media(prefers-reduced-motion:reduce){
-  .startup-splash,.startup-splash::before,.startup-splash::after,.startup-splash-content,.startup-splash-mark,.startup-splash-title,.startup-splash-subtitle,.startup-splash-burst::before,.startup-splash-burst::after,.app{animation:none!important;transition:none!important}
-}
-</style>
-
-<style id="v96StartupExitBurst">
-/* v96：画面への切り替え時、ロゴを中心に光が外側へはじけて消える */
-.startup-splash{
-  transition:opacity .68s cubic-bezier(.18,.72,.22,1),transform .68s cubic-bezier(.18,.72,.22,1),filter .58s ease-out;
-}
-.startup-splash.is-leaving{
-  opacity:0;transform:scale(1.025);filter:blur(1.5px);pointer-events:none;
-  transition:opacity .68s cubic-bezier(.18,.72,.22,1),transform .68s cubic-bezier(.18,.72,.22,1),filter .58s ease-out;
-}
-/* 大きな放射状の光がロゴの位置から画面の外へ広がる */
-.startup-splash-exit-burst{
-  position:absolute;z-index:3;pointer-events:none;
-  width:200vmax;height:200vmax;left:50%;top:calc(50% - 38px);
-  transform:translate(-50%,-50%) scale(.035) rotate(-10deg);
-  transform-origin:center;
-  opacity:0;
-  background:repeating-conic-gradient(from -5deg,
-    rgba(255,255,255,0) 0deg 7deg,
-    rgba(255,194,35,.94) 7deg 8deg,
-    rgba(255,255,255,.58) 8deg 9.5deg,
-    rgba(255,255,255,0) 9.5deg 20deg);
-  -webkit-mask-image:radial-gradient(circle,transparent 0 5%,#000 8% 100%);
-  mask-image:radial-gradient(circle,transparent 0 5%,#000 8% 100%);
-}
-.startup-splash.is-leaving .startup-splash-exit-burst{
-  animation:v96FullBurst .66s cubic-bezier(.12,.66,.16,1) both;
-}
-.startup-splash.is-leaving .startup-splash-mark{
-  animation:v96MarkBurst .6s cubic-bezier(.12,.7,.18,1) both;
-}
-.startup-splash.is-leaving .startup-splash-title{
-  animation:v96TitleBurst .53s cubic-bezier(.16,.68,.2,1) both;
-}
-.startup-splash.is-leaving .startup-splash-subtitle{
-  animation:v96SubtitleBurst .48s cubic-bezier(.16,.68,.2,1) both;
-}
-.startup-splash.is-leaving .startup-splash-burst::before{
-  animation:v96ExitRing .66s cubic-bezier(.12,.66,.16,1) both;
-}
-.startup-splash.is-leaving .startup-splash-burst::after{
-  animation:v96ExitRays .66s cubic-bezier(.12,.66,.16,1) both;
-}
-@keyframes v96FullBurst{
-  0%{opacity:0;transform:translate(-50%,-50%) scale(.035) rotate(-10deg)}
-  14%{opacity:.92}
-  58%{opacity:.76}
-  100%{opacity:0;transform:translate(-50%,-50%) scale(1.14) rotate(8deg)}
-}
-@keyframes v96MarkBurst{
-  0%{opacity:1;transform:scale(1) rotate(0);filter:blur(0)}
-  18%{opacity:1;transform:scale(1.2) rotate(-3deg);filter:blur(0)}
-  100%{opacity:0;transform:scale(2.45) rotate(18deg);filter:blur(7px)}
-}
-@keyframes v96TitleBurst{
-  0%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
-  100%{opacity:0;transform:translateY(-17px) scale(1.12);filter:blur(5px)}
-}
-@keyframes v96SubtitleBurst{
-  0%{opacity:1;transform:translateY(0) scale(1)}
-  100%{opacity:0;transform:translateY(18px) scale(1.12)}
-}
-@keyframes v96ExitRing{
-  0%{opacity:0;transform:scale(.28)}
-  12%{opacity:.95}
-  100%{opacity:0;transform:scale(34)}
-}
-@keyframes v96ExitRays{
-  0%{opacity:0;transform:scale(.22) rotate(-14deg)}
-  16%{opacity:.96}
-  100%{opacity:0;transform:scale(23) rotate(13deg)}
-}
-@media(prefers-reduced-motion:reduce){
-  .startup-splash,.startup-splash-exit-burst,.startup-splash::before,.startup-splash::after,
-  .startup-splash-content,.startup-splash-mark,.startup-splash-title,.startup-splash-subtitle,
-  .startup-splash-burst::before,.startup-splash-burst::after,.app{
-    animation:none!important;transition:none!important;
-  }
-}
-</style>
-
-<style id="v97StartupParticleBurst">
-/* v97: はじける瞬間を強調し、光の粒を放射状に飛ばす。DOM/CSSのみで動作。 */
-.startup-splash{
-  /* 光と粒が飛ぶ時間を確保してから、背景をフェードアウト */
-  transition:opacity .22s .72s ease-out,transform .84s cubic-bezier(.12,.7,.18,1),filter .5s .32s ease-out;
-}
-.startup-splash.is-leaving{
-  opacity:0;transform:scale(1.035);filter:blur(2px);pointer-events:none;
-  transition:opacity .22s .72s ease-out,transform .84s cubic-bezier(.12,.7,.18,1),filter .5s .32s ease-out;
-}
-.startup-splash-exit-burst{
-  width:220vmax;height:220vmax;
-  background:repeating-conic-gradient(from -4deg,
-    rgba(255,255,255,0) 0deg 5.8deg,
-    rgba(255,190,22,.98) 5.8deg 6.8deg,
-    rgba(255,255,255,.92) 6.8deg 7.8deg,
-    rgba(255,224,103,.38) 7.8deg 9deg,
-    rgba(255,255,255,0) 9deg 17deg);
-  filter:drop-shadow(0 0 9px rgba(255,205,58,.55));
-}
-.startup-splash.is-leaving .startup-splash-exit-burst{
-  animation:v97FullBurst .82s cubic-bezier(.08,.64,.13,1) both;
-}
-.startup-splash-exit-flash{
-  position:absolute;z-index:2;inset:-8%;pointer-events:none;opacity:0;
-  background:radial-gradient(ellipse at 50% calc(50% - 38px),
-    rgba(255,255,255,.98) 0%,rgba(255,248,204,.92) 3.5%,
-    rgba(255,211,69,.5) 11%,rgba(255,211,69,.12) 23%,transparent 42%);
-  transform:scale(.72);mix-blend-mode:screen;
-}
-.startup-splash.is-leaving .startup-splash-exit-flash{
-  animation:v97FlashPop .58s cubic-bezier(.1,.72,.16,1) both;
-}
-.startup-splash-particles{position:absolute;inset:0;z-index:4;overflow:hidden;pointer-events:none;contain:layout paint;}
+.startup-splash-title{margin:0;color:#20243a;font-size:clamp(24px,5vw,32px);font-weight:900;letter-spacing:.025em;line-height:1.25;opacity:0;animation:v99TitleReveal .62s 1.03s cubic-bezier(.2,.75,.25,1) both}
+.startup-splash-subtitle{margin:0;color:#61716d;font-size:13px;font-weight:700;letter-spacing:.07em;opacity:0;animation:v99SubtitleReveal .55s 1.34s ease-out both}
+.startup-splash-particles{position:absolute;inset:0;z-index:2;overflow:hidden;pointer-events:none;contain:layout paint}
 .startup-splash-particle{
-  position:absolute;left:50%;top:calc(50% - 38px);display:block;
-  width:var(--size,4px);height:var(--size,4px);border-radius:50%;
-  opacity:0;transform:translate(-50%,-50%) translate3d(0,0,0) scale(.1);
-  will-change:transform,opacity;box-shadow:0 0 7px currentColor,0 0 15px rgba(255,202,47,.68);
-}
-.startup-splash-particle--gold{color:#ffc52f;background:#ffcf4a;}
-.startup-splash-particle--white{color:#fff;background:#fff;box-shadow:0 0 6px #fff,0 0 13px rgba(255,227,134,.95);}
-.startup-splash-particle--mint{color:#8be7cf;background:#adf4df;box-shadow:0 0 7px #8be7cf,0 0 14px rgba(100,224,189,.62);}
-.startup-splash-particle--amber{color:#ff9f24;background:#ff9f24;box-shadow:0 0 7px #ff9f24,0 0 14px rgba(255,139,26,.7);}
-.startup-splash-particle.is-streak{
-  width:calc(var(--size,4px)*.7);height:calc(var(--size,4px)*3.4);
-  border-radius:999px;background:linear-gradient(to top,transparent 0%,currentColor 42%,#fff 100%);
-}
-.startup-splash.is-leaving .startup-splash-particle{
-  animation:v97ParticleFly var(--duration,.72s) cubic-bezier(.12,.66,.16,1) var(--delay,0s) both;
-}
-.startup-splash.is-leaving .startup-splash-mark{
-  animation:v97MarkExplosion .7s cubic-bezier(.1,.68,.15,1) both;
-}
-.startup-splash.is-leaving .startup-splash-title{
-  animation:v97TitleExplosion .58s cubic-bezier(.15,.68,.2,1) both;
-}
-.startup-splash.is-leaving .startup-splash-subtitle{
-  animation:v97SubtitleExplosion .5s cubic-bezier(.15,.68,.2,1) both;
-}
-.startup-splash.is-leaving .startup-splash-burst::before{
-  animation:v97RingExplosion .78s cubic-bezier(.08,.64,.13,1) both;
-}
-.startup-splash.is-leaving .startup-splash-burst::after{
-  animation:v97RayExplosion .8s cubic-bezier(.08,.64,.13,1) both;
-}
-@keyframes v97FullBurst{
-  0%{opacity:0;transform:translate(-50%,-50%) scale(.025) rotate(-8deg)}
-  10%{opacity:1}
-  38%{opacity:.96;transform:translate(-50%,-50%) scale(.58) rotate(2deg)}
-  72%{opacity:.66;transform:translate(-50%,-50%) scale(1.06) rotate(7deg)}
-  100%{opacity:0;transform:translate(-50%,-50%) scale(1.26) rotate(12deg)}
-}
-@keyframes v97FlashPop{
-  0%{opacity:0;transform:scale(.72)}
-  11%{opacity:.98;transform:scale(.9)}
-  27%{opacity:.8;transform:scale(1.05)}
-  100%{opacity:0;transform:scale(1.24)}
-}
-@keyframes v97ParticleFly{
-  0%{opacity:0;transform:translate(-50%,-50%) translate3d(0,0,0) rotate(var(--angle,0deg)) scale(.08)}
-  12%{opacity:1;transform:translate(-50%,-50%) translate3d(calc(var(--dx,0px)*.13),calc(var(--dy,0px)*.13),0) rotate(var(--angle,0deg)) scale(1.12)}
-  38%{opacity:1}
-  100%{opacity:0;transform:translate(-50%,-50%) translate3d(var(--dx,0px),var(--dy,0px),0) rotate(calc(var(--angle,0deg) + var(--spin,120deg))) scale(.04)}
-}
-@keyframes v97MarkExplosion{
-  0%{opacity:1;transform:scale(1) rotate(0);filter:blur(0)}
-  12%{opacity:1;transform:scale(1.23) rotate(-4deg);filter:blur(0);box-shadow:0 0 64px rgba(255,215,63,.94),0 0 120px rgba(255,255,255,.75)}
-  100%{opacity:0;transform:scale(2.9) rotate(20deg);filter:blur(9px)}
-}
-@keyframes v97TitleExplosion{
-  0%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
-  100%{opacity:0;transform:translateY(-16px) scale(1.13);filter:blur(7px)}
-}
-@keyframes v97SubtitleExplosion{
-  0%{opacity:1;transform:translateY(0) scale(1)}
-  100%{opacity:0;transform:translateY(18px) scale(1.14)}
-}
-@keyframes v97RingExplosion{
-  0%{opacity:0;transform:scale(.24)}
-  12%{opacity:1}
-  100%{opacity:0;transform:scale(39)}
-}
-@keyframes v97RayExplosion{
-  0%{opacity:0;transform:scale(.2) rotate(-14deg)}
-  12%{opacity:1}
-  100%{opacity:0;transform:scale(28) rotate(16deg)}
-}
-@media(max-width:620px){
-  .startup-splash-particle{box-shadow:0 0 5px currentColor,0 0 10px rgba(255,202,47,.65)}
-  .startup-splash-exit-burst{filter:none;}
-}
-@media(prefers-reduced-motion:reduce){
-  .startup-splash,.startup-splash-exit-burst,.startup-splash-exit-flash,.startup-splash-particle,
-  .startup-splash::before,.startup-splash::after,.startup-splash-content,.startup-splash-mark,
-  .startup-splash-title,.startup-splash-subtitle,.startup-splash-burst::before,
-  .startup-splash-burst::after,.app{animation:none!important;transition:none!important;}
-}
-</style>
-
-
-<style id="v98ElegantParticleDissolve">
-/* v98：筋状の閃光を除き、柔らかな光の粒が静かに広がる起動終了演出 */
-.startup-splash{
-  transition:opacity .36s .60s ease-out,transform .92s cubic-bezier(.2,.7,.25,1),filter .48s .28s ease-out;
-}
-.startup-splash.is-leaving{
-  opacity:0;transform:scale(1.006);filter:blur(.7px);pointer-events:none;
-  transition:opacity .36s .60s ease-out,transform .92s cubic-bezier(.2,.7,.25,1),filter .48s .28s ease-out;
-}
-/* これまでの大きな放射線レイヤーは無効化 */
-.startup-splash-exit-burst{display:none!important;}
-.startup-splash-exit-flash{
-  background:radial-gradient(ellipse at 50% calc(50% - 38px),
-    rgba(255,255,255,.68) 0%,rgba(255,247,211,.46) 5%,
-    rgba(255,212,102,.18) 13%,rgba(173,244,223,.07) 23%,transparent 42%);
-  filter:blur(4px);mix-blend-mode:screen;
-}
-.startup-splash.is-leaving .startup-splash-exit-flash{
-  animation:v98SoftBloom .72s ease-out both;
-}
-/* マーク周囲は線ではなく、淡い面状の光に変更 */
-.startup-splash-burst::before{
-  border:1px solid rgba(246,190,30,.36);
-  box-shadow:0 0 16px rgba(255,215,95,.12);
-}
-.startup-splash-burst::after{
-  background:radial-gradient(circle,rgba(255,231,165,.20) 0%,rgba(255,231,165,.08) 38%,transparent 70%);
-  -webkit-mask-image:none;mask-image:none;
-  filter:blur(2px);
-}
-.startup-splash.is-leaving .startup-splash-burst::before,
-.startup-splash.is-leaving .startup-splash-burst::after{
-  animation:none!important;opacity:0!important;
-}
-.startup-splash-particles{overflow:hidden;pointer-events:none;contain:layout paint;}
-.startup-splash-particle{
+  position:absolute;left:50%;top:calc(50% - 38px);display:block;flex:none;
   width:var(--size,3px);height:var(--size,3px);border-radius:50%;
-  opacity:0;transform:translate(-50%,-50%) translate3d(0,0,0) scale(.38);
-  filter:saturate(.92);will-change:transform,opacity;
-  box-shadow:0 0 5px currentColor,0 0 10px rgba(255,214,112,.40);
+  opacity:0;transform:translate(-50%,-50%) translate3d(0,0,0) scale(.28);
+  will-change:transform,opacity;backface-visibility:hidden;
 }
-.startup-splash-particle--gold{color:#e9b936;background:#f5cf68;}
-.startup-splash-particle--white{color:#fff;background:#fff;box-shadow:0 0 5px rgba(255,255,255,.95),0 0 11px rgba(255,229,167,.72);}
-.startup-splash-particle--mint{color:#83d7c0;background:#a3e6d5;box-shadow:0 0 5px rgba(131,215,192,.68),0 0 10px rgba(100,224,189,.35);}
-.startup-splash-particle--amber{color:#e6a34b;background:#f0b45f;box-shadow:0 0 5px rgba(230,163,75,.62),0 0 10px rgba(255,190,100,.30);}
-.startup-splash-particle.is-soft{filter:blur(.7px);}
+.startup-splash-particle--gold{color:#e8bd4c;background:#f5cf68;box-shadow:0 0 5px rgba(245,207,104,.42),0 0 11px rgba(255,228,163,.28)}
+.startup-splash-particle--white{color:#fff;background:#fff;box-shadow:0 0 5px rgba(255,255,255,.82),0 0 12px rgba(255,229,167,.48)}
+.startup-splash-particle--mint{color:#83d7c0;background:#a3e6d5;box-shadow:0 0 5px rgba(131,215,192,.48),0 0 10px rgba(100,224,189,.24)}
+.startup-splash-particle--amber{color:#e6a34b;background:#f0b45f;box-shadow:0 0 5px rgba(230,163,75,.42),0 0 10px rgba(255,190,100,.22)}
+.startup-splash-particle.is-soft{filter:blur(.55px)}
+.startup-splash-particle.is-dust{box-shadow:0 0 3px currentColor;}
+.startup-splash-particle.is-glow{filter:blur(.45px);}
 .startup-splash.is-leaving .startup-splash-particle{
-  animation:v98ParticleDrift var(--duration,.88s) cubic-bezier(.16,.58,.26,1) var(--delay,0s) both;
+  animation:v99ParticleJourney var(--duration,1.16s) cubic-bezier(.14,.62,.24,1) var(--delay,0s) both;
 }
-.startup-splash.is-leaving .startup-splash-mark{
-  animation:v98MarkDissolve .72s cubic-bezier(.2,.64,.28,1) both;
+.startup-splash.is-leaving .startup-splash-mark{animation:v99MarkRelease .82s cubic-bezier(.18,.66,.22,1) both}
+.startup-splash.is-leaving .startup-splash-title{animation:v99TextRelease .58s ease-out both}
+.startup-splash.is-leaving .startup-splash-subtitle{animation:v99SubtitleRelease .48s ease-out both}
+.startup-splash.is-leaving + .app{animation:v99AppReveal .92s cubic-bezier(.18,.68,.22,1) both}
+@keyframes v99AmbientGather{
+  0%{opacity:0;transform:scale(.70)}
+  38%{opacity:.78;transform:scale(1.02)}
+  74%{opacity:.62;transform:scale(.98)}
+  100%{opacity:.76;transform:scale(1)}
 }
-.startup-splash.is-leaving .startup-splash-title{
-  animation:v98TextDissolve .54s ease-out both;
+@keyframes v99MarkBuild{
+  0%{opacity:0;transform:scale(.16) rotate(-13deg);filter:blur(8px);box-shadow:0 0 0 rgba(255,202,42,0)}
+  22%{opacity:.72;transform:scale(.59) rotate(-6deg);filter:blur(2px);box-shadow:0 0 29px rgba(255,202,42,.30)}
+  47%{opacity:1;transform:scale(.96) rotate(1.5deg);filter:blur(0);box-shadow:0 0 38px rgba(255,202,42,.36),0 8px 20px rgba(181,137,13,.12)}
+  68%{opacity:1;transform:scale(1.13) rotate(-1deg);box-shadow:0 0 44px rgba(255,202,42,.42),0 12px 26px rgba(181,137,13,.12)}
+  83%{opacity:1;transform:scale(.97) rotate(.4deg);box-shadow:0 0 25px rgba(255,202,42,.20),0 7px 18px rgba(181,137,13,.1)}
+  100%{opacity:1;transform:scale(1) rotate(0);filter:blur(0);box-shadow:0 7px 18px rgba(181,137,13,.12),inset 0 1px 0 rgba(255,255,255,.78)}
 }
-.startup-splash.is-leaving .startup-splash-subtitle{
-  animation:v98SubtitleDissolve .48s ease-out both;
+@keyframes v99TitleReveal{0%{opacity:0;transform:translateY(12px);filter:blur(2.5px)}100%{opacity:1;transform:translateY(0);filter:blur(0)}}
+@keyframes v99SubtitleReveal{0%{opacity:0;transform:translateY(7px)}100%{opacity:1;transform:translateY(0)}}
+@keyframes v99ParticleJourney{
+  0%{opacity:0;transform:translate(-50%,-50%) translate3d(0,0,0) scale(.28) rotate(0deg)}
+  15%{opacity:var(--peak-opacity,.76);transform:translate(-50%,-50%) translate3d(var(--mid-x,0px),var(--mid-y,0px),0) scale(1.02) rotate(var(--mid-spin,0deg))}
+  43%{opacity:var(--peak-opacity,.76);transform:translate(-50%,-50%) translate3d(calc(var(--mid-x,0px) + var(--bend-x,0px)),calc(var(--mid-y,0px) + var(--bend-y,0px)),0) scale(.93) rotate(var(--mid-spin,0deg))}
+  75%{opacity:.48;transform:translate(-50%,-50%) translate3d(var(--far-x,0px),var(--far-y,0px),0) scale(.68) rotate(var(--spin,0deg))}
+  100%{opacity:0;transform:translate(-50%,-50%) translate3d(var(--dx,0px),var(--dy,0px),0) scale(.22) rotate(var(--spin,0deg))}
 }
-@keyframes v98SoftBloom{
-  0%{opacity:0;transform:scale(.78)}
-  20%{opacity:.48;transform:scale(.94)}
-  48%{opacity:.20;transform:scale(1.08)}
-  100%{opacity:0;transform:scale(1.22)}
+@keyframes v99MarkRelease{
+  0%{opacity:1;transform:scale(1) rotate(0);filter:blur(0)}
+  18%{opacity:1;transform:scale(1.08) rotate(-1deg);filter:blur(0);box-shadow:0 0 32px rgba(255,215,100,.5),0 0 55px rgba(255,255,255,.25)}
+  100%{opacity:0;transform:scale(1.34) rotate(4deg);filter:blur(4px)}
 }
-@keyframes v98ParticleDrift{
-  0%{opacity:0;transform:translate(-50%,-50%) translate3d(0,0,0) scale(.38)}
-  16%{opacity:.88;transform:translate(-50%,-50%) translate3d(calc(var(--dx,0px)*.13),calc(var(--dy,0px)*.13),0) scale(1)}
-  53%{opacity:.76;transform:translate(-50%,-50%) translate3d(calc(var(--dx,0px)*.63 + var(--curve-x,0px)),calc(var(--dy,0px)*.63 + var(--curve-y,0px)),0) scale(.86)}
-  100%{opacity:0;transform:translate(-50%,-50%) translate3d(var(--dx,0px),var(--dy,0px),0) scale(.28)}
-}
-@keyframes v98MarkDissolve{
-  0%{opacity:1;transform:scale(1) rotate(0);filter:blur(0);}
-  18%{opacity:1;transform:scale(1.10) rotate(-1deg);filter:blur(0);box-shadow:0 0 34px rgba(255,215,100,.58),0 0 62px rgba(255,255,255,.32);}
-  100%{opacity:0;transform:scale(1.48) rotate(5deg);filter:blur(5px);}
-}
-@keyframes v98TextDissolve{
-  0%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
-  100%{opacity:0;transform:translateY(-8px) scale(1.035);filter:blur(3px)}
-}
-@keyframes v98SubtitleDissolve{
-  0%{opacity:1;transform:translateY(0)}
-  100%{opacity:0;transform:translateY(7px)}
-}
+@keyframes v99TextRelease{0%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}100%{opacity:0;transform:translateY(-7px) scale(1.018);filter:blur(2.5px)}}
+@keyframes v99SubtitleRelease{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(5px)}}
+@keyframes v99AppReveal{0%{opacity:.94;transform:translateY(3px)}100%{opacity:1;transform:translateY(0)}}
 @media(max-width:620px){
-  .startup-splash-particle{box-shadow:0 0 4px currentColor,0 0 8px rgba(255,214,112,.34);}
-  .startup-splash-exit-flash{filter:blur(3px);}
+  .startup-splash-particle--gold,.startup-splash-particle--white,.startup-splash-particle--mint,.startup-splash-particle--amber{box-shadow:0 0 4px currentColor,0 0 7px rgba(255,214,112,.28)}
+  .startup-splash-particle.is-dust{box-shadow:0 0 2px currentColor}
+  .startup-splash::after{width:84vw;left:8vw;top:calc(50% - 42vw)}
 }
 @media(prefers-reduced-motion:reduce){
-  .startup-splash,.startup-splash-exit-burst,.startup-splash-exit-flash,.startup-splash-particle,
-  .startup-splash::before,.startup-splash::after,.startup-splash-content,.startup-splash-mark,
-  .startup-splash-title,.startup-splash-subtitle,.startup-splash-burst::before,
-  .startup-splash-burst::after,.app{animation:none!important;transition:none!important;}
+  .startup-splash,.startup-splash::before,.startup-splash::after,.startup-splash-content,.startup-splash-mark,.startup-splash-title,.startup-splash-subtitle,.startup-splash-particle,.app{animation:none!important;transition:none!important}
 }
 </style>
 
@@ -3884,7 +3629,7 @@ body.mock-test-active .mascot{display:none!important;}
   </div>
 </div>
 
-<!-- MANAKURU-YELLOW-BUILD: v98-soft-particle-burst -->
+<!-- MANAKURU-YELLOW-BUILD: v99-polished-particle-dissolve -->
 <div class="app">
   <div class="mode-switcher-shell" aria-label="学習モード">
     <div class="mode-intro">
@@ -14090,7 +13835,7 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 
 
 <script>
-// v98: 放射線や筋状の粒をやめ、柔らかな光の粒がランダムに漂って消える演出。
+// v99：大小・軌道・タイミングの異なる光の粒と、サイト表示を同期させる。
 (function finishStartupSplash(){
   const splash = document.getElementById('startupSplash');
   if (!splash) return;
@@ -14100,38 +13845,58 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
   const particleLayer = document.getElementById('startupSplashParticles');
   if (particleLayer) {
     const isSmallScreen = window.matchMedia && window.matchMedia('(max-width: 620px)').matches;
-    const count = isSmallScreen ? 32 : 48;
+    const count = isSmallScreen ? 32 : 50;
     const minDimension = Math.min(window.innerWidth || 390, window.innerHeight || 800);
     const colors = ['gold','gold','gold','white','white','mint','amber'];
     for (let i = 0; i < count; i++) {
-      // 角度と距離を個別にランダム化し、放射線のような整列を避ける。
+      // 角度に加えて接線方向のゆらぎを加え、直線的・整列した印象を避ける。
       const angle = Math.random() * Math.PI * 2;
-      const distance = Math.round(minDimension * (0.20 + Math.random() * 0.32));
-      const curve = Math.round((Math.random() - 0.5) * minDimension * 0.085);
-      const dx = Math.round(Math.cos(angle) * distance + curve);
-      const dy = Math.round(Math.sin(angle) * distance - curve * 0.36);
-      const size = (i % 11 === 0 ? 4.4 + Math.random() * 2.1 : 1.8 + Math.random() * 3.1).toFixed(1);
-      const delay = (Math.random() * 0.19).toFixed(3);
-      const duration = (0.76 + Math.random() * 0.22).toFixed(3);
+      const distance = Math.round(minDimension * (0.14 + Math.random() * 0.31));
+      const curve = Math.round((Math.random() - 0.5) * minDimension * 0.13);
+      const tangentX = -Math.sin(angle) * curve;
+      const tangentY = Math.cos(angle) * curve;
+      const dx = Math.round(Math.cos(angle) * distance + tangentX * 0.28);
+      const dy = Math.round(Math.sin(angle) * distance + tangentY * 0.28);
+      const midX = Math.round(dx * (0.29 + Math.random() * 0.10));
+      const midY = Math.round(dy * (0.29 + Math.random() * 0.10));
+      const bendX = Math.round(tangentX * (0.25 + Math.random() * 0.35));
+      const bendY = Math.round(tangentY * (0.25 + Math.random() * 0.35));
+      const farX = Math.round(dx * (0.76 + Math.random() * 0.06) - bendX * 0.20);
+      const farY = Math.round(dy * (0.76 + Math.random() * 0.06) - bendY * 0.20);
+      const isGlow = i % 8 === 0;
+      const isDust = !isGlow && i % 3 === 0;
+      const size = isGlow ? 4.0 + Math.random() * 2.0 : isDust ? 1.4 + Math.random() * 1.3 : 2.0 + Math.random() * 2.2;
+      const delay = (Math.random() * 0.24).toFixed(3);
+      const duration = (1.02 + Math.random() * 0.28).toFixed(3);
       const particle = document.createElement('span');
       particle.className = 'startup-splash-particle startup-splash-particle--' + colors[Math.floor(Math.random() * colors.length)];
+      if (isGlow) particle.classList.add('is-glow');
+      if (isDust) particle.classList.add('is-dust');
       if (i % 6 === 0) particle.classList.add('is-soft');
       particle.style.setProperty('--dx', dx + 'px');
       particle.style.setProperty('--dy', dy + 'px');
-      particle.style.setProperty('--curve-x', Math.round((Math.random() - 0.5) * 24) + 'px');
-      particle.style.setProperty('--curve-y', Math.round((Math.random() - 0.5) * 20) + 'px');
-      particle.style.setProperty('--size', size + 'px');
+      particle.style.setProperty('--mid-x', midX + 'px');
+      particle.style.setProperty('--mid-y', midY + 'px');
+      particle.style.setProperty('--bend-x', bendX + 'px');
+      particle.style.setProperty('--bend-y', bendY + 'px');
+      particle.style.setProperty('--far-x', farX + 'px');
+      particle.style.setProperty('--far-y', farY + 'px');
+      particle.style.setProperty('--size', size.toFixed(1) + 'px');
       particle.style.setProperty('--delay', delay + 's');
       particle.style.setProperty('--duration', duration + 's');
+      particle.style.setProperty('--spin', Math.round((Math.random() - 0.5) * 150) + 'deg');
+      particle.style.setProperty('--mid-spin', Math.round((Math.random() - 0.5) * 28) + 'deg');
+      particle.style.setProperty('--peak-opacity', (0.48 + Math.random() * 0.38).toFixed(2));
       particleLayer.appendChild(particle);
     }
   }
 
-  // ロゴの光を少しだけ膨らませてから、粒が漂うように散り、背景が静かに消える。
+  // ロゴが見える時間を確保してから退出演出を開始。背景のフェード、粒の余韻、アプリ表示を同期。
   window.setTimeout(() => {
     splash.classList.add('is-leaving');
-    window.setTimeout(() => splash.remove(), 1180);
-  }, 2240);
+    // 最も遅い粒のアニメーションが終わるまでスプラッシュを残す。
+    window.setTimeout(() => splash.remove(), 1580);
+  }, 2020);
 })();
 </script>
 
