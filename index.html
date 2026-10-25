@@ -803,6 +803,8 @@ input:focus,textarea:focus{border-color:var(--teal)}
 #urlPanel .info{color:#666;line-height:1.7}
 .urlbox{display:none;margin-top:18px}
 .urlbox input{background:#f8fafb}
+/* URL共有画面では固定マスコットが操作欄に重ならないよう非表示 */
+.url-share-active .mascot{display:none!important}
 
 
 
@@ -3563,7 +3565,7 @@ body.mock-test-active .mascot{display:none!important;}
           <div class="utility-section-title">問題の作成・管理</div>
           <button id="manageTab" data-view="manage">🛠 問題管理</button>
           <button id="tagTab" data-view="tag">🏷️ 分野・タグ</button>
-          <button id="urlTab" data-view="url">🔗 URL生成</button>
+          <button id="urlTab" data-view="url">🔗 共有・追加</button>
         </section>
         <div class="utility-section-divider" role="separator"></div>
         <section class="utility-section" aria-label="設定とデータ管理">
@@ -4988,7 +4990,7 @@ Q2. 鎌倉幕府を開いた人物は？ → 源頼朝"></textarea>
             <p><strong>自動保存：</strong>問題や成績の変更は、このHTML専用のブラウザ保存領域に自動で保存されます。画面の「自動保存」表示も確認できます。別のHTMLファイル・別のブラウザ・別のPCとは保存先が分かれます。</p>
             <p><strong>全データを移行する：</strong>「その他」→「データ管理」→「全データを保存」で、問題集・成績・履歴・タイムアタック記録などをJSONファイルにまとめます。移行先では「全データを復元」を使います。復元すると、移行先にあるデータがバックアップの内容に置き換わるため、先に移行先もバックアップしてください。</p>
             <p><strong>問題集だけを渡す：</strong>「現在の問題集を保存」は問題・答え・出題設定などを保存し、成績・学習履歴は含めません。問題集を渡したいときに使います。</p>
-            <p><strong>URL生成：</strong>現在の問題・答え・出題設定を含むURLを作ります。URLを開く側も元のマナクル YELLOWのページにアクセスできる必要があります。長いURLは、送信するサービスによっては扱えない場合があります。</p>
+            <p><strong>問題集の共有：</strong>現在の問題・答え・出題設定を含む共有URLを作れます。受け取ったURLを開くと問題集が読み込まれます。マナクルを開いたまま追加する場合は「共有・追加」画面にURLを貼り付けてください。長いURLは、送信するサービスによって扱えない場合があります。</p>
             <p><strong>共有用HTMLを保存：</strong>問題セットをHTMLファイルに埋め込みます。ファイルを相手のPCで開いて使えるので、URLを共有しづらい場合やオフラインで使いたい場合に便利です。共有用HTMLを開いた側では、問題は引き継がれますが、成績は新しく始まります。</p>
             <div class="usage-callout warning"><strong>注意：</strong>大切な学習記録は、定期的に「全データを保存」でバックアップしてください。「全データを復元」は、現在の保存データを置き換える操作です。</div>
           </div>
@@ -5005,19 +5007,33 @@ Q2. 鎌倉幕府を開いた人物は？ → 源頼朝"></textarea>
     </section>
 
     <section id="urlPanel" class="panel">
-      <h2>URL生成</h2>
-      <div class="info">現在の問題リストを含むマナクル YELLOWを作成します。生成されたURLを共有できます。</div>
+      <h2>問題集の共有</h2>
+      <div class="info">友達に渡すときは共有URLを作成します。受け取った人はURLを開くだけで読み込めます。今の画面を開いたまま追加したい場合は、下の欄にURLを貼り付けてください。</div>
       <div class="row">
-        <button class="action main" id="makeUrlBtn">URLを生成する</button>
-        <button class="action main" id="saveHtmlBtn">共有用HTMLを保存</button>
+        <button class="action main" id="makeUrlBtn">🔗 この問題集の共有URLを作る</button>
+        <button class="action sub" id="saveHtmlBtn">共有用HTMLを保存</button>
       </div>
       <div class="urlbox" id="urlBox">
-        <input id="urlInput" type="text" readonly>
+        <label for="urlInput">共有URL</label>
+        <input id="urlInput" type="text" readonly aria-label="生成された共有URL">
+        <p class="note" id="urlLengthNote">URLをコピーして相手に送ってください。</p>
         <div class="row">
-          <button class="action sub" id="copyBtn">📋 コピー</button>
+          <button class="action sub" id="copyBtn">📋 URLをコピー</button>
         </div>
       </div>
-      <div class="note" style="margin-top:16px;">「共有用HTMLを保存」を使うと、問題・答え・設定をこのHTMLファイルに埋め込みます。保存したHTMLを別のPCで開いても使え、そこからもう一度「共有用HTMLを保存」して更新版を作ることもできます。</div>
+
+      <div class="url-import-area" style="margin-top:30px;padding-top:22px;border-top:1px solid #e1e8e7;">
+        <h3 style="margin:0 0 8px;font-size:20px;">受け取ったURLから問題集を追加</h3>
+        <p class="note" style="margin:0 0 12px;">マナクルの共有URLを丸ごと貼り付けてください。問題・答え・設定をこのブラウザ内で読み取り、自分用の問題集として保存します。共有元や他の利用者の問題集は変更されません。</p>
+        <label for="importDeckUrlInput">受け取った共有URL</label>
+        <textarea id="importDeckUrlInput" rows="4" style="min-height:110px;" placeholder="https://...（マナクルの共有URL）"></textarea>
+        <div class="row">
+          <button class="action main" id="importDeckUrlBtn" type="button">問題集として追加</button>
+        </div>
+        <div id="importDeckUrlStatus" class="note" role="status" aria-live="polite"></div>
+      </div>
+
+      <div class="note" style="margin-top:18px;">URLが長すぎる場合や、オフラインで渡したい場合は「共有用HTMLを保存」を使えます。共有URLには問題集の内容が含まれます。個人情報や公開したくない情報は入れないでください。</div>
     </section>
   </main>
 
@@ -7282,7 +7298,9 @@ function initializeDeckLibrary(){
   migrateLegacyAppStorage();
   loadDeckLibrary();
   const isSharedCopy=!!(embeddedData && typeof embeddedData === "object" && typeof embeddedData.words === "string");
-  const hasLoadedInput=!!(pairs.length || isSharedCopy || new URLSearchParams(location.search).get("data"));
+  const isUrlDataImport=!!new URLSearchParams(location.search).get("data");
+  const importedUrlTags=normalizeTagsArray(pairTags,pairs.length);
+  const hasLoadedInput=!!(pairs.length || isSharedCopy || isUrlDataImport);
   if(hasLoadedInput){
     const words=deckWords();
     let deck=null;
@@ -7323,9 +7341,11 @@ function initializeDeckLibrary(){
       timeAttackRecords=[];
     }else{
       deck=findDeckByWords(words,titleInput.value);
+      let deckWasCreated=false;
       if(!deck){
         deck={id:makeDeckId(),title:safeDeckTitle(titleInput.value),words,hints:hintsForPairs(window.__V37_IMPORTED_HINTS__,pairs),redParts:redPartsForPairs(window.__V53_IMPORTED_RED_PARTS__,pairs),direction:directionSelect?.value||"forward",questionCount:questionCountSelect?.value||"all",createdAt:Date.now(),updatedAt:Date.now()};
         deckLibrary.push(deck); saveDeckLibrary();
+        deckWasCreated=true;
       }else if((window.__V37_IMPORTED_HINTS__ && typeof window.__V37_IMPORTED_HINTS__==="object")||(window.__V53_IMPORTED_RED_PARTS__ && typeof window.__V53_IMPORTED_RED_PARTS__==="object")){
         deck.hints={...hintsForPairs(window.__V37_IMPORTED_HINTS__,pairs),...normalizeProblemHintMap(deck.hints)};
         deck.redParts={...redPartsForPairs(window.__V53_IMPORTED_RED_PARTS__,pairs),...redPartsForPairs(deck.redParts,pairs)};
@@ -7334,7 +7354,14 @@ function initializeDeckLibrary(){
       window.__V37_IMPORTED_HINTS__=undefined;
       window.__V53_IMPORTED_RED_PARTS__=undefined;
       setActiveDeckId(deck.id);
-      loadPairTagsFromStorage();
+      if(isUrlDataImport && deckWasCreated){
+        // URLから初めて取り込んだ問題集のタグを、この問題集専用の保存領域に引き継ぐ。
+        pairTags=normalizeTagsArray(importedUrlTags,pairs.length);
+        savePairTagsToStorage();
+      }else{
+        // 既存問題集の場合は、URL側のタグで利用者自身のタグを上書きしない。
+        loadPairTagsFromStorage();
+      }
       migrateLegacyStatsForDeck(deck);
       loadProblemStats();
     }
@@ -10965,7 +10992,7 @@ function updatePageGuide(view){
     tag:{group:"作成・管理",title:"分野・タグ",hint:"問題にタグを付けると、分野別や複数分野の学習に使えます。",needsPairs:true},
     library:{group:"問題集",title:"問題集",hint:"問題集を切り替えたり、登録済みの問題集を管理したりできます。"},
     sharedLibrary:{group:"共有",title:"みんなの問題集",hint:"内容を確認した問題集を探して、自分用にコピーできます。"},
-    url:{group:"作成・管理",title:"URL生成",hint:"問題セットを共有するURLを作成できます。",needsPairs:true},
+    url:{group:"作成・管理",title:"問題集の共有",hint:"共有URLの作成や、受け取ったURLからの問題集追加ができます."},
     print:{group:"設定・データ",title:"印刷",hint:"問題と答えの印刷レイアウトを確認してから印刷します。",needsPairs:true},
     settings:{group:"設定・データ",title:"学習設定",hint:"キー操作や学習の動作を自分に合うよう調整します。"},
     appearance:{group:"設定・データ",title:"デザイン設定",hint:"色や表示など、画面の見た目を調整します。"},
@@ -11017,6 +11044,7 @@ function switchView(view){
     const expandedButton=document.getElementById("blankStudyExpandBtn");if(expandedButton){expandedButton.setAttribute("aria-pressed","false");expandedButton.textContent="⛶ 白紙を広げる";}
   }
   document.body.classList.toggle("blank-study-active",view==="blankStudy");
+  document.body.classList.toggle("url-share-active",view==="url");
   // 手書きは一時メモなので、学習画面から別画面へ移る際は内容を残さない。
   if(view!=="inputCard") clearHandwritingPad("input");
   if(view!=="roulette") clearHandwritingPad("output");
@@ -11658,6 +11686,11 @@ document.getElementById("makeUrlBtn").onclick=()=>{
 
   document.getElementById("urlInput").value=url;
   document.getElementById("urlBox").style.display="block";
+  const lengthNote=document.getElementById("urlLengthNote");
+  if(lengthNote){
+    const approximate=url.length.toLocaleString("ja-JP");
+    lengthNote.textContent=`URLの長さ：約${approximate}文字。コピーして相手に送ってください。とても長い場合は共有用HTML保存を使ってください。`;
+  }
 };
 
 document.getElementById("copyBtn").onclick=async()=>{
@@ -11671,6 +11704,104 @@ document.getElementById("copyBtn").onclick=async()=>{
     alert("URLをコピーしました。");
   }
 };
+
+function decodeDeckShareUrl(rawUrl){
+  const text=String(rawUrl||"").trim();
+  if(!text) throw new Error("共有URLを貼り付けてください。");
+  if(text.length>1000000) throw new Error("URLが長すぎます。URLではなく「共有用HTMLを保存」またはJSONファイルで共有してください。");
+  let parsedUrl;
+  try{ parsedUrl=new URL(text,location.href); }
+  catch(_error){ throw new Error("URLの形式を確認してください。"); }
+  const encoded=parsedUrl.searchParams.get("data");
+  if(!encoded) throw new Error("このURLには問題集データが見つかりません。マナクルの「共有URLを作る」で作成したURLを使ってください。");
+  let payload;
+  try{ payload=JSON.parse(base64UrlDecode(encoded)); }
+  catch(_error){ throw new Error("URLの問題集データを読み取れません。URL全体が欠けずにコピーされているか確認してください。"); }
+  if(!payload||typeof payload!=="object"||typeof payload.words!=="string"){
+    throw new Error("このURLに含まれるデータは問題集として読み込めません。");
+  }
+  if(payload.words.length>250000) throw new Error("問題集のデータが大きすぎます。共有用HTMLまたはJSONファイルを使ってください。");
+  const lines=payload.words.split(/\r?\n/).filter(line=>line.trim());
+  if(!lines.length) throw new Error("URLに問題が含まれていません。");
+  if(lines.length>MAX) throw new Error(`一度に追加できるのは${MAX}問までです。`);
+  const importedPairs=[];
+  for(let i=0;i<lines.length;i++){
+    const line=lines[i];
+    const tab=line.indexOf("\t");
+    if(tab<0) throw new Error(`${i+1}問目の問題と答えを区切れません。URLが正しくコピーされているか確認してください。`);
+    const q=line.slice(0,tab).trim();
+    const a=line.slice(tab+1).trim();
+    if(!q||!a) throw new Error(`${i+1}問目の問題または答えが空欄です。`);
+    importedPairs.push([q,a]);
+  }
+  return {payload,importedPairs,words:importedPairs.map(([q,a])=>`${q}\t${a}`).join("\n")};
+}
+
+function addDeckFromShareUrl(){
+  const input=document.getElementById("importDeckUrlInput");
+  const status=document.getElementById("importDeckUrlStatus");
+  const setStatus=(message,isError=false)=>{
+    status.textContent=message;
+    status.style.color=isError?"#b42318":"#24724d";
+  };
+  let decoded;
+  try{ decoded=decodeDeckShareUrl(input?.value||""); }
+  catch(error){ setStatus(error?.message||"URLを読み込めませんでした。",true); return; }
+
+  const {payload,importedPairs}=decoded;
+  const baseTitle=String(payload.title||"受け取った問題集").trim().slice(0,100)||"受け取った問題集";
+  const incomingFingerprint=deckFingerprint(decoded.words);
+  const existing=deckLibrary.find(deck=>deckFingerprint(deck.words)===incomingFingerprint);
+  if(existing){
+    openDeck(existing,true);
+    alert(`「${existing.title}」と同じ内容の問題集がすでに登録されています。重複登録せず、既存の問題集を開きました。`);
+    input.value="";
+    return;
+  }
+
+  let title=baseTitle;
+  const usedTitles=new Set(deckLibrary.map(deck=>String(deck.title||"")));
+  if(usedTitles.has(title)){
+    const sharedTitle=`${baseTitle}（共有）`;
+    title=sharedTitle;
+    let suffix=2;
+    while(usedTitles.has(title)) title=`${baseTitle}（共有${suffix++}）`;
+  }
+  const now=Date.now();
+  const importedDeck={
+    id:makeDeckId(),
+    title,
+    words:decoded.words,
+    direction:["forward","reverse","random"].includes(payload.direction)?payload.direction:"forward",
+    questionCount:["all","10","20","50"].includes(String(payload.questionCount))?String(payload.questionCount):"all",
+    testDate:"",
+    spacedReviewEnabled:true,
+    spacedReviewPausedAt:0,
+    folder:"",
+    archived:false,
+    sortOrder:getNewDeckSortOrder(""),
+    hints:hintsForPairs(payload.hints,importedPairs),
+    redParts:redPartsForPairs(payload.redParts,importedPairs),
+    createdAt:now,
+    updatedAt:now
+  };
+  deckLibrary.push(importedDeck);
+  if(!saveDeckLibrary()){
+    deckLibrary=deckLibrary.filter(deck=>deck.id!==importedDeck.id);
+    setStatus("問題集を保存できませんでした。ブラウザの保存容量を確認し、必要なら先にデータをバックアップしてください。",true);
+    return;
+  }
+  // タグは問題集IDごとの領域に保存し、既存問題集のタグと混ざらないようにする。
+  try{
+    localStorage.setItem(`${TAGS_KEY_PREFIX}${importedDeck.id}`,JSON.stringify({version:1,items:normalizeTagsArray(payload.tags,importedPairs.length),savedAt:now}));
+  }catch(_error){}
+  openDeck(importedDeck,true);
+  input.value="";
+  setStatus(`「${importedDeck.title}」を${importedPairs.length}問の問題集として追加しました。問題集一覧からいつでも編集できます。`);
+  alert(`問題集を追加しました。\n\n${importedDeck.title}\n${importedPairs.length}問\n\n自分用のコピーとして保存されています。`);
+}
+
+document.getElementById("importDeckUrlBtn").addEventListener("click",addDeckFromShareUrl);
 
 document.getElementById("saveHtmlBtn").onclick=()=>{
   if(!parsePairs()){
