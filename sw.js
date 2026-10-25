@@ -1,4 +1,4 @@
-const CACHE_NAME = 'manakuru-yellow-v93-mock-direction';
+const CACHE_NAME = 'manakuru-yellow-v94-startup-animation';
 const APP_SHELL = [
   './',
   './index.html',

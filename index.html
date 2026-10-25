@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<!-- MANAKURU-YELLOW-BUILD: v91-shared-vocab-set -->
+<!-- MANAKURU-YELLOW-BUILD: v94-startup-animation -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="一問一答、復習、成績・弱点分析、問題集、白紙勉強法、模擬テストをまとめた学習ツール「マナクル YELLOW」です。">
@@ -3510,9 +3510,45 @@ body.mock-test-active .mascot{display:none!important;}
 @media(max-width:700px){.shared-library-hero{align-items:flex-start;padding:16px}.shared-library-hero h3{font-size:18px}.shared-library-controls{grid-template-columns:1fr}.shared-library-grid{grid-template-columns:1fr}.shared-set-card{padding:15px}.shared-set-actions{flex-direction:column}}
 </style>
 
+
+<style id="v94StartupAnimation">
+/* v94: short, lightweight app-opening animation */
+.startup-splash{
+  position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;
+  padding:24px;background:linear-gradient(145deg,#fff8d5 0%,#fffdf4 48%,#d9f8ef 100%);
+  opacity:1;transition:opacity .22s ease;pointer-events:auto;
+}
+.startup-splash.is-leaving{opacity:0;pointer-events:none}
+.startup-splash-content{display:flex;flex-direction:column;align-items:center;gap:13px;text-align:center;animation:v94SplashContentIn .48s cubic-bezier(.2,.75,.25,1) both}
+.startup-splash-mark{
+  width:82px;height:82px;border-radius:27px;display:grid;place-items:center;
+  background:linear-gradient(145deg,#ffe36d,#ffc928);color:#51431a;
+  box-shadow:0 12px 28px rgba(181,137,13,.2);font-size:38px;font-weight:900;
+  transform-origin:center;animation:v94SplashMarkIn .62s cubic-bezier(.17,.84,.24,1.2) both;
+}
+.startup-splash-title{margin:0;color:#20243a;font-size:clamp(24px,5vw,31px);font-weight:900;letter-spacing:.025em;line-height:1.25}
+.startup-splash-subtitle{margin:0;color:#61716d;font-size:13px;font-weight:700;letter-spacing:.07em;animation:v94SplashTextIn .42s .12s ease both}
+.app{animation:v94AppEntrance .48s ease-out}
+@keyframes v94SplashContentIn{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+@keyframes v94SplashMarkIn{0%{opacity:0;transform:scale(.72) rotate(-9deg)}72%{opacity:1;transform:scale(1.045) rotate(1.5deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes v94SplashTextIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@keyframes v94AppEntrance{from{opacity:.82;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){
+  .startup-splash,.startup-splash-content,.startup-splash-mark,.startup-splash-subtitle,.app{animation:none!important;transition:none!important}
+}
+</style>
+
 </head>
 
 <body>
+<div class="startup-splash" id="startupSplash" aria-hidden="true">
+  <div class="startup-splash-content">
+    <div class="startup-splash-mark" aria-hidden="true">M</div>
+    <p class="startup-splash-title">マナクル YELLOW</p>
+    <p class="startup-splash-subtitle">学びを、もっと楽しく。</p>
+  </div>
+</div>
+
 <!-- MANAKURU-YELLOW-BUILD: v86-branding-pwa -->
 <div class="app">
   <div class="mode-switcher-shell" aria-label="学習モード">
@@ -13715,6 +13751,21 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
     navigator.serviceWorker.register('./sw.js', { scope: './' }).catch(() => {});
   });
 }
+</script>
+
+
+<script>
+// v94: 起動演出は短時間で終了し、動きを減らす設定では即座に閉じる。
+(function finishStartupSplash(){
+  const splash = document.getElementById('startupSplash');
+  if (!splash) return;
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) { splash.remove(); return; }
+  window.setTimeout(() => {
+    splash.classList.add('is-leaving');
+    window.setTimeout(() => splash.remove(), 260);
+  }, 720);
+})();
 </script>
 
 </body>
