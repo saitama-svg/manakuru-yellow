@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<!-- MANAKURU-YELLOW-BUILD: v95-startup-burst-animation -->
+<!-- MANAKURU-YELLOW-BUILD: v97-dramatic-particle-burst -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="一問一答、復習、成績・弱点分析、問題集、白紙勉強法、模擬テストをまとめた学習ツール「マナクル YELLOW」です。">
@@ -3651,11 +3651,133 @@ body.mock-test-active .mascot{display:none!important;}
 }
 </style>
 
+<style id="v97StartupParticleBurst">
+/* v97: はじける瞬間を強調し、光の粒を放射状に飛ばす。DOM/CSSのみで動作。 */
+.startup-splash{
+  /* 光と粒が飛ぶ時間を確保してから、背景をフェードアウト */
+  transition:opacity .22s .72s ease-out,transform .84s cubic-bezier(.12,.7,.18,1),filter .5s .32s ease-out;
+}
+.startup-splash.is-leaving{
+  opacity:0;transform:scale(1.035);filter:blur(2px);pointer-events:none;
+  transition:opacity .22s .72s ease-out,transform .84s cubic-bezier(.12,.7,.18,1),filter .5s .32s ease-out;
+}
+.startup-splash-exit-burst{
+  width:220vmax;height:220vmax;
+  background:repeating-conic-gradient(from -4deg,
+    rgba(255,255,255,0) 0deg 5.8deg,
+    rgba(255,190,22,.98) 5.8deg 6.8deg,
+    rgba(255,255,255,.92) 6.8deg 7.8deg,
+    rgba(255,224,103,.38) 7.8deg 9deg,
+    rgba(255,255,255,0) 9deg 17deg);
+  filter:drop-shadow(0 0 9px rgba(255,205,58,.55));
+}
+.startup-splash.is-leaving .startup-splash-exit-burst{
+  animation:v97FullBurst .82s cubic-bezier(.08,.64,.13,1) both;
+}
+.startup-splash-exit-flash{
+  position:absolute;z-index:2;inset:-8%;pointer-events:none;opacity:0;
+  background:radial-gradient(ellipse at 50% calc(50% - 38px),
+    rgba(255,255,255,.98) 0%,rgba(255,248,204,.92) 3.5%,
+    rgba(255,211,69,.5) 11%,rgba(255,211,69,.12) 23%,transparent 42%);
+  transform:scale(.72);mix-blend-mode:screen;
+}
+.startup-splash.is-leaving .startup-splash-exit-flash{
+  animation:v97FlashPop .58s cubic-bezier(.1,.72,.16,1) both;
+}
+.startup-splash-particles{position:absolute;inset:0;z-index:4;overflow:hidden;pointer-events:none;contain:layout paint;}
+.startup-splash-particle{
+  position:absolute;left:50%;top:calc(50% - 38px);display:block;
+  width:var(--size,4px);height:var(--size,4px);border-radius:50%;
+  opacity:0;transform:translate(-50%,-50%) translate3d(0,0,0) scale(.1);
+  will-change:transform,opacity;box-shadow:0 0 7px currentColor,0 0 15px rgba(255,202,47,.68);
+}
+.startup-splash-particle--gold{color:#ffc52f;background:#ffcf4a;}
+.startup-splash-particle--white{color:#fff;background:#fff;box-shadow:0 0 6px #fff,0 0 13px rgba(255,227,134,.95);}
+.startup-splash-particle--mint{color:#8be7cf;background:#adf4df;box-shadow:0 0 7px #8be7cf,0 0 14px rgba(100,224,189,.62);}
+.startup-splash-particle--amber{color:#ff9f24;background:#ff9f24;box-shadow:0 0 7px #ff9f24,0 0 14px rgba(255,139,26,.7);}
+.startup-splash-particle.is-streak{
+  width:calc(var(--size,4px)*.7);height:calc(var(--size,4px)*3.4);
+  border-radius:999px;background:linear-gradient(to top,transparent 0%,currentColor 42%,#fff 100%);
+}
+.startup-splash.is-leaving .startup-splash-particle{
+  animation:v97ParticleFly var(--duration,.72s) cubic-bezier(.12,.66,.16,1) var(--delay,0s) both;
+}
+.startup-splash.is-leaving .startup-splash-mark{
+  animation:v97MarkExplosion .7s cubic-bezier(.1,.68,.15,1) both;
+}
+.startup-splash.is-leaving .startup-splash-title{
+  animation:v97TitleExplosion .58s cubic-bezier(.15,.68,.2,1) both;
+}
+.startup-splash.is-leaving .startup-splash-subtitle{
+  animation:v97SubtitleExplosion .5s cubic-bezier(.15,.68,.2,1) both;
+}
+.startup-splash.is-leaving .startup-splash-burst::before{
+  animation:v97RingExplosion .78s cubic-bezier(.08,.64,.13,1) both;
+}
+.startup-splash.is-leaving .startup-splash-burst::after{
+  animation:v97RayExplosion .8s cubic-bezier(.08,.64,.13,1) both;
+}
+@keyframes v97FullBurst{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.025) rotate(-8deg)}
+  10%{opacity:1}
+  38%{opacity:.96;transform:translate(-50%,-50%) scale(.58) rotate(2deg)}
+  72%{opacity:.66;transform:translate(-50%,-50%) scale(1.06) rotate(7deg)}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(1.26) rotate(12deg)}
+}
+@keyframes v97FlashPop{
+  0%{opacity:0;transform:scale(.72)}
+  11%{opacity:.98;transform:scale(.9)}
+  27%{opacity:.8;transform:scale(1.05)}
+  100%{opacity:0;transform:scale(1.24)}
+}
+@keyframes v97ParticleFly{
+  0%{opacity:0;transform:translate(-50%,-50%) translate3d(0,0,0) rotate(var(--angle,0deg)) scale(.08)}
+  12%{opacity:1;transform:translate(-50%,-50%) translate3d(calc(var(--dx,0px)*.13),calc(var(--dy,0px)*.13),0) rotate(var(--angle,0deg)) scale(1.12)}
+  38%{opacity:1}
+  100%{opacity:0;transform:translate(-50%,-50%) translate3d(var(--dx,0px),var(--dy,0px),0) rotate(calc(var(--angle,0deg) + var(--spin,120deg))) scale(.04)}
+}
+@keyframes v97MarkExplosion{
+  0%{opacity:1;transform:scale(1) rotate(0);filter:blur(0)}
+  12%{opacity:1;transform:scale(1.23) rotate(-4deg);filter:blur(0);box-shadow:0 0 64px rgba(255,215,63,.94),0 0 120px rgba(255,255,255,.75)}
+  100%{opacity:0;transform:scale(2.9) rotate(20deg);filter:blur(9px)}
+}
+@keyframes v97TitleExplosion{
+  0%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
+  100%{opacity:0;transform:translateY(-16px) scale(1.13);filter:blur(7px)}
+}
+@keyframes v97SubtitleExplosion{
+  0%{opacity:1;transform:translateY(0) scale(1)}
+  100%{opacity:0;transform:translateY(18px) scale(1.14)}
+}
+@keyframes v97RingExplosion{
+  0%{opacity:0;transform:scale(.24)}
+  12%{opacity:1}
+  100%{opacity:0;transform:scale(39)}
+}
+@keyframes v97RayExplosion{
+  0%{opacity:0;transform:scale(.2) rotate(-14deg)}
+  12%{opacity:1}
+  100%{opacity:0;transform:scale(28) rotate(16deg)}
+}
+@media(max-width:620px){
+  .startup-splash-particle{box-shadow:0 0 5px currentColor,0 0 10px rgba(255,202,47,.65)}
+  .startup-splash-exit-burst{filter:none;}
+}
+@media(prefers-reduced-motion:reduce){
+  .startup-splash,.startup-splash-exit-burst,.startup-splash-exit-flash,.startup-splash-particle,
+  .startup-splash::before,.startup-splash::after,.startup-splash-content,.startup-splash-mark,
+  .startup-splash-title,.startup-splash-subtitle,.startup-splash-burst::before,
+  .startup-splash-burst::after,.app{animation:none!important;transition:none!important;}
+}
+</style>
+
 </head>
 
 <body>
 <div class="startup-splash" id="startupSplash" aria-hidden="true">
   <div class="startup-splash-exit-burst" aria-hidden="true"></div>
+  <div class="startup-splash-exit-flash" aria-hidden="true"></div>
+  <div class="startup-splash-particles" id="startupSplashParticles" aria-hidden="true"></div>
   <div class="startup-splash-content">
     <div class="startup-splash-emblem-wrap" aria-hidden="true">
       <div class="startup-splash-burst"></div>
@@ -13872,16 +13994,47 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 
 
 <script>
-// v96: ロゴの周りから光が外側へはじけて消えた後、通常画面へ移行する。
+// v97: 起動終了時に光の粒を放射状に飛ばし、スマートフォンでも同じ演出を行う。
 (function finishStartupSplash(){
   const splash = document.getElementById('startupSplash');
   if (!splash) return;
   const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduceMotion) { splash.remove(); return; }
-  // ロゴ・文字の出現が終わり、弾ける演出を少し見せてから閉じる。
+
+  // CSSだけで動く小さな粒を生成。低幅画面では数を少し抑えて軽量化する。
+  const particleLayer = document.getElementById('startupSplashParticles');
+  if (particleLayer) {
+    const isSmallScreen = window.matchMedia && window.matchMedia('(max-width: 620px)').matches;
+    const count = isSmallScreen ? 30 : 46;
+    const minDimension = Math.min(window.innerWidth || 390, window.innerHeight || 800);
+    const colors = ['gold','gold','white','mint','amber'];
+    for (let i = 0; i < count; i++) {
+      const angle = (Math.PI * 2 * i / count) + (Math.random() - 0.5) * 0.16;
+      const distance = Math.round(minDimension * (0.30 + Math.random() * 0.48));
+      const dx = Math.round(Math.cos(angle) * distance);
+      const dy = Math.round(Math.sin(angle) * distance);
+      const size = (2.2 + Math.random() * 3.9).toFixed(1);
+      const delay = (Math.random() * 0.105).toFixed(3);
+      const duration = (0.63 + Math.random() * 0.18).toFixed(3);
+      const spin = Math.round((Math.random() - 0.5) * 300);
+      const particle = document.createElement('span');
+      particle.className = 'startup-splash-particle startup-splash-particle--' + colors[Math.floor(Math.random() * colors.length)];
+      if (i % 4 === 0) particle.classList.add('is-streak');
+      particle.style.setProperty('--dx', dx + 'px');
+      particle.style.setProperty('--dy', dy + 'px');
+      particle.style.setProperty('--size', size + 'px');
+      particle.style.setProperty('--delay', delay + 's');
+      particle.style.setProperty('--duration', duration + 's');
+      particle.style.setProperty('--angle', (angle * 180 / Math.PI + 90) + 'deg');
+      particle.style.setProperty('--spin', spin + 'deg');
+      particleLayer.appendChild(particle);
+    }
+  }
+
+  // ロゴと文字の出現後、派手なフラッシュと粒の飛び散りを見せてから画面を開く。
   window.setTimeout(() => {
     splash.classList.add('is-leaving');
-    window.setTimeout(() => splash.remove(), 700);
+    window.setTimeout(() => splash.remove(), 1000);
   }, 2240);
 })();
 </script>
