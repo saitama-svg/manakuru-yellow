@@ -1,8 +1,8 @@
 {
   "format": "manakuru-shared-library",
   "version": 1,
-  "updatedAt": "2026-10-26",
-  "note": "初期サンプル4種類と、公開許可を得た投稿問題集2種類を掲載。投稿問題集の個人情報を除き、既存の問題集を保持しています。",
+  "updatedAt": "2026-10-27",
+  "note": "初期サンプル4種類と、公開許可を得た投稿問題集3種類を掲載。投稿問題集の個人情報を除き、既存の問題集を保持しています。",
   "sets": [
     {
       "id": "history-modern-japan-001",
@@ -613,6 +613,356 @@
         {
           "question": "斜面を使うと、力の大きさと引く距離はどうなるか",
           "answer": "力は小さくなり、引く距離は長くなる"
+        }
+      ]
+    },
+    {
+      "id": "jp-kanji-junior3-pre2-08-09-term2-final-001",
+      "title": "中3漢字準2級⑧～⑨　2学期期末",
+      "subject": "国語",
+      "grade": "中学3年",
+      "topic": "漢字（準2級⑧～⑨）",
+      "level": "2学期期末対策",
+      "description": "提示された文のひらがな表記に対応する漢字・語句を答える、中学3年向けの漢字問題集。",
+      "author": "投稿者（匿名）",
+      "reviewStatus": "投稿者本人による公開許可確認済み",
+      "rightsNote": "運営者の登録依頼に基づき掲載。投稿者の氏名などの個人情報は表示していません。",
+      "questions": [
+        {
+          "question": "うえきばちを並べる。",
+          "answer": "植木鉢"
+        },
+        {
+          "question": "がくばつで固めた組織。",
+          "answer": "学閥"
+        },
+        {
+          "question": "手続きははんざつだった。",
+          "answer": "煩雑"
+        },
+        {
+          "question": "安否を思いわずらう。",
+          "answer": "煩う"
+        },
+        {
+          "question": "冊子のはんかを統一する。",
+          "answer": "頒価"
+        },
+        {
+          "question": "ひでんかを迎える。",
+          "answer": "妃殿下"
+        },
+        {
+          "question": "見事な演技をひろうする。",
+          "answer": "披露"
+        },
+        {
+          "question": "書物のとびらえを描く。",
+          "answer": "扉絵"
+        },
+        {
+          "question": "次官をひめんする。",
+          "answer": "罷免"
+        },
+        {
+          "question": "ねこの手も借りたい。",
+          "answer": "猫"
+        },
+        {
+          "question": "らいひんが祝辞を述べる。",
+          "answer": "来賓"
+        },
+        {
+          "question": "事故のひんどを調べる。",
+          "answer": "頻度"
+        },
+        {
+          "question": "かびんに紅バラをいける。",
+          "answer": "花瓶"
+        },
+        {
+          "question": "両親をふようする義務。",
+          "answer": "扶養"
+        },
+        {
+          "question": "大学ふぞくの病院がある。",
+          "answer": "附属"
+        },
+        {
+          "question": "自由主義思想のけいふ。",
+          "answer": "系譜"
+        },
+        {
+          "question": "ぶじょくしたわけではない。",
+          "answer": "侮辱"
+        },
+        {
+          "question": "火にかけてふっとうさせる。",
+          "answer": "沸騰"
+        },
+        {
+          "question": "瞬間ゆわかし器を買う。",
+          "answer": "湯沸"
+        },
+        {
+          "question": "明るいふんいきの職場。",
+          "answer": "雰囲気"
+        },
+        {
+          "question": "相手の言葉にふんがいする。",
+          "answer": "憤慨"
+        },
+        {
+          "question": "不正行為にいきどおる。",
+          "answer": "憤る"
+        },
+        {
+          "question": "甲乙へいてい。",
+          "answer": "丙丁"
+        },
+        {
+          "question": "痛恨のへいさつ打になる。",
+          "answer": "併殺"
+        },
+        {
+          "question": "いたべいの家。",
+          "answer": "板塀"
+        },
+        {
+          "question": "新しへいが発行された。",
+          "answer": "紙幣"
+        },
+        {
+          "question": "薬のへいがいに苦しむ。",
+          "answer": "弊害"
+        },
+        {
+          "question": "へんさちで判断する。",
+          "answer": "偏差値"
+        },
+        {
+          "question": "かたよった意見ばかりだ。",
+          "answer": "偏る"
+        },
+        {
+          "question": "諸国へへんれきの旅に出る。",
+          "answer": "遍歴"
+        },
+        {
+          "question": "長年の努力がすいほうに帰す。",
+          "answer": "水泡"
+        },
+        {
+          "question": "夢があわと消えた。",
+          "answer": "泡"
+        },
+        {
+          "question": "ねんぽう一千万円。",
+          "answer": "年俸"
+        },
+        {
+          "question": "ごほうびを期待する。",
+          "answer": "褒美"
+        },
+        {
+          "question": "子どもの作品をほめる。",
+          "answer": "褒める"
+        },
+        {
+          "question": "ぼうせき工場で働く。",
+          "answer": "紡績"
+        },
+        {
+          "question": "萩焼のそぼくな風合い。",
+          "answer": "素朴"
+        },
+        {
+          "question": "君とぼくの仲だから言う。",
+          "answer": "僕"
+        },
+        {
+          "question": "全治三週間のだぼく傷。",
+          "answer": "打撲"
+        },
+        {
+          "question": "そとぼりを埋める。",
+          "answer": "外堀"
+        },
+        {
+          "question": "国事にほんそうする。",
+          "answer": "奔走"
+        },
+        {
+          "question": "あさの夏服は涼しい。",
+          "answer": "麻"
+        },
+        {
+          "question": "日米間の貿易まさつ。",
+          "answer": "摩擦"
+        },
+        {
+          "question": "けんま剤が含まれている。",
+          "answer": "研磨"
+        },
+        {
+          "question": "くもった鏡をみがく。",
+          "answer": "磨く"
+        },
+        {
+          "question": "登録をまっしょうされる。",
+          "answer": "抹消"
+        },
+        {
+          "question": "みさきめぐりのバスに乗る。",
+          "answer": "岬"
+        },
+        {
+          "question": "講演にかんめいを受けた。",
+          "answer": "感銘"
+        },
+        {
+          "question": "被害もうそうを断ち切る。",
+          "answer": "妄想"
+        },
+        {
+          "question": "えんしょう火災で入院する。",
+          "answer": "延焼"
+        },
+        {
+          "question": "体力をしょうもうする。",
+          "answer": "消耗"
+        },
+        {
+          "question": "思いがけずやくなんに遭う。",
+          "answer": "厄難"
+        },
+        {
+          "question": "ゆかいな時間を過ごす。",
+          "answer": "愉快"
+        },
+        {
+          "question": "小学校きょうゆの免許取得。",
+          "answer": "教諭"
+        },
+        {
+          "question": "病気がへいゆする。",
+          "answer": "平癒"
+        },
+        {
+          "question": "この傷がいえる。",
+          "answer": "癒える"
+        },
+        {
+          "question": "ゆいいつの手がかり。",
+          "answer": "唯一"
+        },
+        {
+          "question": "ゆうぜんと流れる大河。",
+          "answer": "悠然"
+        },
+        {
+          "question": "よゆうのある態度。",
+          "answer": "余裕"
+        },
+        {
+          "question": "銀行からゆうしを受ける。",
+          "answer": "融資"
+        },
+        {
+          "question": "何事もちゅうようが大切。",
+          "answer": "中庸"
+        },
+        {
+          "question": "数字のられつにすぎない。",
+          "answer": "羅列"
+        },
+        {
+          "question": "親子代々らくのうを営む。",
+          "answer": "酪農"
+        },
+        {
+          "question": "食中毒でげりが続く。",
+          "answer": "下痢"
+        },
+        {
+          "question": "全科目をりしゅうする。",
+          "answer": "履修"
+        },
+        {
+          "question": "新しい靴をはいて出かける。",
+          "answer": "履く"
+        },
+        {
+          "question": "趣味のせんりゅうを投稿。",
+          "answer": "川柳"
+        },
+        {
+          "question": "やなぎに風と受け流す。",
+          "answer": "柳"
+        },
+        {
+          "question": "りゅうぐう城の乙姫様。",
+          "answer": "竜宮"
+        },
+        {
+          "question": "たつまきの被害を逃れた。",
+          "answer": "竜巻"
+        },
+        {
+          "question": "銅に希りゅうさんを加える。",
+          "answer": "硫酸"
+        },
+        {
+          "question": "ほりょが釈放された。",
+          "answer": "捕虜"
+        },
+        {
+          "question": "川下りはりょうみ満点だ。",
+          "answer": "涼味"
+        },
+        {
+          "question": "浴衣を着てゆうすずみ。",
+          "answer": "夕涼み"
+        },
+        {
+          "question": "定例のかくりょう会議。",
+          "answer": "閣僚"
+        },
+        {
+          "question": "学生りょうに入る。",
+          "answer": "寮"
+        },
+        {
+          "question": "りんりをわきまえぬ行為。",
+          "answer": "倫理"
+        },
+        {
+          "question": "けいるいが多い人々。",
+          "answer": "係累"
+        },
+        {
+          "question": "ほんるいへ滑り込んだ。",
+          "answer": "本塁"
+        },
+        {
+          "question": "還付金がもどってきた。",
+          "answer": "戻る"
+        },
+        {
+          "question": "よれいの五分後に始まる。",
+          "answer": "予鈴"
+        },
+        {
+          "question": "柿がすずなりになっている。",
+          "answer": "鈴なり"
+        },
+        {
+          "question": "しゅうわいの疑いを持つ。",
+          "answer": "収賄"
+        },
+        {
+          "question": "そとわくの色を変える。",
+          "answer": "外枠"
         }
       ]
     }
