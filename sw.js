@@ -1,4 +1,4 @@
-const CACHE_NAME = 'manakuru-yellow-v100-backup-url-integrity';
+const CACHE_NAME = 'manakuru-yellow-v101-library-search-sort';
 const APP_SHELL = [
   './',
   './index.html',
