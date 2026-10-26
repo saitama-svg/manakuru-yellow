@@ -1,4 +1,4 @@
-const CACHE_NAME = 'manakuru-yellow-v99-polished-particle-dissolve';
+const CACHE_NAME = 'manakuru-yellow-v100-backup-url-integrity';
 const APP_SHELL = [
   './',
   './index.html',

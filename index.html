@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<!-- MANAKURU-YELLOW-BUILD: v99-polished-particle-dissolve -->
+<!-- MANAKURU-YELLOW-BUILD: v100-backup-url-integrity -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="一問一答、復習、成績・弱点分析、問題集、白紙勉強法、模擬テストをまとめた学習ツール「マナクル YELLOW」です。">
@@ -3511,7 +3511,7 @@ body.mock-test-active .mascot{display:none!important;}
 </style>
 
 
-<style id="v99PolishedParticleDissolve">
+<style id="v100PolishedParticleDissolve">
 /* v99：光の粒に自然な軌道と時間差を持たせ、粒の余韻と画面切り替えを同期 */
 .startup-splash{
   position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;
@@ -5545,7 +5545,16 @@ function storeAutosaveSnapshot(entries,createdAt=Date.now()){
   if(!entries || typeof entries!=="object" || Array.isArray(entries) || Object.keys(entries).length===0) return false;
   try{
     const snapshot=makeAutosaveSnapshot(entries,createdAt);
-    nativeStorageSetItem.call(localStorage,AUTOSAVE_BACKUP_KEY,JSON.stringify(snapshot));
+    const serialized=JSON.stringify(snapshot);
+    nativeStorageSetItem.call(localStorage,AUTOSAVE_BACKUP_KEY,serialized);
+    const readBack=nativeStorageGetItem.call(localStorage,AUTOSAVE_BACKUP_KEY);
+    if(readBack!==serialized) throw new Error("自動復元ポイントを保存後に読み戻せませんでした。");
+    const parsed=JSON.parse(readBack);
+    if(!validateAutosaveSnapshot(parsed)) throw new Error("自動復元ポイントの形式を確認できませんでした。");
+    // 個々の保存値も照合し、途中で欠落したスナップショットを有効扱いしない。
+    for(const [key,value] of Object.entries(entries)){
+      if(nativeStorageGetItem.call(localStorage,key)!==value) throw new Error(`復元ポイントの照合に失敗しました（${key.slice(STORAGE_PREFIX.length)}）。`);
+    }
     writeAutosaveMeta({backupAt:createdAt,backupAvailable:true,backupError:""});
     autosaveLastBackupError="";
     renderAutosaveBackupInfo();
@@ -5696,7 +5705,13 @@ function restoreAutosaveSnapshot(){
       if(isAutosaveSnapshotKey(key)) keys.push(key);
     }
     keys.forEach(key=>nativeStorageRemoveItem.call(localStorage,key));
-    for(const [key,value] of Object.entries(snapshot.entries)) nativeStorageSetItem.call(localStorage,key,value);
+    for(const [key,value] of Object.entries(snapshot.entries)){
+      nativeStorageSetItem.call(localStorage,key,value);
+      if(nativeStorageGetItem.call(localStorage,key)!==value) throw new Error(`復元したデータを読み戻せませんでした（${key.slice(STORAGE_PREFIX.length)}）。`);
+    }
+    // 問題集・フォルダー等の主要な構造も再確認してから画面へ反映する。
+    const restoredDeckRaw=nativeStorageGetItem.call(localStorage,DECK_LIBRARY_KEY);
+    if(restoredDeckRaw!==null && !Array.isArray(JSON.parse(restoredDeckRaw))) throw new Error("復元した問題集一覧の形式が正しくありません。");
     writeAutosaveMeta({backupAt:rollbackSnapshot.createdAt,backupAvailable:Object.keys(rollbackEntries).length>0,lastSavedAt:Date.now(),lastSaveError:""});
     loadDeckLibrary();
     const savedActive=nativeStorageGetItem.call(localStorage,ACTIVE_DECK_KEY)||"";
@@ -10053,6 +10068,26 @@ function collectPortableDrafts(){
       }
     }catch(_e){}
   }
+  // ストレージ容量不足などで自動下書き保存に失敗していても、画面上の未適用入力を
+  // 外部バックアップへ含められるよう、現在の入力欄と保存済み問題集を比較する。
+  const activeId=currentDeckId||"";
+  const activeDeck=deckLibrary.find(deck=>deck.id===activeId)||null;
+  const liveTitle=String(titleInput?.value||"");
+  const liveData=String(dataInput?.value||"");
+  const liveDirection=String(directionSelect?.value||"forward");
+  const liveQuestionCount=String(questionCountSelect?.value||"all");
+  const savedTitle=activeDeck ? (activeDeck.title==="無題の問題集"?"":String(activeDeck.title||"")) : "";
+  const savedData=String(activeDeck?.words||"");
+  const savedDirection=String(activeDeck?.direction||"forward");
+  const savedQuestionCount=String(activeDeck?.questionCount||"all");
+  const hasLiveContent=!!(liveTitle.trim()||liveData.trim());
+  const differs=activeDeck
+    ? liveTitle!==savedTitle || liveData!==savedData || liveDirection!==savedDirection || liveQuestionCount!==savedQuestionCount
+    : hasLiveContent;
+  if(differs || (autosaveDraftSaveTimer && hasLiveContent)){
+    const idKey=activeId||"new";
+    drafts[idKey]=JSON.stringify({format:"word-roulette-form-draft",version:1,deckId:activeId,savedAt:Date.now(),title:liveTitle,data:liveData,direction:liveDirection,questionCount:liveQuestionCount});
+  }
   return drafts;
 }
 function buildFullBackupPayload(){
@@ -10143,15 +10178,22 @@ function renderDataManagement(){
 function exportAllData(){
   try{if(typeof blankStudyBeforeFullBackup==="function")blankStudyBeforeFullBackup();}catch(_e){}
   let standaloneNotebookCount=0;try{standaloneNotebookCount=typeof loadBlankStudyNotebooks==="function"?loadBlankStudyNotebooks().length:0;}catch(_e){}
-  if(!deckLibrary.length && !standaloneNotebookCount){
-    alert("保存する問題集または白紙勉強ノートがありません。先にノートを作成するか、問題集を登録してください。");
+  const hasUnsavedFormContent=!!(String(titleInput?.value||"").trim() || String(dataInput?.value||"").trim());
+  if(!deckLibrary.length && !standaloneNotebookCount && !hasUnsavedFormContent){
+    alert("保存する問題集・白紙勉強ノート・未適用の入力がありません。先に問題を入力するか、ノートを作成してください。");
     return;
   }
   try{
     flushAutoDraftSave();
     const payload=buildFullBackupPayload();
+    // 実際に保存するJSONを一度シリアライズ・再解析して、エクスポート直前にも形式を検証する。
+    const serializedCheck=JSON.stringify(payload);
+    if(typeof serializedCheck!=="string" || !serializedCheck.length) throw new Error("バックアップ内容をJSONへ変換できませんでした。");
+    const roundTripPayload=JSON.parse(serializedCheck);
+    if(!validateFullBackup(roundTripPayload)) throw new Error("作成したバックアップの形式検証に失敗しました。データはまだダウンロードしていません。");
+    if(roundTripPayload.decks.length!==payload.decks.length) throw new Error("バックアップの問題集件数が一致しません。");
     const filename=formatBackupFilename("manakuru-yellow-全データバックアップ");
-    if(downloadJsonFile(payload,filename)){
+    if(downloadJsonFile(roundTripPayload,filename)){
       setAutosaveStatus("saved",`全データバックアップ作成開始 · ${autosaveFormatTime(Date.now())}`);
       alert(`全データバックアップのダウンロードを開始しました。\n\nファイル名：${filename}\n問題集：${payload.decks.length}個\n白紙勉強ノート：${standaloneNotebookCount}件\n保存設定：${Object.keys(payload.storageEntries||{}).length}項目\n未登録の入力下書き：${Object.keys(payload.pendingDrafts||{}).length}件\n\nブラウザのダウンロード一覧でファイルが保存されたことを確認し、別の場所にも保管してください。`);
     }
@@ -10164,8 +10206,11 @@ function exportAllData(){
 function validateFullBackup(payload){
   if(!payload || payload.format!=="word-roulette-full-backup" || ![1,2,3,4,5,6].includes(Number(payload.version))) return false;
   if(!Array.isArray(payload.decks) || payload.decks.length>500) return false;
+  const deckIds=new Set();
   for(const raw of payload.decks){
-    if(!normalizeDeck(raw)) return false;
+    const normalized=normalizeDeck(raw);
+    if(!normalized || deckIds.has(normalized.id)) return false;
+    deckIds.add(normalized.id);
   }
   if(payload.perDeck!==undefined && (typeof payload.perDeck!=="object" || payload.perDeck===null || Array.isArray(payload.perDeck))) return false;
   if(payload.preferences!==undefined && (typeof payload.preferences!=="object" || payload.preferences===null || Array.isArray(payload.preferences))) return false;
@@ -10285,8 +10330,9 @@ function restoreFullBackup(payload){
   }
   const normalizedDecks=payload.decks.map(normalizeDeck).filter(Boolean);
   const backupNotebookCount=blankStudyBackupCount(payload);
-  if(!normalizedDecks.length && !backupNotebookCount){
-    alert("バックアップ内に問題集も白紙勉強ノートもありません。");
+  const hasRestorableDrafts=!!(payload.pendingDrafts && typeof payload.pendingDrafts==="object" && Object.keys(payload.pendingDrafts).length);
+  if(!normalizedDecks.length && !backupNotebookCount && !hasRestorableDrafts){
+    alert("バックアップ内に問題集・白紙勉強ノート・未適用の入力がありません。");
     return false;
   }
   if(!verifyBrowserStorageAvailability(false)){
@@ -10358,7 +10404,7 @@ function restoreFullBackup(payload){
     const extra=Number(payload.version)>=6?"設定・復習予定・学習履歴・未登録の入力下書きも含めて確認しました。":"このバックアップ形式では一部の新しい設定・入力下書きが含まれていない場合があります。今後のため、復元後に新しい完全バックアップを作成してください。";
     const finalNotebookCount=typeof loadBlankStudyNotebooks==="function"?loadBlankStudyNotebooks().length:backupNotebookCount;
     alert(`全データを復元し、主要データの読み戻し確認まで完了しました。\n\n問題集：${normalizedDecks.length}個\n白紙勉強ノート：${finalNotebookCount}件\n${extra}`);
-    switchView(normalizedDecks.length?"library":"blankStudy");
+    switchView(normalizedDecks.length?"library":hasRestorableDrafts?"register":"blankStudy");
     return true;
   }catch(e){
     let rollbackOk=false;
@@ -11771,7 +11817,11 @@ document.getElementById("timeAttackDisplay").addEventListener("click",()=>{
 function base64UrlEncode(text){
   const bytes = new TextEncoder().encode(text);
   let binary = "";
-  for(const b of bytes) binary += String.fromCharCode(b);
+  // 大きな問題集でも巨大な引数展開や1バイトずつの連結に頼らない。
+  const chunkSize=0x8000;
+  for(let offset=0;offset<bytes.length;offset+=chunkSize){
+    binary += String.fromCharCode(...bytes.subarray(offset,Math.min(bytes.length,offset+chunkSize)));
+  }
   return btoa(binary).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/g,"");
 }
 
@@ -11798,20 +11848,32 @@ document.getElementById("makeUrlBtn").onclick=()=>{
     tags: normalizeTagsArray(pairTags,pairs.length),
     hints: hintsForPairs(getCurrentDeck()?.hints,pairs),
     redParts:redPartsForPairs(getCurrentDeck()?.redParts,pairs),
+    redSheetPrintEdits:normalizePrintRedEditorEditsMap(getCurrentDeck()?.redSheetPrintEdits,normalizedWords),
     direction: directionSelect ? directionSelect.value : "forward",
     questionCount: questionCountSelect ? questionCountSelect.value : "all"
   };
 
   const data = base64UrlEncode(JSON.stringify(payload));
-  const baseUrl = location.href.split("?")[0].split("#")[0];
-  const url = baseUrl + "?data=" + data;
+  const baseLocation=new URL(location.href);
+  baseLocation.search="";
+  baseLocation.hash="";
+  const url = baseLocation.href + "?data=" + data;
 
   document.getElementById("urlInput").value=url;
   document.getElementById("urlBox").style.display="block";
   const lengthNote=document.getElementById("urlLengthNote");
   if(lengthNote){
-    const approximate=url.length.toLocaleString("ja-JP");
-    lengthNote.textContent=`URLの長さ：約${approximate}文字。コピーして相手に送ってください。とても長い場合は共有用HTML保存を使ってください。`;
+    const length=url.length;
+    const approximate=length.toLocaleString("ja-JP");
+    if(length>20000){
+      lengthNote.textContent=`URLの長さ：約${approximate}文字。かなり長いため、メッセージアプリで途中で切れる可能性があります。「現在の問題集を保存」でJSONファイルにするか、「共有用HTMLを保存」を使うのがおすすめです。`;
+    }else if(length>8000){
+      lengthNote.textContent=`URLの長さ：約${approximate}文字。長めのURLです。送信先によっては扱えないことがあるため、届かない場合はJSONファイルか共有用HTMLを使ってください。`;
+    }else if(length>2000){
+      lengthNote.textContent=`URLの長さ：約${approximate}文字。コピーして送れますが、送信先によっては短いURLより扱いにくい場合があります。`;
+    }else{
+      lengthNote.textContent=`URLの長さ：約${approximate}文字。コピーして相手に送ってください。`;
+    }
   }
 };
 
@@ -11821,9 +11883,12 @@ document.getElementById("copyBtn").onclick=async()=>{
     await navigator.clipboard.writeText(input.value);
     alert("URLをコピーしました。");
   }catch{
+    input.focus();
     input.select();
-    document.execCommand("copy");
-    alert("URLをコピーしました。");
+    let copied=false;
+    try{copied=document.execCommand("copy");}catch(_error){}
+    if(copied) alert("URLをコピーしました。");
+    else alert("自動コピーできませんでした。選択されたURLを Ctrl+C（スマートフォンでは長押し）でコピーしてください。");
   }
 };
 
@@ -11904,23 +11969,62 @@ function addDeckFromShareUrl(){
     sortOrder:getNewDeckSortOrder(""),
     hints:hintsForPairs(payload.hints,importedPairs),
     redParts:redPartsForPairs(payload.redParts,importedPairs),
+    redSheetPrintEdits:normalizePrintRedEditorEditsMap(payload.redSheetPrintEdits,decoded.words),
     createdAt:now,
     updatedAt:now
   };
+
+  // 問題集一覧・フォルダー・現在選択中のID・タグの書き込みを一まとまりとして扱う。
+  // 途中で1項目でも保存に失敗したら、メモリと保存領域を元の値へ戻す。
+  const deckLibraryBefore=deckLibrary.slice();
+  const currentDeckIdBefore=currentDeckId;
+  const tagsKey=getTagsStorageKey(importedDeck.id);
+  const storageBefore={
+    decks:nativeStorageGetItem.call(localStorage,DECK_LIBRARY_KEY),
+    folders:nativeStorageGetItem.call(localStorage,LIBRARY_FOLDERS_KEY),
+    active:nativeStorageGetItem.call(localStorage,ACTIVE_DECK_KEY),
+    tags:nativeStorageGetItem.call(localStorage,tagsKey)
+  };
+  function restoreRawStorageKey(key,value){
+    if(value===null) nativeStorageRemoveItem.call(localStorage,key);
+    else nativeStorageSetItem.call(localStorage,key,value);
+    if(nativeStorageGetItem.call(localStorage,key)!==value) throw new Error(`保存前の状態を戻せませんでした（${key.slice(STORAGE_PREFIX.length)}）。`);
+  }
+  function rollbackShareImport(){
+    const errors=[];
+    deckLibrary=deckLibraryBefore;
+    currentDeckId=currentDeckIdBefore;
+    // タグを先に取り除いて空き容量を確保してから元の一覧を書き戻す。
+    for(const [key,value] of [[tagsKey,storageBefore.tags],[DECK_LIBRARY_KEY,storageBefore.decks],[LIBRARY_FOLDERS_KEY,storageBefore.folders],[ACTIVE_DECK_KEY,storageBefore.active]]){
+      try{restoreRawStorageKey(key,value);}catch(error){errors.push(String(error?.message||error));}
+    }
+    return errors;
+  }
+
   deckLibrary.push(importedDeck);
   if(!saveDeckLibrary()){
-    deckLibrary=deckLibrary.filter(deck=>deck.id!==importedDeck.id);
-    setStatus("問題集を保存できませんでした。ブラウザの保存容量を確認し、必要なら先にデータをバックアップしてください。",true);
+    const rollbackErrors=rollbackShareImport();
+    const detail=rollbackErrors.length?`元の状態の確認にも失敗しました：${rollbackErrors.join(" / ")}`:"問題集の追加を取り消し、保存前の状態へ戻しました。";
+    setStatus(`問題集を保存できませんでした。ブラウザの保存容量を確認し、必要なら外部バックアップを作成してください。${detail}`,true);
     return;
   }
-  // タグは問題集IDごとの領域に保存し、既存問題集のタグと混ざらないようにする。
+  // タグの保存も読み戻し一致まで確認し、失敗を握りつぶさない。
   try{
-    localStorage.setItem(`${TAGS_KEY_PREFIX}${importedDeck.id}`,JSON.stringify({version:1,items:normalizeTagsArray(payload.tags,importedPairs.length),savedAt:now}));
-  }catch(_error){}
+    const tagsValue=JSON.stringify({version:1,items:normalizeTagsArray(payload.tags,importedPairs.length),savedAt:now});
+    localStorage.setItem(tagsKey,tagsValue);
+    if(nativeStorageGetItem.call(localStorage,tagsKey)!==tagsValue) throw new Error("タグを保存後に読み戻せませんでした。");
+    if(!setActiveDeckId(importedDeck.id)) throw new Error("現在の問題集を選択状態として保存できませんでした。");
+  }catch(error){
+    const rollbackErrors=rollbackShareImport();
+    const detail=rollbackErrors.length?`元の状態の確認にも失敗しました：${rollbackErrors.join(" / ")}`:"追加を取り消し、保存前の状態へ戻しました。";
+    setStatus(`問題集の追加を完了できませんでした。${String(error?.message||error)}。${detail}`,true);
+    alert(`問題集を追加できませんでした。\n\n${String(error?.message||error)}\n\n${detail}\n必要に応じて「全データを保存」でバックアップを作成してください。`);
+    return;
+  }
   openDeck(importedDeck,true);
   input.value="";
-  setStatus(`「${importedDeck.title}」を${importedPairs.length}問の問題集として追加しました。問題集一覧からいつでも編集できます。`);
-  alert(`問題集を追加しました。\n\n${importedDeck.title}\n${importedPairs.length}問\n\n自分用のコピーとして保存されています。`);
+  setStatus(`「${importedDeck.title}」を${importedPairs.length}問の問題集として追加しました。問題・答え・出題設定・タグ・印刷用編集を引き継ぎ、自分用のコピーとして保存しました。`);
+  alert(`問題集を追加しました。\n\n${importedDeck.title}\n${importedPairs.length}問\n\n対応する設定とタグも引き継ぎ、自分用のコピーとして保存されています。`);
 }
 
 document.getElementById("importDeckUrlBtn").addEventListener("click",addDeckFromShareUrl);
