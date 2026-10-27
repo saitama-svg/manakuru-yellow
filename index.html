@@ -3509,6 +3509,16 @@ body.mock-test-active .mascot{display:none!important;}
 .shared-set-actions{display:flex;gap:8px;margin-top:auto}.shared-set-actions .action{flex:1;min-width:0;font-size:13px;padding:10px 12px}
 .shared-set-preview{border-top:1px solid #e7ecea;padding-top:12px;margin-top:3px}.shared-preview-row{padding:10px 0;border-bottom:1px solid #eef1ef}.shared-preview-row:last-child{border-bottom:0}.shared-preview-q{font-weight:800;color:#263632;line-height:1.5}.shared-preview-a{margin-top:5px;color:#31724f;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}.shared-preview-index{font-size:11px;color:#89948f;margin-right:6px}.shared-library-status{padding:13px;border-radius:12px;background:#f5f7f6;color:#5b6b65;font-size:13px;line-height:1.6}.shared-library-status.error{background:#fff0ef;color:#9b3028}.shared-library-note{margin-top:18px;border-left:4px solid #e5bd36;padding:10px 12px;background:#fffaf0;border-radius:0 12px 12px 0;font-size:12px;color:#655d3b;line-height:1.7}
 @media(max-width:700px){.shared-library-hero{align-items:flex-start;padding:16px}.shared-library-hero h3{font-size:18px}.shared-library-controls{grid-template-columns:1fr}.shared-library-grid{grid-template-columns:1fr}.shared-set-card{padding:15px}.shared-set-actions{flex-direction:column}}
+/* v102: みんなの問題集のメタデータ絞り込み、件数表示、報告窓口 */
+.shared-library-controls{grid-template-columns:minmax(220px,1.6fr) repeat(2,minmax(135px,1fr));}
+.shared-library-controls label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:750;color:#445650;}
+.shared-library-advanced-count{margin:-2px 0 12px;font-size:12px;color:#64756e;line-height:1.5;}
+.shared-library-support-actions{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:16px 0;padding:15px 16px;border:1px solid #e7e1c7;border-radius:15px;background:#fffdf4;}
+.shared-library-support-actions strong{display:block;color:#4b472f;font-size:14px;}
+.shared-library-support-actions p{margin:4px 0 0;color:#6b6754;font-size:12px;line-height:1.55;}
+.shared-library-report-link{flex:0 0 auto;text-decoration:none;white-space:normal;text-align:center;}
+@media(max-width:760px){.shared-library-controls{grid-template-columns:repeat(2,minmax(0,1fr));}.shared-library-controls label:first-child{grid-column:1/-1}.shared-library-support-actions{align-items:stretch;flex-direction:column}.shared-library-report-link{width:100%;box-sizing:border-box}}
+@media(max-width:480px){.shared-library-controls{grid-template-columns:1fr}.shared-library-controls label:first-child{grid-column:auto}}
 </style>
 
 
@@ -4630,10 +4640,19 @@ Q2. 鎌倉幕府を開いた人物は？ → 源頼朝"></textarea>
       <div id="sharedLibraryControls" class="shared-library-controls" hidden>
         <label>問題集を検索<input id="sharedLibrarySearch" type="search" placeholder="問題集名・単元・説明で検索" autocomplete="off"></label>
         <label>教科<select id="sharedLibrarySubject"><option value="all">すべての教科</option></select></label>
+        <label>対象学年<select id="sharedLibraryGrade"><option value="all">すべての学年</option></select></label>
+        <label>単元<select id="sharedLibraryTopic"><option value="all">すべての単元</option></select></label>
+        <label>難易度<select id="sharedLibraryLevel"><option value="all">すべての難易度</option></select></label>
+        <label>掲載区分<select id="sharedLibraryReview"><option value="all">すべての掲載区分</option></select></label>
       </div>
       <div id="sharedLibraryCount" class="shared-library-count" hidden></div>
+      <div id="sharedLibraryAdvancedCount" class="shared-library-advanced-count" role="status" aria-live="polite" hidden></div>
       <div id="sharedLibraryGrid" class="shared-library-grid"></div>
-      <div class="shared-library-note"><strong>掲載方針：</strong>初期サンプルは動作確認用です。投稿問題集は公開許可を確認したうえで掲載します。内容の誤りや権利上の問題を見つけた場合は、管理者が確認・修正・取り下げを行います。個人用の問題集が自動で公開されることはありません。</div>
+      <div class="shared-library-support-actions">
+        <div><strong>問題集に誤りを見つけましたか？</strong><p>問題集のタイトルと、問題・解答のどこに問題があるかを報告してください。公開内容を確認するための窓口です。</p></div>
+        <a class="action sub shared-library-report-link" href="https://docs.google.com/forms/d/e/1FAIpQLSdFX9iwaqVkyH5_gbZ36buhUopAJFqXWLnCace13n3AZC623w/viewform" target="_blank" rel="noopener noreferrer">問題集の誤り・不具合を報告</a>
+      </div>
+      <div class="shared-library-note"><strong>掲載方針：</strong>初期サンプルと、公開許可を確認した投稿問題集を区別して掲載します。内容の誤りや権利上の問題が報告された場合は、管理者が確認・修正・取り下げを判断します。個人用の問題集が自動で公開されることはありません。</div>
     </section>
 
     <section id="statsView" class="panel">
@@ -13972,6 +13991,117 @@ document.addEventListener("keydown",event=>{if(event.key==="Escape"&&blankStudyF
 
 </script>
 <script src="./shared-library.js"></script>
+<script>
+/* v102: みんなの問題集の対象学年・単元・難易度・掲載区分フィルター。
+   既存の共有ライブラリの読み込み・プレビュー・取り込み処理は変更せず、表示だけを絞り込みます。 */
+(function initSharedLibraryV102Filters(){
+  const grid = document.getElementById('sharedLibraryGrid');
+  const count = document.getElementById('sharedLibraryAdvancedCount');
+  const controls = {
+    grade: document.getElementById('sharedLibraryGrade'),
+    topic: document.getElementById('sharedLibraryTopic'),
+    level: document.getElementById('sharedLibraryLevel'),
+    reviewStatus: document.getElementById('sharedLibraryReview')
+  };
+  if (!grid || !count || Object.values(controls).some(el => !el)) return;
+
+  const normalize = value => String(value ?? '').normalize('NFKC').trim().toLocaleLowerCase('ja');
+  const setByTitle = new Map();
+  let scheduled = false;
+  let metadataReady = false;
+
+  function uniqueValues(key) {
+    const values = [...new Set([...setByTitle.values()].map(set => String(set[key] ?? '').trim()).filter(Boolean))];
+    return values.sort((a,b) => a.localeCompare(b, 'ja', {numeric:true, sensitivity:'base'}));
+  }
+  function fillSelect(select, firstLabel, values) {
+    const prior = select.value || 'all';
+    while (select.options.length > 1) select.remove(1);
+    for (const value of values) {
+      const option = document.createElement('option');
+      option.value = value;
+      option.textContent = value;
+      select.appendChild(option);
+    }
+    select.value = values.includes(prior) ? prior : 'all';
+    select.options[0].textContent = firstLabel;
+  }
+  function selectedFilters() {
+    return Object.fromEntries(Object.entries(controls).map(([key, el]) => [key, el.value || 'all']));
+  }
+  function fieldForCard(card, key, set) {
+    if (set && set[key] != null) return String(set[key]);
+    // JSONを取得できない環境でも、カードに表示されたラベルを使って可能な範囲で絞り込みます。
+    return card.querySelector('.shared-set-meta')?.textContent || card.textContent || '';
+  }
+  function applyFilters() {
+    scheduled = false;
+    const cards = [...grid.querySelectorAll('.shared-set-card')];
+    const filters = selectedFilters();
+    const active = Object.values(filters).some(value => value !== 'all');
+    let shown = 0;
+    for (const card of cards) {
+      const title = card.querySelector('h3')?.textContent?.trim() || '';
+      const set = setByTitle.get(normalize(title));
+      let visible = true;
+      for (const [key, selected] of Object.entries(filters)) {
+        if (selected === 'all') continue;
+        const value = normalize(fieldForCard(card, key, set));
+        if (set && set[key] != null) {
+          visible = normalize(set[key]) === normalize(selected);
+        } else {
+          visible = value.includes(normalize(selected));
+        }
+        if (!visible) break;
+      }
+      card.style.display = visible ? '' : 'none';
+      if (visible) shown++;
+    }
+    if (active && cards.length) {
+      count.textContent = `追加条件に一致：${shown}件（検索・教科で絞り込んだ ${cards.length}件の中）`;
+      count.hidden = false;
+    } else {
+      count.textContent = '';
+      count.hidden = true;
+    }
+  }
+  function scheduleApply() {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(applyFilters);
+  }
+
+  for (const select of Object.values(controls)) select.addEventListener('change', scheduleApply);
+  const observer = new MutationObserver(scheduleApply);
+  observer.observe(grid, {childList:true, subtree:true});
+
+  // 同じ公開JSONを読み、利用可能な値だけを選択肢に出します。取得失敗時も既存機能を止めません。
+  fetch('./shared-sets.json').then(response => {
+    if (!response.ok) throw new Error('共有問題集データを取得できません');
+    return response.json();
+  }).then(data => {
+    const sets = Array.isArray(data?.sets) ? data.sets : [];
+    for (const set of sets) {
+      if (!set || !set.title) continue;
+      setByTitle.set(normalize(set.title), set);
+    }
+    fillSelect(controls.grade, 'すべての学年', uniqueValues('grade'));
+    fillSelect(controls.topic, 'すべての単元', uniqueValues('topic'));
+    fillSelect(controls.level, 'すべての難易度', uniqueValues('level'));
+    fillSelect(controls.reviewStatus, 'すべての掲載区分', uniqueValues('reviewStatus'));
+    metadataReady = true;
+    scheduleApply();
+  }).catch(() => {
+    // オフラインなどでデータを取得できない場合は、既存の検索・教科フィルターをそのまま利用できます。
+    count.textContent = '';
+    count.hidden = true;
+  });
+
+  // 初回描画・ライブラリの非同期描画のどちらにも対応します。
+  scheduleApply();
+})();
+</script>
+<!-- v102: みんなの問題集の対象学年・単元・難易度・掲載区分フィルターを追加。 -->
 <!-- v56: toolbar button and Ctrl/Command+Z mark selected text pink; pasted bold content remains pink. -->
 <!-- v57: 保存した選択範囲に対して色変更を実行し、通常色へ戻す操作と太字貼付を安定化。 -->
 

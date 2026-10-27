@@ -1,4 +1,4 @@
-const CACHE_NAME = 'manakuru-yellow-v101-library-search-sort';
+const CACHE_NAME = 'manakuru-yellow-v102-shared-library-filters';
 const APP_SHELL = [
   './',
   './index.html',
