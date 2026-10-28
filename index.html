@@ -3509,6 +3509,15 @@ body.mock-test-active .mascot{display:none!important;}
 .shared-set-actions{display:flex;gap:8px;margin-top:auto}.shared-set-actions .action{flex:1;min-width:0;font-size:13px;padding:10px 12px}
 .shared-set-preview{border-top:1px solid #e7ecea;padding-top:12px;margin-top:3px}.shared-preview-row{padding:10px 0;border-bottom:1px solid #eef1ef}.shared-preview-row:last-child{border-bottom:0}.shared-preview-q{font-weight:800;color:#263632;line-height:1.5}.shared-preview-a{margin-top:5px;color:#31724f;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}.shared-preview-index{font-size:11px;color:#89948f;margin-right:6px}.shared-library-status{padding:13px;border-radius:12px;background:#f5f7f6;color:#5b6b65;font-size:13px;line-height:1.6}.shared-library-status.error{background:#fff0ef;color:#9b3028}.shared-library-note{margin-top:18px;border-left:4px solid #e5bd36;padding:10px 12px;background:#fffaf0;border-radius:0 12px 12px 0;font-size:12px;color:#655d3b;line-height:1.7}
 @media(max-width:700px){.shared-library-hero{align-items:flex-start;padding:16px}.shared-library-hero h3{font-size:18px}.shared-library-controls{grid-template-columns:1fr}.shared-library-grid{grid-template-columns:1fr}.shared-set-card{padding:15px}.shared-set-actions{flex-direction:column}}
+/* v104: 自分の問題集から投稿申請、みんなの問題集から誤り報告へ分離 */
+.library-submission-callout{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 18px;padding:14px 16px;border:1px solid #ecd995;border-radius:15px;background:linear-gradient(180deg,#fffdf4 0%,#fff8df 100%)}
+.library-submission-callout-copy{min-width:0}
+.library-submission-callout-copy strong{display:block;color:#5e4d1b;font-size:14px;font-weight:900;line-height:1.5}
+.library-submission-callout-copy p{margin:5px 0 0;color:#756943;font-size:12px;line-height:1.7}
+.library-submission-callout .manakuru-submission-form-link{flex:0 0 auto;white-space:normal;text-align:center;text-decoration:none}
+.library-submission-callout .manakuru-submission-form-link[data-form-unconfigured="true"]{opacity:.8}
+@media(max-width:760px){.library-submission-callout{align-items:stretch;flex-direction:column}.library-submission-callout .manakuru-submission-form-link{width:100%;box-sizing:border-box}}
+
 /* v102: みんなの問題集のメタデータ絞り込み、件数表示、報告窓口 */
 .shared-library-controls{grid-template-columns:minmax(220px,1.6fr) repeat(2,minmax(135px,1fr));}
 .shared-library-controls label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:750;color:#445650;}
@@ -3516,7 +3525,7 @@ body.mock-test-active .mascot{display:none!important;}
 .shared-library-support-actions{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:16px 0;padding:15px 16px;border:1px solid #e7e1c7;border-radius:15px;background:#fffdf4;}
 .shared-library-support-actions strong{display:block;color:#4b472f;font-size:14px;}
 .shared-library-support-actions p{margin:4px 0 0;color:#6b6754;font-size:12px;line-height:1.55;}
-.shared-library-report-link{flex:0 0 auto;text-decoration:none;white-space:normal;text-align:center;}
+.shared-library-report-link{flex:0 0 auto;text-decoration:none;white-space:normal;text-align:center;} .shared-library-report-link[data-form-unconfigured="true"]{opacity:.72;cursor:not-allowed;}
 @media(max-width:760px){.shared-library-controls{grid-template-columns:repeat(2,minmax(0,1fr));}.shared-library-controls label:first-child{grid-column:1/-1}.shared-library-support-actions{align-items:stretch;flex-direction:column}.shared-library-report-link{width:100%;box-sizing:border-box}}
 @media(max-width:480px){.shared-library-controls{grid-template-columns:1fr}.shared-library-controls label:first-child{grid-column:auto}}
 </style>
@@ -4591,6 +4600,13 @@ Q2. 鎌倉幕府を開いた人物は？ → 源頼朝"></textarea>
         </div>
         <button class="action sub" id="saveCurrentAsNewBtn" type="button">現在の内容を新しい問題集として保存</button>
       </div>
+      <div class="library-submission-callout" aria-label="みんなの問題集への登録申請">
+        <div class="library-submission-callout-copy">
+          <strong>この問題集を「みんなの問題集」に掲載してもらいませんか？</strong>
+          <p>自分で作成した問題集を共有したい場合はこちらから投稿申請できます。申請しただけでは公開されず、内容・公開許可・個人情報などを管理者が確認し、承認された問題集だけが掲載されます。申請フォームでは「現在の問題集だけ」を書き出したJSONを使ってください。「全データを保存」で作る成績・学習履歴入りのバックアップは送らないでください。</p>
+        </div>
+        <a class="action sub manakuru-submission-form-link" data-manakuru-submission-form href="#manakuru-submission-form-unconfigured" data-form-unconfigured="true" aria-label="みんなの問題集への登録申請フォーム。接続設定が必要です">📨 みんなの問題集への登録を申請する</a>
+      </div>
       <div class="library-tools">
         <label class="library-search-wrap">検索
           <input id="librarySearch" type="search" placeholder="問題集名・フォルダ名・問題・答え" autocomplete="off">
@@ -4649,8 +4665,8 @@ Q2. 鎌倉幕府を開いた人物は？ → 源頼朝"></textarea>
       <div id="sharedLibraryAdvancedCount" class="shared-library-advanced-count" role="status" aria-live="polite" hidden></div>
       <div id="sharedLibraryGrid" class="shared-library-grid"></div>
       <div class="shared-library-support-actions">
-        <div><strong>問題集に誤りを見つけましたか？</strong><p>問題集のタイトルと、問題・解答のどこに問題があるかを報告してください。公開内容を確認するための窓口です。</p></div>
-        <a class="action sub shared-library-report-link" href="https://docs.google.com/forms/d/e/1FAIpQLSdFX9iwaqVkyH5_gbZ36buhUopAJFqXWLnCace13n3AZC623w/viewform" target="_blank" rel="noopener noreferrer">問題集の誤り・不具合を報告</a>
+        <div><strong>みんなの問題集に誤り・不具合を見つけましたか？</strong><p>掲載されている問題文・答え・解説の誤り、不適切な内容、問題集の読み込み・取り込みエラーはこちらから報告してください。問題集名と該当する問題、誤りの内容が分かるように記入してください。報告内容は運営者が確認し、すぐに修正・掲載停止されるとは限りません。</p></div>
+        <a class="action sub shared-library-report-link manakuru-report-form-link" data-manakuru-report-form href="#manakuru-report-form-unconfigured" data-form-unconfigured="true" aria-disabled="true">誤り・不具合報告フォーム（準備中）</a>
       </div>
       <div class="shared-library-note"><strong>掲載方針：</strong>初期サンプルと、公開許可を確認した投稿問題集を区別して掲載します。内容の誤りや権利上の問題が報告された場合は、管理者が確認・修正・取り下げを判断します。個人用の問題集が自動で公開されることはありません。</div>
     </section>
@@ -14101,6 +14117,60 @@ document.addEventListener("keydown",event=>{if(event.key==="Escape"&&blankStudyF
   scheduleApply();
 })();
 </script>
+<!-- v106: 投稿申請フォームと誤り・不具合報告フォームの両方を接続。 -->
+<script>
+const MANAKURU_SUBMISSION_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdFX9iwaqVkyH5_gbZ36buhUopAJFqXWLnCace13n3AZC623w/viewform";
+const MANAKURU_REPORT_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSc5iTSriR_tsFEa7VyrvITGMTPfrRD9UwJ6GpIqXvjFt0BsZg/viewform"; // 誤り・不具合報告フォームの回答用URL
+(function wireManakuruFormLinks() {
+  const isFormUrl = value => /^https:\/\/(?:docs\.google\.com\/forms\/d\/e\/|forms\.gle\/)/i.test(String(value || '').trim());
+
+  const submissionUrl = String(MANAKURU_SUBMISSION_FORM_URL || '').trim();
+  document.querySelectorAll('[data-manakuru-submission-form]').forEach(link => {
+    if (isFormUrl(submissionUrl)) {
+      link.href = submissionUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.dataset.formUnconfigured = 'false';
+      link.removeAttribute('aria-label');
+      link.title = '投稿申請フォームを新しいタブで開きます';
+    } else {
+      link.href = '#manakuru-submission-form-unconfigured';
+      link.dataset.formUnconfigured = 'true';
+      link.title = '投稿申請フォームの回答用URLが未設定です';
+      link.addEventListener('click', event => {
+        event.preventDefault();
+        alert('問題集の投稿申請フォームURLがまだ設定されていません。index.html内の MANAKURU_SUBMISSION_FORM_URL に回答用URLを設定してください。');
+      });
+    }
+  });
+
+  const reportUrl = String(MANAKURU_REPORT_FORM_URL || '').trim();
+  document.querySelectorAll('[data-manakuru-report-form]').forEach(link => {
+    if (isFormUrl(reportUrl)) {
+      link.href = reportUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.dataset.formUnconfigured = 'false';
+      link.removeAttribute('aria-disabled');
+      link.textContent = '誤り・不具合を報告する';
+      link.title = '誤り・不具合報告フォームを新しいタブで開きます';
+    } else {
+      link.href = '#manakuru-report-form-unconfigured';
+      link.removeAttribute('target');
+      link.removeAttribute('rel');
+      link.dataset.formUnconfigured = 'true';
+      link.setAttribute('aria-disabled', 'true');
+      link.textContent = '誤り・不具合報告フォーム（準備中）';
+      link.title = '専用の誤り・不具合報告フォームはまだ作成されていません';
+      link.addEventListener('click', event => {
+        event.preventDefault();
+        alert('誤り・不具合報告フォームはまだ作成されていません。専用フォームを作成し、index.html内の MANAKURU_REPORT_FORM_URL に回答用URLを設定してください。投稿申請フォームとは別のフォームです。');
+      });
+    }
+  });
+})();
+</script>
+<!-- v106: 自分の問題集=投稿申請／みんなの問題集=誤り・不具合報告。異なる回答用URLを使用。 -->
 <!-- v102: みんなの問題集の対象学年・単元・難易度・掲載区分フィルターを追加。 -->
 <!-- v56: toolbar button and Ctrl/Command+Z mark selected text pink; pasted bold content remains pink. -->
 <!-- v57: 保存した選択範囲に対して色変更を実行し、通常色へ戻す操作と太字貼付を安定化。 -->

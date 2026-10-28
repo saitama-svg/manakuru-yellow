@@ -1,4 +1,4 @@
-const CACHE_NAME = 'manakuru-yellow-v102-shared-library-filters';
+const CACHE_NAME = 'manakuru-yellow-v106-form-routing';
 const APP_SHELL = [
   './',
   './index.html',
