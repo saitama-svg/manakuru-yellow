@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<!-- MANAKURU-YELLOW-BUILD: v101-library-search-sort -->
+<!-- MANAKURU-YELLOW-BUILD: v107-mobile-ui-step1 -->
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="一問一答、復習、成績・弱点分析、問題集、白紙勉強法、模擬テストをまとめた学習ツール「マナクル YELLOW」です。">
 <meta name="application-name" content="マナクル YELLOW">
 <meta name="theme-color" content="#F7F8FA">
@@ -11,6 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="マナクル">
 <link rel="manifest" href="./manifest.webmanifest">
+<link rel="stylesheet" href="./mobile-ui.css">
 <link rel="icon" type="image/png" sizes="48x48" href="./favicon-48.png">
 <link rel="icon" type="image/x-icon" href="./favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon-180.png">
@@ -14117,6 +14118,8 @@ document.addEventListener("keydown",event=>{if(event.key==="Escape"&&blankStudyF
   scheduleApply();
 })();
 </script>
+
+<script src="./mobile-ui.js"></script>
 <!-- v106: 投稿申請フォームと誤り・不具合報告フォームの両方を接続。 -->
 <script>
 const MANAKURU_SUBMISSION_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdFX9iwaqVkyH5_gbZ36buhUopAJFqXWLnCace13n3AZC623w/viewform";

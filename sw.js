@@ -1,10 +1,12 @@
-const CACHE_NAME = 'manakuru-yellow-v106-form-routing';
+const CACHE_NAME = 'manakuru-yellow-v107-mobile-ui-step1';
 const APP_SHELL = [
   './',
   './index.html',
   './manifest.webmanifest',
   './shared-sets.json',
   './shared-library.js',
+  './mobile-ui.css',
+  './mobile-ui.js',
   './icon-192.png',
   './icon-512.png',
   './apple-touch-icon-180.png',
