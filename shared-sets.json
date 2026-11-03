@@ -1,8 +1,8 @@
 {
   "format": "manakuru-shared-library",
   "version": 1,
-  "updatedAt": "2026-10-30",
-  "note": "初期サンプル4種類と投稿問題集4種類を掲載。投稿問題集の個人情報は除き、既存の問題集を保持しています。",
+  "updatedAt": "2026-11-02",
+  "note": "初期サンプル4種類と投稿問題集5種類を掲載。投稿問題集の個人情報は除き、既存の問題集を保持しています。",
   "sets": [
     {
       "id": "history-modern-japan-001",
@@ -1177,6 +1177,556 @@
         {
           "question": "x² - 5x - 9",
           "answer": "(x - 5/2)² - 61/4"
+        }
+      ]
+    },
+    {
+      "id": "english-new-treasure-9-2-further-reading-001",
+      "title": "英単語New Treasure 9-2~further reading",
+      "subject": "英語",
+      "grade": "中学3年",
+      "topic": "英単語",
+      "level": "標準",
+      "description": "書きながらアウトプット",
+      "author": "投稿者（匿名）",
+      "reviewStatus": "運営者申告により公開同意済みとして受付。申請情報に自作または公開許可の確認項目あり。",
+      "rightsNote": "申請情報では、自作または共有・公開の許可を得た内容であると申告。投稿者のニックネーム等は公開データに含めていません。",
+      "questions": [
+        {
+          "question": "how is の短縮形",
+          "answer": "how's"
+        },
+        {
+          "question": "とてもよい，すごい",
+          "answer": "awesome"
+        },
+        {
+          "question": "愛",
+          "answer": "love"
+        },
+        {
+          "question": "恋している",
+          "answer": "be in love"
+        },
+        {
+          "question": "レタス",
+          "answer": "lettuce"
+        },
+        {
+          "question": "流れる",
+          "answer": "run"
+        },
+        {
+          "question": "～を煮る，ゆでる",
+          "answer": "boil"
+        },
+        {
+          "question": "《卵》～をいり卵にする",
+          "answer": "scramble"
+        },
+        {
+          "question": "地面，土地",
+          "answer": "ground"
+        },
+        {
+          "question": "fallの過去分詞",
+          "answer": "fallen"
+        },
+        {
+          "question": "落ちる",
+          "answer": "fall"
+        },
+        {
+          "question": "側，側面",
+          "answer": "side"
+        },
+        {
+          "question": "図，図解",
+          "answer": "figure"
+        },
+        {
+          "question": "drawの過去分詞",
+          "answer": "drawn"
+        },
+        {
+          "question": "～を起こす，目が覚める",
+          "answer": "wake"
+        },
+        {
+          "question": "～を起こす，目が覚める[熟]",
+          "answer": "wake up"
+        },
+        {
+          "question": "（鉄道の）車両",
+          "answer": "car"
+        },
+        {
+          "question": "大統領",
+          "answer": "president"
+        },
+        {
+          "question": "アフガニスタン",
+          "answer": "Afghanistan"
+        },
+        {
+          "question": "兵士",
+          "answer": "soldier"
+        },
+        {
+          "question": "カブール《地名》",
+          "answer": "Kabul"
+        },
+        {
+          "question": "manの複数形",
+          "answer": "men"
+        },
+        {
+          "question": "まったくの，ちょうどその",
+          "answer": "very"
+        },
+        {
+          "question": "柩，棺おけ",
+          "answer": "coffin"
+        },
+        {
+          "question": "アフガニスタンの",
+          "answer": "Afghan"
+        },
+        {
+          "question": "旗",
+          "answer": "flag"
+        },
+        {
+          "question": "遺体",
+          "answer": "body"
+        },
+        {
+          "question": "～について調べる，知る",
+          "answer": "find out"
+        },
+        {
+          "question": "大学，総合大学",
+          "answer": "university"
+        },
+        {
+          "question": "パキスタン",
+          "answer": "Pakistan"
+        },
+        {
+          "question": "医療の",
+          "answer": "medical"
+        },
+        {
+          "question": "doctorの略，（医者の名につけて）…先生",
+          "answer": "Dr."
+        },
+        {
+          "question": "～を手当てする，治療する",
+          "answer": "treat"
+        },
+        {
+          "question": "患者",
+          "answer": "patient"
+        },
+        {
+          "question": "ハンセン病",
+          "answer": "leprosy"
+        },
+        {
+          "question": "国境（線），境界（線）",
+          "answer": "border"
+        },
+        {
+          "question": "難民，避難民，亡命者",
+          "answer": "refugee"
+        },
+        {
+          "question": "（難民などの）収容所",
+          "answer": "camp"
+        },
+        {
+          "question": "故郷の，自宅の",
+          "answer": "home"
+        },
+        {
+          "question": "サービス，貢献",
+          "answer": "service"
+        },
+        {
+          "question": "平和医療団・日本（ピース・ジャパン・メディカルサービス）",
+          "answer": "the Peace (Japan) Medical Services"
+        },
+        {
+          "question": "本拠地，拠点",
+          "answer": "base"
+        },
+        {
+          "question": "～を救う",
+          "answer": "save"
+        },
+        {
+          "question": "～に気づく",
+          "answer": "realize"
+        },
+        {
+          "question": "《問題など》～を解く，解決する",
+          "answer": "solve"
+        },
+        {
+          "question": "方法，やり方",
+          "answer": "way"
+        },
+        {
+          "question": "干ばつ",
+          "answer": "drought"
+        },
+        {
+          "question": "それゆえに，したがって",
+          "answer": "therefore"
+        },
+        {
+          "question": "～と一緒に",
+          "answer": "together with"
+        },
+        {
+          "question": "村人，村民",
+          "answer": "villager"
+        },
+        {
+          "question": "～を掘る，掘って作る",
+          "answer": "dig"
+        },
+        {
+          "question": "井戸",
+          "answer": "well"
+        },
+        {
+          "question": "運河",
+          "answer": "canal"
+        },
+        {
+          "question": "畑，田，野原",
+          "answer": "field"
+        },
+        {
+          "question": "機械",
+          "answer": "machine"
+        },
+        {
+          "question": "しばらくの間",
+          "answer": "after a while"
+        },
+        {
+          "question": "～に打ち勝つ，克服する",
+          "answer": "overcome"
+        },
+        {
+          "question": "難しさ，困難",
+          "answer": "difficulty"
+        },
+        {
+          "question": "ついに",
+          "answer": "finally"
+        },
+        {
+          "question": "いたるところに〔へ〕",
+          "answer": "everywhere"
+        },
+        {
+          "question": "じゃがいも",
+          "answer": "potato"
+        },
+        {
+          "question": "スイカ",
+          "answer": "watermelon"
+        },
+        {
+          "question": "～に加えて",
+          "answer": "in addition to"
+        },
+        {
+          "question": "小麦",
+          "answer": "wheat"
+        },
+        {
+          "question": "大いに，非常に",
+          "answer": "greatly"
+        },
+        {
+          "question": "（～を）改善する",
+          "answer": "improve"
+        },
+        {
+          "question": "…のように，…のとおりに",
+          "answer": "as"
+        },
+        {
+          "question": "～をもたらす",
+          "answer": "do"
+        },
+        {
+          "question": "よい行い",
+          "answer": "good"
+        },
+        {
+          "question": "役立つ，よいことをする",
+          "answer": "do good"
+        },
+        {
+          "question": "事実，現実",
+          "answer": "fact"
+        },
+        {
+          "question": "実際は",
+          "answer": "in fact"
+        },
+        {
+          "question": "カカ・ムラド（なかむらのおじさん）《中村哲医師のアフガニスタンでの愛称》",
+          "answer": "Kaka Murad"
+        },
+        {
+          "question": "独力で",
+          "answer": "on one's own"
+        },
+        {
+          "question": "死，死亡",
+          "answer": "death"
+        },
+        {
+          "question": "～をむだに使う",
+          "answer": "waste"
+        },
+        {
+          "question": "いなくなった，失われた",
+          "answer": "gone"
+        },
+        {
+          "question": "使命，天命",
+          "answer": "mission"
+        },
+        {
+          "question": "～を照らす",
+          "answer": "shine"
+        },
+        {
+          "question": "光，日光",
+          "answer": "light"
+        },
+        {
+          "question": "隅，端",
+          "answer": "corner"
+        },
+        {
+          "question": "生きて，存続して",
+          "answer": "alive"
+        },
+        {
+          "question": "コンパス",
+          "answer": "compass"
+        },
+        {
+          "question": "文房具",
+          "answer": "stationery"
+        },
+        {
+          "question": "はさみ",
+          "answer": "scissors"
+        },
+        {
+          "question": "接着剤，のり",
+          "answer": "glue"
+        },
+        {
+          "question": "方向",
+          "answer": "way"
+        },
+        {
+          "question": "こちらです",
+          "answer": "this way"
+        },
+        {
+          "question": "種類，型",
+          "answer": "type"
+        },
+        {
+          "question": "省エネルギーの",
+          "answer": "energy-saving"
+        },
+        {
+          "question": "冷蔵庫",
+          "answer": "refrigerator"
+        },
+        {
+          "question": "洗濯機",
+          "answer": "washing machine"
+        },
+        {
+          "question": "エアコン",
+          "answer": "air conditioner"
+        },
+        {
+          "question": "ストーブ，暖房装置",
+          "answer": "heater"
+        },
+        {
+          "question": "掃除機",
+          "answer": "(vacuum) cleaner"
+        },
+        {
+          "question": "パートナー，連れ，相棒",
+          "answer": "partner"
+        },
+        {
+          "question": "科学展",
+          "answer": "science fair"
+        },
+        {
+          "question": "影響，効果",
+          "answer": "effect"
+        },
+        {
+          "question": "磁力，磁気",
+          "answer": "magnetism"
+        },
+        {
+          "question": "成長",
+          "answer": "growth"
+        },
+        {
+          "question": "背景",
+          "answer": "background"
+        },
+        {
+          "question": "chooseの過去形",
+          "answer": "chose"
+        },
+        {
+          "question": "農業",
+          "answer": "agriculture"
+        },
+        {
+          "question": "磁場，磁界",
+          "answer": "magnetic field"
+        },
+        {
+          "question": "磁石",
+          "answer": "magnet"
+        },
+        {
+          "question": "使うこと，使用",
+          "answer": "using"
+        },
+        {
+          "question": "～を充電する",
+          "answer": "charge"
+        },
+        {
+          "question": "バッテリー，電池",
+          "answer": "battery"
+        },
+        {
+          "question": "～を蓄える，～を保管する",
+          "answer": "store"
+        },
+        {
+          "question": "情報，データ",
+          "answer": "data"
+        },
+        {
+          "question": "南の",
+          "answer": "south"
+        },
+        {
+          "question": "カメ",
+          "answer": "turtle"
+        },
+        {
+          "question": "～に影響する",
+          "answer": "affect"
+        },
+        {
+          "question": "かいわれ大根",
+          "answer": "radish sprout"
+        },
+        {
+          "question": "実験",
+          "answer": "experiment"
+        },
+        {
+          "question": "良い，有益な",
+          "answer": "positive"
+        },
+        {
+          "question": "（種から育った）苗木",
+          "answer": "seedling"
+        },
+        {
+          "question": "方法",
+          "answer": "method"
+        },
+        {
+          "question": "～を置く",
+          "answer": "place"
+        },
+        {
+          "question": "U字形の",
+          "answer": "U-shaped"
+        },
+        {
+          "question": "土",
+          "answer": "soil"
+        },
+        {
+          "question": "芽",
+          "answer": "sprout"
+        },
+        {
+          "question": "～を計測する",
+          "answer": "measure"
+        },
+        {
+          "question": "高さ",
+          "answer": "height"
+        },
+        {
+          "question": "状態，体調",
+          "answer": "condition"
+        },
+        {
+          "question": "芽を出す",
+          "answer": "sprout"
+        },
+        {
+          "question": "平均の",
+          "answer": "average"
+        },
+        {
+          "question": "細い",
+          "answer": "thin"
+        },
+        {
+          "question": "茎",
+          "answer": "stem"
+        },
+        {
+          "question": "斑点",
+          "answer": "spot"
+        },
+        {
+          "question": "結論",
+          "answer": "conclusion"
+        },
+        {
+          "question": "実験する",
+          "answer": "experiment"
+        },
+        {
+          "question": "大豆",
+          "answer": "soy"
+        },
+        {
+          "question": "役に立つ，有用な",
+          "answer": "helpful"
         }
       ]
     }
