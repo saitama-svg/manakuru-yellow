@@ -1,4 +1,4 @@
-/* マナクル YELLOW v107 — スマホ専用ナビゲーション・画面土台（Step 1）
+/* マナクル YELLOW v108 — スマホ専用ナビゲーション・通常学習画面（Step 2）
    既存の switchView / setAppMode / 保存・採点処理を再利用します。 */
 (function initManakuruMobileUI() {
   'use strict';
@@ -214,6 +214,17 @@
     const isPortrait = window.matchMedia
       ? window.matchMedia('(orientation: portrait)').matches
       : window.innerHeight > window.innerWidth;
+    const isLandscapeMobileLearning = isMobileDevice() && !isPortrait && (view === 'roulette' || view === 'inputCard');
+    body.classList.toggle('mobile-learning-landscape', isLandscapeMobileLearning);
+    body.classList.toggle('mobile-learning-roulette', isLandscapeMobileLearning && view === 'roulette');
+    body.classList.toggle('mobile-learning-input-card', isLandscapeMobileLearning && view === 'inputCard');
+
+    // 横画面の通常学習では、設定で手書きが有効な場合だけ手書き欄を初期表示する。
+    if (isLandscapeMobileLearning && body.dataset.userHandwriting !== 'off') {
+      const padDetails = document.getElementById(view === 'inputCard' ? 'inputHandwritingDetails' : 'outputHandwritingDetails');
+      if (padDetails && !padDetails.open) padDetails.open = true;
+    }
+
     // Keep the orientation prompt independent of the more-sheet, so the bottom navigation remains usable.
     portraitNotice.hidden = !(isMobileDevice() && isPortrait && learningViews.has(view));
 
@@ -269,6 +280,7 @@
           const app = document.querySelector('.app');
           if (app) app.scrollTop = 0;
         }
+        // CSS gridへの切替後、既存のResizeObserverがcanvasの実寸変化を検出する。
       });
       return result;
     };

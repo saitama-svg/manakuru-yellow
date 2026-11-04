@@ -1,4 +1,4 @@
-const CACHE_NAME = 'manakuru-yellow-v107-mobile-ui-step1';
+const CACHE_NAME = 'manakuru-yellow-v108-mobile-ui-step2';
 const APP_SHELL = [
   './',
   './index.html',

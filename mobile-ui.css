@@ -419,3 +419,607 @@
   body.mobile-ui-active .mobile-bottom-nav button { min-height: 48px; gap: 1px; }
   body.mobile-ui-active .mobile-bottom-nav button .mobile-nav-icon { font-size: 17px; }
 }
+
+
+/* =======================================================================
+   v108 Step 2 — 横画面スマホの通常学習レイアウト
+   対象：一問一答（roulette）・カード学習（inputCard）のみ。
+   PC版、一覧学習、模擬テスト、その他の画面には適用しない。
+   ======================================================================= */
+@media (orientation: landscape) {
+  body.mobile-ui-active.mobile-learning-landscape {
+    width:100%;
+    height:100%;
+    min-height:0;
+    overflow:hidden;
+    overscroll-behavior:none;
+  }
+
+  body.mobile-ui-active.mobile-learning-landscape .app {
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    height:100vh;
+    height:100dvh;
+    min-height:0;
+    margin:0;
+    padding:calc(51px + env(safe-area-inset-top, 0px)) 0 calc(56px + env(safe-area-inset-bottom, 0px));
+    overflow:hidden;
+    border-radius:0;
+  }
+
+  body.mobile-ui-active.mobile-learning-landscape .first-use-chooser {display:none !important;}
+  body.mobile-ui-active.mobile-learning-landscape #autosaveIndicator[data-state="saved"] {visibility:hidden;}
+  body.mobile-ui-active.mobile-learning-landscape #autosaveIndicator[data-state="warning"],
+  body.mobile-ui-active.mobile-learning-landscape #autosaveIndicator[data-state="error"] {
+    left:6px;bottom:calc(55px + env(safe-area-inset-bottom, 0px));max-width:40vw;padding:4px 6px;font-size:8px;
+  }
+
+  body.mobile-ui-active.mobile-learning-landscape .app > main {
+    display:flex;
+    flex:1 1 0;
+    flex-direction:column;
+    width:100%;
+    min-width:0;
+    min-height:0;
+    overflow:hidden;
+  }
+
+  body.mobile-ui-active.mobile-learning-landscape .mobile-ui-header {
+    min-height:calc(47px + env(safe-area-inset-top, 0px));
+    padding:calc(4px + env(safe-area-inset-top, 0px)) 10px 4px;
+  }
+  body.mobile-ui-active.mobile-learning-landscape .mobile-brand-mark {
+    width:32px;height:32px;flex-basis:32px;border-radius:9px;font-size:17px;
+  }
+  body.mobile-ui-active.mobile-learning-landscape .mobile-brand-name {font-size:12px;}
+  body.mobile-ui-active.mobile-learning-landscape .mobile-current-view {font-size:10px;}
+  body.mobile-ui-active.mobile-learning-landscape .mobile-header-menu {
+    width:36px;height:36px;flex-basis:36px;border-radius:10px;font-size:19px;
+  }
+  body.mobile-ui-active.mobile-learning-landscape .mobile-bottom-nav {
+    min-height:calc(54px + env(safe-area-inset-bottom, 0px));
+    padding:2px 8px calc(2px + env(safe-area-inset-bottom, 0px));
+  }
+  body.mobile-ui-active.mobile-learning-landscape .mobile-bottom-nav button {
+    min-height:48px;gap:1px;font-size:9px;
+  }
+  body.mobile-ui-active.mobile-learning-landscape .mobile-bottom-nav button .mobile-nav-icon {font-size:17px;}
+
+  /* ---------- アウトプット：一問一答 ---------- */
+  body.mobile-learning-roulette #rouletteView.stage {
+    display:flex !important;
+    flex:1 1 0;
+    flex-direction:column;
+    align-items:stretch;
+    justify-content:flex-start;
+    width:100%;
+    max-width:none;
+    height:100%;
+    min-height:0;
+    margin:0;
+    padding:4px 8px 5px;
+    overflow:hidden;
+    border:0;
+    border-radius:0;
+    box-shadow:none;
+    background:transparent;
+  }
+
+  body.mobile-learning-roulette #rouletteContext,
+  body.mobile-learning-roulette .roulette-context {
+    position:relative;
+    inset:auto;
+    flex:0 0 auto;
+    width:calc(100% - 92px);
+    min-height:22px;
+    max-height:25px;
+    margin:0 0 3px;
+    gap:4px;
+    overflow:hidden;
+  }
+  body.mobile-learning-roulette .roulette-context-deck,
+  body.mobile-learning-roulette .roulette-context-mode {
+    min-height:20px;
+    padding:3px 7px;
+    font-size:9px;
+  }
+  body.mobile-learning-roulette .roulette-context-deck {max-width:62%;}
+  body.mobile-learning-roulette .reset-study-btn {
+    top:4px;right:8px;
+    min-height:25px;
+    padding:4px 8px;
+    border-radius:8px;
+    font-size:10px;
+  }
+
+  body.mobile-learning-roulette #dailyGoalCard:not([hidden]) {
+    flex:0 0 auto;
+    max-height:34px;
+    margin:0 0 3px;
+    padding:3px 7px;
+    overflow:hidden;
+    border-radius:8px;
+    box-shadow:none;
+  }
+  body.mobile-learning-roulette #dailyGoalCard:not([hidden]) .daily-goal-editor,
+  body.mobile-learning-roulette #dailyGoalCard:not([hidden]) .daily-goal-top,
+  body.mobile-learning-roulette #dailyGoalCard:not([hidden]) .daily-goal-progress-area {display:none !important;}
+  body.mobile-learning-roulette #dailyGoalCard:not([hidden]) .daily-goal-compact {
+    display:flex !important;
+    min-height:25px;
+    align-items:center;
+    gap:8px;
+  }
+  body.mobile-learning-roulette #dailyGoalCard:not([hidden]) .daily-goal-compact-main {min-width:0;flex:1;}
+  body.mobile-learning-roulette #dailyGoalCard:not([hidden]) .daily-goal-compact-title,
+  body.mobile-learning-roulette #dailyGoalCard:not([hidden]) .daily-goal-compact-meta,
+  body.mobile-learning-roulette #dailyGoalCard:not([hidden]) .daily-goal-compact-track {display:none !important;}
+  body.mobile-learning-roulette #dailyGoalCard:not([hidden]) .daily-goal-compact-line {margin:0;}
+  body.mobile-learning-roulette #dailyGoalCard:not([hidden]) .daily-goal-compact-start {
+    flex:0 0 auto;padding:4px 8px;font-size:10px;min-height:24px;
+  }
+  body.mobile-learning-roulette #todayReviewShortcut {display:none !important;}
+  body.mobile-learning-roulette #resumeSessionNotice:not([hidden]) {
+    flex:0 0 auto;
+    max-height:36px;
+    margin:0 0 3px;
+    padding:4px 7px;
+    gap:5px;
+    overflow:hidden;
+    border-radius:8px;
+  }
+  body.mobile-learning-roulette #resumeSessionNotice .resume-session-copy strong {font-size:10px;}
+  body.mobile-learning-roulette #resumeSessionNotice .resume-session-copy span {display:none;}
+  body.mobile-learning-roulette #resumeSessionNotice .resume-session-actions {gap:4px;}
+  body.mobile-learning-roulette #resumeSessionNotice .resume-session-actions button {padding:4px 6px;font-size:9px;}
+
+  body[data-user-handwriting="off"].mobile-learning-roulette #outputWritingLayout.output-writing-layout {
+    grid-template-columns:minmax(0,1fr);
+  }
+  body[data-user-handwriting="off"].mobile-learning-roulette .handwriting-output-card {display:none !important;}
+
+  body.mobile-learning-roulette #outputWritingLayout.output-writing-layout {
+    display:grid !important;
+    flex:1 1 0;
+    grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);
+    grid-template-rows:minmax(0,1fr);
+    align-items:stretch;
+    gap:7px;
+    width:100%;
+    min-width:0;
+    min-height:0;
+    margin:0;
+    overflow:hidden;
+  }
+  body.mobile-learning-roulette #outputWritingLayout > .display {
+    display:flex;
+    flex:1 1 0;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    height:100%;
+    min-width:0;
+    min-height:0;
+    margin:0;
+    padding:8px 9px 6px;
+    overflow:hidden;
+    border:1px solid #e3eee9;
+    border-radius:12px;
+    background:rgba(255,255,255,.97);
+    box-shadow:0 3px 10px rgba(35,125,112,.06);
+  }
+  body.mobile-learning-roulette #screen.display,
+  body.mobile-learning-roulette .display .word {
+    min-height:0;
+    max-width:100%;
+    max-height:58%;
+    margin:0;
+    padding:0;
+    overflow:auto;
+    font-size:clamp(19px,3.1vw,34px);
+    line-height:1.25;
+    letter-spacing:0;
+    overflow-wrap:anywhere;
+    scrollbar-width:thin;
+  }
+  body.mobile-learning-roulette .display .divider {width:42px;height:3px;margin:5px 0;flex:0 0 auto;}
+  body.mobile-learning-roulette .display .hint {
+    max-width:100%;
+    margin:3px 0 0;
+    padding:3px 6px;
+    border-radius:7px;
+    font-size:9px;
+    line-height:1.3;
+    white-space:normal;
+  }
+  body.mobile-learning-roulette .display .round-progress {
+    display:block;
+    flex:0 0 auto;
+    margin:3px 0 0;
+    padding:2px 6px;
+    border:0;
+    background:transparent;
+    font-size:9px;
+    line-height:1.2;
+  }
+  body.mobile-learning-roulette .display .review-badge {margin-top:3px;padding:3px 6px;font-size:9px;}
+  body.mobile-learning-roulette .display .study-stats {
+    display:flex;
+    flex:0 0 auto;
+    flex-wrap:nowrap;
+    gap:3px;
+    width:100%;
+    margin:5px 0 0;
+  }
+  body.mobile-learning-roulette .display .study-stat,
+  body.mobile-learning-roulette .display .study-stat.streak {
+    flex:1 1 0;
+    min-width:0;
+    padding:4px 3px;
+    border-radius:7px;
+    box-shadow:none;
+  }
+  body.mobile-learning-roulette .display .study-stat .stat-label {font-size:8px;}
+  body.mobile-learning-roulette .display .study-stat .stat-number,
+  body.mobile-learning-roulette .display .study-stat.streak .stat-number {font-size:16px;}
+  body.mobile-learning-roulette .display .study-stat .stat-unit {font-size:9px;}
+  body.mobile-learning-roulette .display .study-stat .stat-sub {display:none;}
+
+  body.mobile-learning-roulette .handwriting-output-card {
+    display:flex;
+    width:100%;
+    height:100%;
+    min-width:0;
+    min-height:0;
+    margin:0;
+    overflow:hidden;
+  }
+  body.mobile-learning-roulette .handwriting-output-card .handwriting-details {
+    display:flex;
+    flex:1 1 0;
+    flex-direction:column;
+    width:100%;
+    height:100%;
+    min-width:0;
+    min-height:0;
+    overflow:hidden;
+    border-radius:12px;
+    box-shadow:none;
+  }
+  body.mobile-learning-roulette .handwriting-output-card .handwriting-details > summary {
+    flex:0 0 auto;
+    min-height:27px;
+    padding:4px 7px;
+    gap:6px;
+  }
+  body.mobile-learning-roulette .handwriting-output-card .handwriting-summary-icon {width:22px;height:22px;flex-basis:22px;border-radius:7px;font-size:13px;}
+  body.mobile-learning-roulette .handwriting-output-card .handwriting-details > summary strong {font-size:10px;}
+  body.mobile-learning-roulette .handwriting-output-card .handwriting-details > summary small,
+  body.mobile-learning-roulette .handwriting-output-card .handwriting-chevron {display:none;}
+  body.mobile-learning-roulette .handwriting-output-card .handwriting-content {
+    display:flex;
+    flex:1 1 0;
+    flex-direction:column;
+    min-width:0;
+    min-height:0;
+    padding:5px;
+    overflow:hidden;
+  }
+  body.mobile-learning-roulette .handwriting-output-card .handwriting-toolbar {
+    display:flex;
+    flex:0 0 auto;
+    flex-wrap:nowrap;
+    align-items:center;
+    justify-content:flex-start;
+    gap:3px;
+    margin:0 0 4px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scrollbar-width:none;
+  }
+  body.mobile-learning-roulette .handwriting-output-card .handwriting-toolbar::-webkit-scrollbar {display:none;}
+  body.mobile-learning-roulette .handwriting-output-card .handwriting-control {
+    flex:0 0 auto;
+    gap:3px;
+    padding:3px 4px !important;
+    border-radius:6px;
+    font-size:8px !important;
+  }
+  body.mobile-learning-roulette .handwriting-output-card .handwriting-control input[type="color"] {width:18px;height:18px;}
+  body.mobile-learning-roulette .handwriting-output-card .handwriting-control select {min-width:35px;max-width:42px;padding:2px 12px 2px 3px;font-size:9px;}
+  body.mobile-learning-roulette .handwriting-output-card .handwriting-tool-button {
+    flex:0 0 auto;
+    min-height:30px;
+    padding:4px 6px;
+    border-radius:6px;
+    font-size:9px;
+    white-space:nowrap;
+  }
+  body.mobile-learning-roulette .handwriting-output-card .handwriting-tool-button.is-clear {margin-left:0;}
+  body.mobile-learning-roulette .handwriting-output-card .handwriting-canvas-frame {
+    flex:1 1 0;
+    width:100%;
+    height:auto;
+    min-height:0;
+    border-radius:8px;
+  }
+  body.mobile-learning-roulette .handwriting-output-card .handwriting-canvas {background-image:none;}
+  body.mobile-learning-roulette .handwriting-output-card .handwriting-note {display:none;}
+
+  body.mobile-learning-roulette #answerControls.answer-controls {
+    flex:0 0 auto;
+    width:100%;
+    min-height:0;
+    gap:6px;
+    margin:5px 0 0;
+    padding:0;
+  }
+  body.mobile-learning-roulette #answerControls.answer-controls.visible {display:flex;}
+  body.mobile-learning-roulette #answerControls .check-btn {
+    flex:1 1 0;
+    min-width:0;
+    min-height:34px;
+    padding:5px 4px;
+    gap:3px;
+    border-radius:8px;
+    font-size:10px;
+    line-height:1.15;
+  }
+  body.mobile-learning-roulette #answerControls .shortcut-key {display:none;}
+  body.mobile-learning-roulette #rouletteView:has(.round-summary.visible) #outputWritingLayout {display:none !important;}
+  body.mobile-learning-roulette #rouletteView .round-summary.visible {
+    flex:1 1 0;
+    min-height:0;
+    margin:6px 0 0;
+    padding:8px;
+    overflow:auto;
+    border-radius:10px;
+    background:#fff;
+  }
+  body.mobile-learning-roulette #rouletteView .round-summary .summary-title {font-size:17px;}
+  body.mobile-learning-roulette #rouletteView .round-summary .summary-result {font-size:12px;}
+  body.mobile-learning-roulette #rouletteView .round-summary .summary-actions {gap:5px;}
+  body.mobile-learning-roulette #rouletteView .round-summary .summary-btn {min-height:30px;padding:5px 8px;font-size:10px;}
+
+  /* ---------- インプット：カード学習 ---------- */
+  body.mobile-learning-input-card #inputCardView.input-learning-panel {
+    display:flex !important;
+    flex:1 1 0;
+    flex-direction:column;
+    width:100%;
+    max-width:none;
+    height:100%;
+    min-height:0;
+    margin:0;
+    padding:5px 8px;
+    overflow:hidden;
+    border:0;
+    border-radius:0;
+    box-shadow:none;
+    background:transparent;
+  }
+  body.mobile-learning-input-card #inputCardView .input-page-heading {display:none;}
+  body.mobile-learning-input-card #inputCardView #inputCardContent {
+    display:flex;
+    flex:1 1 0;
+    flex-direction:column;
+    min-width:0;
+    min-height:0;
+    overflow:hidden;
+  }
+  body.mobile-learning-input-card #inputCardView #inputCardContent[hidden] {display:none !important;}
+  body.mobile-learning-input-card #inputCardView .input-study-toolbar {
+    display:flex;
+    flex:0 0 auto;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    min-height:28px;
+    margin:0 0 3px;
+    flex-wrap:nowrap;
+  }
+  body.mobile-learning-input-card #inputCardView .input-study-toolbar label {gap:5px;font-size:9px;white-space:nowrap;}
+  body.mobile-learning-input-card #inputCardView .input-study-toolbar select {
+    min-width:0;
+    max-width:145px;
+    padding:4px 6px;
+    border-radius:7px;
+    font-size:10px;
+  }
+  body.mobile-learning-input-card #inputCardView .input-study-counter {gap:6px;font-size:9px;white-space:nowrap;}
+  body.mobile-learning-input-card #inputCardView .input-study-counter strong {font-size:11px;}
+  body.mobile-learning-input-card #inputCardView .input-progress-track {flex:0 0 3px;height:3px;margin:0 0 4px;}
+  body.mobile-learning-input-card #inputCardView .input-card-stage {
+    display:grid;
+    flex:1 1 0;
+    grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);
+    grid-template-rows:auto minmax(0,1fr) auto auto;
+    align-items:stretch;
+    gap:4px 7px;
+    width:100%;
+    min-width:0;
+    min-height:0;
+    padding:5px;
+    overflow:hidden;
+    border-radius:11px;
+  }
+  body.mobile-learning-input-card #inputCardView .input-card-stage > .input-card-meta {
+    grid-column:1 / -1;
+    grid-row:1;
+    min-width:0;
+    margin:0;
+    font-size:8px;
+  }
+  body.mobile-learning-input-card #inputCardView .input-card-stage > .input-card-face {
+    grid-column:1;
+    grid-row:2;
+    display:flex;
+    width:100%;
+    min-width:0;
+    min-height:0;
+    height:100%;
+    gap:6px;
+    padding:7px;
+    overflow:auto;
+    border-radius:9px !important;
+  }
+  body.mobile-learning-input-card #inputCardView .input-card-label {font-size:8px;}
+  body.mobile-learning-input-card #inputCardView .input-card-face > strong {
+    font-size:clamp(16px,2.7vw,28px);
+    line-height:1.25;
+  }
+  body.mobile-learning-input-card #inputCardView .input-card-separator {height:2px;width:30px;flex:0 0 auto;}
+  body.mobile-learning-input-card #inputCardView .input-card-answer {font-size:clamp(13px,2vw,20px);line-height:1.25;}
+  body.mobile-learning-input-card #inputCardView .input-card-face > small {font-size:8px;}
+  body.mobile-learning-input-card #inputCardView .input-hint-toggle {padding:4px 6px;font-size:9px;}
+  body.mobile-learning-input-card #inputCardView .input-hint-content {font-size:9px;}
+  body.mobile-learning-input-card #inputCardView .input-card-stage > .input-card-controls {
+    grid-column:1;
+    grid-row:3;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,1fr);
+    gap:3px;
+    min-width:0;
+    margin:0;
+  }
+  body.mobile-learning-input-card #inputCardView .input-card-controls button {
+    min-width:0;
+    min-height:29px;
+    padding:4px 3px;
+    border-radius:7px;
+    font-size:9px;
+    line-height:1.15;
+  }
+  body.mobile-learning-input-card #inputCardView .input-card-stage > .input-card-marking {
+    grid-column:1;
+    grid-row:4;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    min-width:0;
+    min-height:0;
+    gap:4px;
+    margin:0;
+    padding:3px 0 0;
+    border-top:1px solid #deebe5;
+  }
+  body.mobile-learning-input-card #inputCardView .input-card-marking p {display:none;}
+  body.mobile-learning-input-card #inputCardView .input-status-actions {flex-wrap:nowrap;gap:3px;}
+  body.mobile-learning-input-card #inputCardView .input-status-actions button {
+    min-width:0;
+    min-height:26px;
+    padding:3px 6px;
+    border-radius:7px;
+    font-size:9px;
+    white-space:nowrap;
+  }
+  body[data-user-handwriting="off"].mobile-learning-input-card #inputCardView .input-card-stage {
+    grid-template-columns:minmax(0,1fr);
+  }
+  body[data-user-handwriting="off"].mobile-learning-input-card #inputCardView .input-card-stage > .input-card-face,
+  body[data-user-handwriting="off"].mobile-learning-input-card #inputCardView .input-card-stage > .input-card-controls,
+  body[data-user-handwriting="off"].mobile-learning-input-card #inputCardView .input-card-stage > .input-card-marking {
+    grid-column:1;
+  }
+
+  body.mobile-learning-input-card #inputCardView .input-card-stage > .handwriting-input-card {
+    grid-column:2;
+    grid-row:2 / 5;
+    display:flex;
+    width:100%;
+    height:100%;
+    min-width:0;
+    min-height:0;
+    margin:0;
+    overflow:hidden;
+  }
+  body.mobile-learning-input-card #inputCardView .handwriting-input-card .handwriting-details {
+    display:flex;
+    flex:1 1 0;
+    flex-direction:column;
+    width:100%;
+    height:100%;
+    min-width:0;
+    min-height:0;
+    overflow:hidden;
+    border-radius:9px;
+    box-shadow:none;
+  }
+  body.mobile-learning-input-card #inputCardView .handwriting-input-card .handwriting-details > summary {
+    flex:0 0 auto;
+    min-height:26px;
+    padding:3px 6px;
+    gap:5px;
+  }
+  body.mobile-learning-input-card #inputCardView .handwriting-input-card .handwriting-summary-icon {width:21px;height:21px;flex-basis:21px;border-radius:6px;font-size:12px;}
+  body.mobile-learning-input-card #inputCardView .handwriting-input-card .handwriting-details > summary strong {font-size:9px;}
+  body.mobile-learning-input-card #inputCardView .handwriting-input-card .handwriting-details > summary small,
+  body.mobile-learning-input-card #inputCardView .handwriting-input-card .handwriting-chevron {display:none;}
+  body.mobile-learning-input-card #inputCardView .handwriting-input-card .handwriting-content {
+    display:flex;
+    flex:1 1 0;
+    flex-direction:column;
+    min-width:0;
+    min-height:0;
+    padding:4px;
+    overflow:hidden;
+  }
+  body.mobile-learning-input-card #inputCardView .handwriting-input-card .handwriting-toolbar {
+    display:flex;
+    flex:0 0 auto;
+    flex-wrap:nowrap;
+    gap:3px;
+    margin:0 0 3px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scrollbar-width:none;
+  }
+  body.mobile-learning-input-card #inputCardView .handwriting-input-card .handwriting-toolbar::-webkit-scrollbar {display:none;}
+  body.mobile-learning-input-card #inputCardView .handwriting-input-card .handwriting-control {
+    flex:0 0 auto;
+    gap:2px;
+    padding:2px 3px !important;
+    border-radius:5px;
+    font-size:7px !important;
+  }
+  body.mobile-learning-input-card #inputCardView .handwriting-input-card .handwriting-control input[type="color"] {width:17px;height:17px;}
+  body.mobile-learning-input-card #inputCardView .handwriting-input-card .handwriting-control select {min-width:32px;max-width:38px;padding:2px 10px 2px 3px;font-size:8px;}
+  body.mobile-learning-input-card #inputCardView .handwriting-input-card .handwriting-tool-button {
+    flex:0 0 auto;
+    min-height:28px;
+    padding:3px 5px;
+    border-radius:5px;
+    font-size:8px;
+    white-space:nowrap;
+  }
+  body.mobile-learning-input-card #inputCardView .handwriting-input-card .handwriting-tool-button.is-clear {margin-left:0;}
+  body.mobile-learning-input-card #inputCardView .handwriting-input-card .handwriting-canvas-frame {
+    flex:1 1 0;
+    width:100%;
+    height:auto;
+    min-height:0;
+    border-radius:7px;
+  }
+  body.mobile-learning-input-card #inputCardView .handwriting-input-card .handwriting-canvas {background-image:none;}
+  body.mobile-learning-input-card #inputCardView .handwriting-input-card .handwriting-note {display:none;}
+  body.mobile-learning-input-card #inputCardView .input-learning-summary,
+  body.mobile-learning-input-card #inputCardView .input-quick-test-row {display:none !important;}
+  body.mobile-learning-input-card #inputCardView .input-empty:not([hidden]) {
+    display:flex !important;
+    flex:1 1 0;
+    align-items:center;
+    justify-content:center;
+    min-height:0;
+    overflow:auto;
+    padding:10px;
+  }
+
+  /* 学習中はページ全体・アプリ外枠をスクロールさせない。 */
+  body.mobile-ui-active.mobile-learning-landscape,
+  body.mobile-ui-active.mobile-learning-landscape html {overflow:hidden;}
+  body.mobile-learning-landscape .app > main,
+  body.mobile-learning-landscape #rouletteView,
+  body.mobile-learning-landscape #inputCardView {overscroll-behavior:none;}
+}
