@@ -1,0 +1,250 @@
+/* マナクル YELLOW：新着情報・アップデート通知 */
+body.mky-notice-open { overflow: hidden; }
+.mky-notice-overlay[hidden] { display: none !important; }
+.mky-notice-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 12000;
+  display: grid;
+  place-items: center;
+  padding: max(14px, env(safe-area-inset-top)) 14px max(14px, env(safe-area-inset-bottom));
+  background: rgba(19, 27, 35, .56);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+.mky-notice-dialog {
+  width: min(100%, 650px);
+  max-height: min(86dvh, 780px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.9);
+  border-radius: 22px;
+  background: #fffdf5;
+  color: #302b1d;
+  box-shadow: 0 22px 70px rgba(0,0,0,.28);
+  animation: mkyNoticeEnter .2s ease-out both;
+}
+@keyframes mkyNoticeEnter {
+  from { opacity: .75; transform: translateY(12px) scale(.99); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.mky-notice-header {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid #eee5c8;
+  background: linear-gradient(135deg, #fff8d9, #fffdf4 78%);
+}
+.mky-notice-brand {
+  margin: 0 0 4px;
+  color: #88702d;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+.mky-notice-dialog-title {
+  margin: 0;
+  color: #362e19;
+  font-size: clamp(19px, 3vw, 23px);
+  font-weight: 950;
+  line-height: 1.3;
+}
+.mky-notice-close-x {
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 11px;
+  background: #f2eddd;
+  color: #64572f;
+  font-size: 22px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.mky-notice-summary {
+  margin: 9px 0 0;
+  color: #796f54;
+  font-size: 12px;
+  font-weight: 700;
+}
+.mky-notice-list {
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 15px 18px 18px;
+}
+.mky-notice-card {
+  padding: 15px 16px;
+  border: 1px solid #eee4c4;
+  border-radius: 16px;
+  background: #fff;
+}
+.mky-notice-card + .mky-notice-card { margin-top: 11px; }
+.mky-notice-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 9px;
+}
+.mky-notice-type {
+  display: inline-flex;
+  align-items: center;
+  min-height: 23px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: #fff2bd;
+  color: #725900;
+  font-size: 10px;
+  font-weight: 950;
+}
+.mky-notice-type.is-important { background: #ffebe5; color: #a3422b; }
+.mky-notice-type.is-new-sets { background: #e6f6ed; color: #287448; }
+.mky-notice-date { color: #958d7a; font-size: 10px; font-weight: 700; }
+.mky-notice-card-title {
+  margin: 0 0 7px;
+  color: #342e20;
+  font-size: 16px;
+  font-weight: 950;
+  line-height: 1.45;
+}
+.mky-notice-card-body {
+  margin: 0;
+  color: #625b4b;
+  font-size: 13px;
+  line-height: 1.75;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+.mky-notice-items {
+  display: grid;
+  gap: 7px;
+  margin: 11px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.mky-notice-items li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: #514a3a;
+  font-size: 12px;
+  line-height: 1.55;
+}
+.mky-notice-items li::before {
+  content: "✓";
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff3bf;
+  color: #806400;
+  font-size: 10px;
+  font-weight: 950;
+}
+.mky-notice-new-chip {
+  flex: 0 0 auto;
+  margin-left: auto;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: #fff0ac;
+  color: #755b00;
+  font-size: 9px;
+  font-weight: 950;
+}
+.mky-notice-empty {
+  padding: 36px 14px;
+  color: #77705d;
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.mky-notice-footer {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px 18px calc(12px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid #eee8d7;
+  background: #fffdf7;
+}
+.mky-notice-confirm {
+  min-width: 150px;
+  min-height: 43px;
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 12px;
+  background: #ffd83d;
+  color: #3f3300;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 950;
+  cursor: pointer;
+  box-shadow: 0 3px 0 #e2bc2b;
+}
+.mky-notice-confirm:active { transform: translateY(1px); box-shadow: 0 2px 0 #e2bc2b; }
+.mky-notice-open-btn { position: relative; }
+.mky-notice-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 17px;
+  height: 17px;
+  margin-left: 5px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: #e84f36;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 950;
+  line-height: 1;
+  vertical-align: middle;
+}
+.mky-notice-count[hidden] { display: none !important; }
+.mky-notice-settings-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin: 0 0 14px;
+  padding: 13px 15px;
+  border: 1px solid #eadb9e;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #fff9de, #fffef8);
+}
+.mky-notice-settings-copy { min-width: 0; }
+.mky-notice-settings-copy strong { display: block; color: #5d4a08; font-size: 13px; font-weight: 950; }
+.mky-notice-settings-copy span { display: block; margin-top: 3px; color: #82754d; font-size: 11px; line-height: 1.5; }
+.mky-notice-settings-open {
+  flex: 0 0 auto;
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1px solid #e5c747;
+  border-radius: 10px;
+  background: #fff3bd;
+  color: #665000;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 900;
+  cursor: pointer;
+}
+.mky-notice-history-status { margin-left: 6px; color: #8a805f; font-size: 10px; font-weight: 700; }
+@media (max-width: 640px) {
+  .mky-notice-overlay { padding: max(9px, env(safe-area-inset-top)) 9px max(9px, env(safe-area-inset-bottom)); }
+  .mky-notice-dialog { max-height: min(88dvh, 760px); border-radius: 18px; }
+  .mky-notice-header { padding: 15px 15px 12px; }
+  .mky-notice-list { padding: 11px 11px 14px; }
+  .mky-notice-card { padding: 12px; border-radius: 13px; }
+  .mky-notice-card-title { font-size: 14px; }
+  .mky-notice-card-body { font-size: 12px; }
+  .mky-notice-settings-card { align-items: flex-start; flex-direction: column; }
+  .mky-notice-settings-open { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mky-notice-dialog { animation: none; }
+}
