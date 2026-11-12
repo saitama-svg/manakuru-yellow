@@ -1,9 +1,29 @@
 {
   "format": "manakuru-announcements",
   "version": 1,
-  "updatedAt": "2026-11-12",
+  "updatedAt": "2026-11-13",
   "note": "公開済みのお知らせは削除せず、履歴として残してください。新しいお知らせは一意のidを付けて先頭に追加します。",
   "announcements": [
+    {
+      "id": "2026-11-13-new-set-kabuki-test",
+      "type": "new-sets",
+      "date": "2026-11-13",
+      "title": "新しい問題集が追加されました",
+      "body": "みんなの問題集に「中3音楽　歌舞伎　2学期期末」が追加されました。",
+      "items": [
+        "中3音楽　歌舞伎　2学期期末"
+      ]
+    },
+    {
+      "id": "2026-11-13-new-set-nitrogen-test",
+      "type": "new-sets",
+      "date": "2026-11-13",
+      "title": "新しい問題集が追加されました",
+      "body": "みんなの問題集に「窒素の循環」が追加されました。",
+      "items": [
+        "窒素の循環"
+      ]
+    },
     {
       "id": "2026-11-12-notice-center-release",
       "type": "update",
