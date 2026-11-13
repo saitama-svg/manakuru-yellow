@@ -1,8 +1,8 @@
 {
   "format": "manakuru-shared-library",
   "version": 1,
-  "updatedAt": "2026-11-12",
-  "note": "初期サンプル4種類と投稿問題集7種類を掲載。投稿問題集の個人情報は除き、既存の問題集を保持しています。",
+  "updatedAt": "2026-11-13",
+  "note": "初期サンプル4種類と投稿問題集9種類を掲載。投稿問題集の個人情報は除き、既存の問題集を保持しています。",
   "sets": [
     {
       "id": "history-modern-japan-001",
@@ -2055,6 +2055,270 @@
         {
           "question": "狂言をもとにした松羽目物の演目を三つ答えよ。",
           "answer": "棒しばり・身替座禅・太刀盗人"
+        }
+      ]
+    },
+    {
+      "id": "english-new-treasure-10-1-10-2-junior3-term2-final-001",
+      "title": "英単語New Treasure 10-1~10-2　中3　2学期期末",
+      "subject": "英語",
+      "grade": "中学3年",
+      "topic": "英単語（New Treasure 10-1～10-2）",
+      "level": "標準",
+      "description": "10-1と10-2の英単語を効率よく暗記する問題集です。",
+      "author": "投稿者（匿名）",
+      "reviewStatus": "投稿者本人による公開許可確認済み",
+      "rightsNote": "申請フォームで投稿者本人が自作、または共有・公開の許可を得た内容であると申告。投稿者のニックネームは公開せず匿名化しています。",
+      "questions": [
+        {
+          "question": "神社",
+          "answer": "shrine"
+        },
+        {
+          "question": "塩，食塩",
+          "answer": "salt"
+        },
+        {
+          "question": "直接的に",
+          "answer": "directly"
+        },
+        {
+          "question": "あー，えー",
+          "answer": "uh"
+        },
+        {
+          "question": "ウィルコール（の）《インターネット等で購入済みのチケットの受け取り》",
+          "answer": "will-call"
+        },
+        {
+          "question": "窓口，受付",
+          "answer": "window"
+        },
+        {
+          "question": "《関係代名詞》…である〔する〕ところの　人でも物でも",
+          "answer": "that"
+        },
+        {
+          "question": "《関係代名詞》人が～する場合に使う語",
+          "answer": "who"
+        },
+        {
+          "question": "ジャケット",
+          "answer": "jacket"
+        },
+        {
+          "question": "予約",
+          "answer": "booking"
+        },
+        {
+          "question": "10桁の",
+          "answer": "ten-digit"
+        },
+        {
+          "question": "《関係代名詞》…である〔する〕ところの　物の時",
+          "answer": "which"
+        },
+        {
+          "question": "～を含める",
+          "answer": "include"
+        },
+        {
+          "question": "確認，裏づけ",
+          "answer": "confirmation"
+        },
+        {
+          "question": "隣に",
+          "answer": "next door"
+        },
+        {
+          "question": "地域，地域社会",
+          "answer": "community"
+        },
+        {
+          "question": "意味",
+          "answer": "meaning"
+        },
+        {
+          "question": "（～を）追う，追いかける",
+          "answer": "chase"
+        },
+        {
+          "question": "《本の》表紙",
+          "answer": "cover"
+        },
+        {
+          "question": "ところで，ねえ，えー，…でしょ",
+          "answer": "you know"
+        },
+        {
+          "question": "ブロードウェイ",
+          "answer": "Broadway"
+        },
+        {
+          "question": "劇場，映画館",
+          "answer": "theater"
+        },
+        {
+          "question": "前の，正面の",
+          "answer": "front"
+        },
+        {
+          "question": "列，（キーボードの）横の列",
+          "answer": "row"
+        },
+        {
+          "question": "ボーカル，ボーカリスト，歌手",
+          "answer": "vocalist"
+        },
+        {
+          "question": "《関係代名詞》人を目的格で表す語",
+          "answer": "whom"
+        },
+        {
+          "question": "書店",
+          "answer": "bookstore"
+        },
+        {
+          "question": "作家",
+          "answer": "writer"
+        },
+        {
+          "question": "答える，返事をする",
+          "answer": "reply"
+        },
+        {
+          "question": "ローマ",
+          "answer": "Rome"
+        },
+        {
+          "question": "getの過去分詞",
+          "answer": "got"
+        }
+      ]
+    },
+    {
+      "id": "music-chorus-junior3-term2-final-001",
+      "title": "中3音楽　2学期期末予想問題～合唱編～",
+      "subject": "音楽",
+      "grade": "中学3年",
+      "topic": "合唱曲・音楽記号",
+      "level": "標準",
+      "description": "「信じる」「いつまでも」の作詞作曲者名および音楽記号の問題集です。詩の内容や表現の工夫については各自で対策を。",
+      "author": "投稿者（匿名）",
+      "reviewStatus": "投稿者本人による公開許可確認済み",
+      "rightsNote": "申請フォームで投稿者本人が自作、または共有・公開の許可を得た内容であると申告。投稿者のニックネームは公開せず匿名化しています。",
+      "questions": [
+        {
+          "question": "信じるの作詞者は誰？※漢字必須",
+          "answer": "谷川俊太郎"
+        },
+        {
+          "question": "信じるの作曲者は誰？※漢字必須",
+          "answer": "松下耕"
+        },
+        {
+          "question": "いつまでもの作詞・作曲者は誰？※漢字必須",
+          "answer": "若松歓"
+        },
+        {
+          "question": "【読み方と意味】　Moderato",
+          "answer": "モデラート、中ぐらいの速さで"
+        },
+        {
+          "question": "【読み方と意味】　pochissimo",
+          "answer": "ポキッシモ、ほんのわずかに"
+        },
+        {
+          "question": "【読み方と意味】 poco",
+          "answer": "ポーコ、少し"
+        },
+        {
+          "question": "【読み方と意味】 rall.",
+          "answer": "ラレンタンド、だんだん遅く、緩やかに"
+        },
+        {
+          "question": "【読み方と意味】 a tempo",
+          "answer": "アテンポ、もとの速さで"
+        },
+        {
+          "question": "【読み方と意味】 riten.",
+          "answer": "リテヌート、すぐに遅く"
+        },
+        {
+          "question": "【読み方と意味】 legato",
+          "answer": "レガート、滑らかに"
+        },
+        {
+          "question": "【読み方と意味】cresc.",
+          "answer": "クレシェンド、だんだん強く"
+        },
+        {
+          "question": "【読み方と意味】molto",
+          "answer": "モルト、非常に"
+        },
+        {
+          "question": "【読み方と意味】poco a poco",
+          "answer": "ポーコ・ア・ポーコ、少しずつ"
+        },
+        {
+          "question": "【読み方と意味】stringendo",
+          "answer": "ストリンジェンド、だんだん急き込んで"
+        },
+        {
+          "question": "【読み方と意味】Piu mosso",
+          "answer": "ピウモッソ、今までより速く"
+        },
+        {
+          "question": "【読み方と意味】Liricamente",
+          "answer": "リリカメンテ、叙情的に"
+        },
+        {
+          "question": "【読み方と意味】marcato",
+          "answer": "マルカート、一つ一つの音をはっきりと"
+        },
+        {
+          "question": "【読み方と意味】liberamente",
+          "answer": "リベラメンテ、自由に"
+        },
+        {
+          "question": "【読み方と意味】Parlando",
+          "answer": "パルランド、話すように"
+        },
+        {
+          "question": "【読み方と意味】rit.",
+          "answer": "リタルダンド、だんだん遅く"
+        },
+        {
+          "question": "【読み方と意味】Tempo primo",
+          "answer": "テンポプリモ、最初の速さで"
+        },
+        {
+          "question": "【読み方と意味】ossia",
+          "answer": "オッシア、あるいは"
+        },
+        {
+          "question": "【読み方と意味】Meno mosso",
+          "answer": "メーノモッソ、今までより遅く"
+        },
+        {
+          "question": "【読み方と意味】Tranquillo",
+          "answer": "トランクイッロ、静かに"
+        },
+        {
+          "question": "【読み方と意味】Lento",
+          "answer": "レント、緩やかに"
+        },
+        {
+          "question": "【読み方と意味】unis.",
+          "answer": "ユニゾン、そのパートの全員が同じ音を演奏する"
+        },
+        {
+          "question": "【読み方と意味】8va",
+          "answer": "オッターヴァ、一つ上のオクターブを演奏する"
+        },
+        {
+          "question": "【読み方と意味】div.",
+          "answer": "ディヴィジ、1つのパートを分けて"
         }
       ]
     }

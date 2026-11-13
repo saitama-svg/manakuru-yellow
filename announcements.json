@@ -5,6 +5,26 @@
   "note": "公開済みのお知らせは削除せず、履歴として残してください。新しいお知らせは一意のidを付けて先頭に追加します。",
   "announcements": [
     {
+      "id": "2026-11-13-new-set-english-new-treasure-10-1-10-2-junior3",
+      "type": "new-sets",
+      "date": "2026-11-13",
+      "title": "新しい問題集が追加されました",
+      "body": "みんなの問題集に「英単語New Treasure 10-1~10-2　中3　2学期期末」が追加されました。",
+      "items": [
+        "英単語New Treasure 10-1~10-2　中3　2学期期末"
+      ]
+    },
+    {
+      "id": "2026-11-13-new-set-music-chorus-junior3-term2",
+      "type": "new-sets",
+      "date": "2026-11-13",
+      "title": "新しい問題集が追加されました",
+      "body": "みんなの問題集に「中3音楽　2学期期末予想問題～合唱編～」が追加されました。",
+      "items": [
+        "中3音楽　2学期期末予想問題～合唱編～"
+      ]
+    },
+    {
       "id": "2026-11-13-new-set-kabuki-test",
       "type": "new-sets",
       "date": "2026-11-13",
