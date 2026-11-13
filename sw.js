@@ -1,4 +1,4 @@
-const CACHE_NAME = 'manakuru-yellow-v109-announcements';
+const CACHE_NAME = 'manakuru-yellow-v110-print-redsheet-light';
 const APP_SHELL = [
   './',
   './index.html',

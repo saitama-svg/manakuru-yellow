@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<!-- MANAKURU-YELLOW-BUILD: v109-announcements -->
+<!-- MANAKURU-YELLOW-BUILD: v110-print-redsheet-light -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="一問一答、復習、成績・弱点分析、問題集、白紙勉強法、模擬テストをまとめた学習ツール「マナクル YELLOW」です。">
@@ -2378,14 +2378,14 @@ body[data-user-handwriting="off"] .handwriting-card{display:none!important;}
 .print-worksheet-table .prompt-text{white-space:pre-wrap}
 .print-worksheet-table .print-hint{margin-top:4px;color:#556b61;font-size:10px;font-weight:500;line-height:1.35}
 .print-worksheet-table td.print-write-cell{height:var(--print-row-height,58px);vertical-align:middle;background-image:linear-gradient(to bottom,transparent calc(100% - 1px),#d6dcd8 calc(100% - 1px));background-size:100% 100%;}
-/* Red-sheet color targets are individually selectable; retain the requested pink-red. */
-.print-worksheet-table .red-answer{color:#FFCCFF!important;font-weight:800;line-height:1.45;white-space:pre-wrap;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-.print-worksheet-table .red-answer-part{color:#FFCCFF!important;font-weight:800;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+/* Red-sheet targets use a pale, less blue-tinted red to reduce print darkening and improve red-filter masking. */
+.print-worksheet-table .red-answer{color:#FFE6E6!important;font-weight:800;line-height:1.45;white-space:pre-wrap;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.print-worksheet-table .red-answer-part{color:#FFE6E6!important;font-weight:800;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .print-worksheet-table .red-sheet-normal{color:#17211d;font-weight:800;line-height:1.45;white-space:pre-wrap}
-.print-worksheet-table .print-hint.red-answer{color:#FFCCFF!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.print-worksheet-table .print-hint.red-answer{color:#FFE6E6!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .print-red-color-fields{grid-column:1/-1;min-width:0;padding:12px 14px;border:1px solid #edcce8;border-radius:12px;background:#fff8fd;}
 .print-red-color-title{display:flex;align-items:center;gap:8px;margin-bottom:9px;color:#654b61;font-size:12px;font-weight:900;}
-.print-red-color-swatch{display:inline-block;width:16px;height:16px;border:1px solid #d5abd0;border-radius:4px;background:#FFCCFF;vertical-align:middle;}
+.print-red-color-swatch{display:inline-block;width:16px;height:16px;border:1px solid #d5abd0;border-radius:4px;background:#FFE6E6;vertical-align:middle;}
 .print-red-color-options{display:flex;flex-wrap:wrap;gap:8px 18px;}
 .print-red-color-options .print-check-field{padding:2px 0;margin:0;}
 .print-red-color-help{margin:8px 0 0;color:#745e70;font-size:11px;line-height:1.55;}
@@ -2422,7 +2422,7 @@ body[data-user-handwriting="off"] .handwriting-card{display:none!important;}
   body.printing-worksheet .print-worksheet-table th{background:#f1f1f1!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   body.printing-worksheet .print-worksheet-table td.print-write-cell{height:var(--print-row-height,15mm)}
   body.printing-worksheet .print-hint{font-size:7pt}
-  body.printing-worksheet .red-answer{color:#FFCCFF!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body.printing-worksheet .red-answer{color:#FFE6E6!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   body.printing-worksheet .print-page-break{break-after:page;page-break-after:always}
 }
 
@@ -2750,9 +2750,10 @@ body[data-user-handwriting="off"] .handwriting-card{display:none!important;}
   body.printing-worksheet .print-sheet-page.ink-saving .print-worksheet-table td.print-write-cell {
     background-image: linear-gradient(to bottom, transparent calc(100% - .7px), #b8b8b8 calc(100% - .7px)) !important;
   }
-  /* Red-sheet output must remain red even when background ink saving is enabled. */
-  body.printing-worksheet .print-sheet-page.ink-saving .red-answer {
-    color: #FFCCFF !important;
+  /* Red-sheet output, including individually marked words, must stay in exact color mode. */
+  body.printing-worksheet .print-sheet-page.ink-saving .red-answer,
+  body.printing-worksheet .print-sheet-page.ink-saving .red-answer-part {
+    color: #FFE6E6 !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
@@ -2778,8 +2779,8 @@ body[data-user-handwriting="off"] .handwriting-card{display:none!important;}
 .print-red-editor-help{border:1px solid #e3c9df;background:#fff8fe;color:#493b48;border-radius:10px;padding:11px 13px;line-height:1.65;font-size:13px;margin:8px 0 12px}
 .print-red-editor-help kbd{display:inline-block;background:#f1e7f0;border:1px solid #cbbac9;border-bottom-width:2px;border-radius:4px;padding:0 5px;font-weight:700;font-size:12px;color:#503d4f}
 .print-red-editable{min-height:1.45em;outline:1px dashed rgba(150,91,142,.45);outline-offset:1px;border-radius:3px;cursor:text;white-space:pre-wrap;overflow-wrap:anywhere;font-weight:400!important}
-.print-red-editable .red-answer-part{font-weight:800!important;color:#FFCCFF!important}
-.print-red-editable:focus{outline:2px solid #b985b2;background:rgba(255,204,255,.09)}
+.print-red-editable .red-answer-part{font-weight:800!important;color:#FFE6E6!important}
+.print-red-editable:focus{outline:2px solid #b985b2;background:rgba(255,230,230,.09)}
 .print-red-editable:empty::before{content:"ここをクリックして編集";color:#969096;font-weight:400}
 @media print{
   .print-red-editable{outline:none!important;background:transparent!important;min-height:0!important}
@@ -4377,7 +4378,7 @@ Q2. 鎌倉幕府を開いた人物は？ → 源頼朝"></textarea>
         </label>
         <label class="print-check-field"><input id="printIncludeHints" type="checkbox">登録済みヒントも問題欄に印刷</label>
         <div class="print-red-color-fields" id="printRedColorFields" hidden>
-          <div class="print-red-color-title">赤シートで隠す場所 <span class="print-red-color-swatch" aria-hidden="true"></span> <code>#FFCCFF</code></div>
+          <div class="print-red-color-title">赤シートで隠す場所 <span class="print-red-color-swatch" aria-hidden="true"></span> <code>#FFE6E6</code></div>
           <div class="print-red-color-options">
             <label class="print-check-field"><input id="printRedPrompt" type="checkbox">問題文を赤色にする</label>
             <label class="print-check-field"><input id="printRedAnswer" type="checkbox" checked>答えを赤色にする</label>
@@ -4394,15 +4395,15 @@ Q2. 鎌倉幕府を開いた人物は？ → 源頼朝"></textarea>
           <p class="print-red-color-help" id="printRedColorHelp">初期設定では答え全体が赤色です。ヒントも赤色にする場合は「登録済みヒントも問題欄に印刷」をオンにしてください。</p>
           <div class="print-red-editor-help" id="printRedEditorHelp" hidden>
           <strong>印刷画面で赤字にする部分を編集できます。</strong>
-          <p class="print-red-editor-help-text">プレビュー内の問題文または答えを「印刷画面で部分編集」にすると、文章を直接編集できます。赤くしたい文字を選択して、下のボタンを押すか <kbd>Ctrl</kbd> + <kbd>Z</kbd>（Macでは <kbd>⌘</kbd> + <kbd>Z</kbd>）を押してください。選択範囲だけがピンク色（#FFCCFF）になります。</p>
+          <p class="print-red-editor-help-text">プレビュー内の問題文または答えを「印刷画面で部分編集」にすると、文章を直接編集できます。赤くしたい文字を選択して、下のボタンを押すか <kbd>Ctrl</kbd> + <kbd>Z</kbd>（Macでは <kbd>⌘</kbd> + <kbd>Z</kbd>）を押してください。選択範囲だけが赤シート用の薄い赤色（#FFE6E6）になります。</p>
           <div class="print-red-editor-toolbar" role="group" aria-label="選択した文字の色を変更">
-            <button type="button" class="action main print-red-mark-button" id="markSelectedPrintTextPinkBtn">選択部分をピンク色にする</button>
+            <button type="button" class="action main print-red-mark-button" id="markSelectedPrintTextPinkBtn">選択部分を赤シート用の色にする</button>
             <button type="button" class="action sub print-red-normal-button" id="restoreSelectedPrintTextNormalBtn">選択部分を通常色に戻す</button>
             <button type="button" class="action sub print-red-copy-all-button" id="copyAllPrintRedEditorTextBtn">📋 問題・答えを全部コピー（AI用）</button>
             <span class="print-red-editor-shortcut">ショートカット：Ctrl + Z（Mac：⌘ + Z）</span>
             <span class="print-red-editor-action-status" id="printRedEditorActionStatus" aria-live="polite">先にプレビュー内の文字を選択してください。</span>
           </div>
-          <p class="print-red-editor-help-text">ChatGPTなどで作った<strong>太字と通常文字が混在する文章</strong>は、書式を保ってコピーし（Ctrl+C）、編集欄に貼り付けると太字部分だけがピンク色になります。プレーンテキストとして貼り付けた場合は太字情報がないため自動変換されません。</p>
+          <p class="print-red-editor-help-text">ChatGPTなどで作った<strong>太字と通常文字が混在する文章</strong>は、書式を保ってコピーし（Ctrl+C）、編集欄に貼り付けると太字部分だけが赤シート用の色になります。プレーンテキストとして貼り付けた場合は太字情報がないため自動変換されません。</p>
           <p class="print-red-editor-help-text">「問題・答えを全部コピー（AI用）」を押すと、現在の印刷対象の問題文・答えを、重要語句の太字化をAIに依頼する指示つきでまとめてコピーできます。コピーした文章をChatGPTなどに貼り付けて使えます。</p>
           <p class="print-red-editor-help-text">編集内容は問題集ごとに保存され、全データバックアップ・問題集のエクスポートにも含まれます。元の問題文・答え・成績は変更しません。</p>
         </div>
@@ -7315,7 +7316,7 @@ function renderProblemManagement(){
       const redQTa=document.createElement("textarea");redQTa.id=`manageEditRedQuestion_${i}`;redQTa.className="manage-hint-editor";redQTa.value=getProblemRedParts(pair,"question").join("\n");redQTa.placeholder="問題文の一部も赤くしたい場合、その文字列を1行ずつ入力";
       const redALabel=document.createElement("label");redALabel.className="manage-hint-label";redALabel.htmlFor=`manageEditRedAnswer_${i}`;redALabel.textContent="赤シートで隠す部分（答えの中・任意）";redALabel.style.margin="9px 0 4px";
       const redATa=document.createElement("textarea");redATa.id=`manageEditRedAnswer_${i}`;redATa.className="manage-hint-editor";redATa.value=getProblemRedParts(pair,"answer").join("\n");redATa.placeholder="例：学芸などのこつを悟る\n答えに含まれる文字列をそのまま入力。複数箇所は1行ずつ";
-      const redNote=document.createElement("div");redNote.className="manage-edit-note";redNote.textContent="入力した文字列だけが赤シート用プリントで #FFCCFF になります。指定した文字列は、問題文・答えの中に完全一致で含まれている必要があります。";
+      const redNote=document.createElement("div");redNote.className="manage-edit-note";redNote.textContent="入力した文字列だけが赤シート用プリントで #FFE6E6 になります。指定した文字列は、問題文・答えの中に完全一致で含まれている必要があります。";
       tdEdit.append(redQLabel,redQTa,redALabel,redATa,redNote);
       const note=document.createElement("div"); note.className="manage-edit-note"; note.textContent="問題文や答えを変更すると、その問題の成績は新しく始まります。ヒントや赤シート指定は任意です。"; tdEdit.appendChild(note);
       const actions=document.createElement("div"); actions.className="manage-actions"; actions.style.marginTop="8px";
@@ -12781,20 +12782,20 @@ function updatePrintControlsForFormat(){
   const redPromptModeHelp=document.getElementById("printRedPromptModeHelp");
   if(redPromptModeHelp)redPromptModeHelp.style.display=(format==="red"&&redPromptChecked)?"block":"none";
   const redPromptMode=document.getElementById("printRedPromptMode")?.value||"whole";
-  if(redPromptModeHelp)redPromptModeHelp.textContent=redPromptMode==="editor"?"印刷プレビュー内の問題文を直接編集します。文字を選択してZキーを押すと、その部分だけピンク色になります。太字混じりの文章を貼り付けると太字部分だけピンク色になります。":(redPromptMode==="partial"?"問題文の一部分だけを赤くしたい場合は、「問題管理」→「編集」で指定部分を入力してください。":"問題文全体をピンク色で印刷します。");
+  if(redPromptModeHelp)redPromptModeHelp.textContent=redPromptMode==="editor"?"印刷プレビュー内の問題文を直接編集します。文字を選択してZキーを押すと、その部分だけ赤シート用の色になります。太字混じりの文章を貼り付けると太字部分だけ赤シート用の色になります。":(redPromptMode==="partial"?"問題文の一部分だけを赤くしたい場合は、「問題管理」→「編集」で指定部分を入力してください。":"問題文全体を赤シート用の色で印刷します。");
   const redAnswerChecked=!!document.getElementById("printRedAnswer")?.checked;
   const redAnswerModeField=document.getElementById("printRedAnswerModeField");
   if(redAnswerModeField)redAnswerModeField.style.display=(format==="red"&&redAnswerChecked)?"flex":"none";
   const redAnswerMode=document.getElementById("printRedAnswerMode")?.value||"whole";
   const redAnswerModeHelp=document.getElementById("printRedAnswerModeHelp");
-  if(redAnswerModeHelp){redAnswerModeHelp.style.display=(format==="red"&&redAnswerChecked)?"block":"none";redAnswerModeHelp.textContent=redAnswerMode==="editor"?"印刷プレビュー内の答えを直接編集します。文字を選択してZキーを押すと、その部分だけピンク色になります。太字混じりの文章を貼り付けると太字部分だけピンク色になります。":(redAnswerMode==="partial"?"一部分だけ赤くしたい場合は「問題管理」→「編集」で、答えの中から隠したい文字列を指定してください。複数箇所は1行ずつ入力できます。":"答え全体をピンク色で印刷します。");}
+  if(redAnswerModeHelp){redAnswerModeHelp.style.display=(format==="red"&&redAnswerChecked)?"block":"none";redAnswerModeHelp.textContent=redAnswerMode==="editor"?"印刷プレビュー内の答えを直接編集します。文字を選択してZキーを押すと、その部分だけ赤シート用の色になります。太字混じりの文章を貼り付けると太字部分だけ赤シート用の色になります。":(redAnswerMode==="partial"?"一部分だけ赤くしたい場合は「問題管理」→「編集」で、答えの中から隠したい文字列を指定してください。複数箇所は1行ずつ入力できます。":"答え全体を赤シート用の色で印刷します。");}
   const redEditorHelp=document.getElementById("printRedEditorHelp");
   if(redEditorHelp)redEditorHelp.hidden=!(format==="red"&&((redPromptChecked&&redPromptMode==="editor")||(redAnswerChecked&&redAnswerMode==="editor")));
   const redHint=document.getElementById("printRedHint");
   const includeHintsChecked=!!document.getElementById("printIncludeHints")?.checked;
   if(redHint)redHint.disabled=!includeHintsChecked;
   const redHintHelp=document.getElementById("printRedColorHelp");
-  if(redHintHelp)redHintHelp.textContent=includeHintsChecked?"選択した項目だけを #FFCCFF で印刷します。":"ヒントを赤色にする場合は、先に「登録済みヒントも問題欄に印刷」をオンにしてください。";
+  if(redHintHelp)redHintHelp.textContent=includeHintsChecked?"選択した項目だけを #FFE6E6 で印刷します。":"ヒントを赤色にする場合は、先に「登録済みヒントも問題欄に印刷」をオンにしてください。";
   const promptWidthField=document.getElementById("printPromptWidthField");
   if(promptWidthField)promptWidthField.style.display=(format==="writing"||format==="copy")?"flex":"none";
   const answerWidthField=document.getElementById("printAnswerWidthField");
@@ -12805,7 +12806,7 @@ function updatePrintControlsForFormat(){
       writing:writingAnswerChecked?"書き込みプリントは、左に問題、右側に繰り返し書く欄を並べ、いちばん右に答えを表示します。答えを見ながら練習・確認したい場合に便利です。":"書き込みプリントは、左に問題、右側に複数の記入欄を並べます。右端の答えを非表示にして、思い出しながら書く練習ができます。",
       copy:"見本つき書き取りは、登録した問題・答えの両方を左に表示し、その右に繰り返し書く欄を並べます。語句や英文を見ながら書いて覚える用途に向いています。",
       test:"小テストは問題ごとに広い記入欄を1つ用意します。答えを自力で書いてから、必要なら解答一覧で確認できます。",
-      red:(redPromptChecked&&redPromptMode==="partial")||(redAnswerChecked&&redAnswerMode==="partial")?"問題管理の編集画面で指定した文字列だけを #FFCCFF で印刷します。指定文字列は問題文または答えに完全一致している必要があります。":"赤シート用では、問題文・答え・ヒントのどの項目を赤色にするか選べます。色は #FFCCFF です。",
+      red:(redPromptChecked&&redPromptMode==="partial")||(redAnswerChecked&&redAnswerMode==="partial")?"問題管理の編集画面で指定した文字列だけを #FFE6E6 で印刷します。指定文字列は問題文または答えに完全一致している必要があります。":"赤シート用では、問題文・答え・ヒントのどの項目を赤色にするか選べます。色は #FFE6E6 です。",
       qa:"問題と答えを通常の文字で並べた一覧を印刷します。確認用の資料や、紙の暗記帳として使えます。"
     };
     hint.textContent=notes[format]||notes.writing;
@@ -12866,7 +12867,7 @@ function getPrintColumnWidths(items,format,repeatCount,orientation,showWritingAn
   return {prompt,answer,writingTotal,promptMode,answerMode,answerVisible};
 }
 
-/* v56: print-screen red-sheet editor button + Ctrl/Command+Z applies #FFCCFF. Plain Z remains text input;
+/* v56: print-screen red-sheet editor button + Ctrl/Command+Z applies #FFE6E6. Plain Z remains text input;
    rich pasted bold text becomes pink. Edits are stored separately from problem data. */
 function getPrintRedEditorStorageKey(){
   const deck=getCurrentDeck();
@@ -12930,7 +12931,7 @@ function sanitizePrintRedEditorHtml(source,convertBoldToPink=false){
     if(tag==='BR')return '<br>';
     const style=node.getAttribute('style')||'';
     const colorMatch=style.match(/(?:^|;)\s*color\s*:\s*(#[0-9a-f]{3,8}|rgba?\([^)]*\)|[a-z]+)/i);
-    const inlinePink=!!(colorMatch&&(/#ffccff|rgb\(\s*255\s*,\s*204\s*,\s*255\s*\)|pink/i.test(colorMatch[1])));
+    const inlinePink=!!(colorMatch&&(/#ffccff|#ffe6e6|rgb\(\s*255\s*,\s*204\s*,\s*255\s*\)|rgb\(\s*255\s*,\s*230\s*,\s*230\s*\)|pink/i.test(colorMatch[1])));
     const red=inheritedRed||node.classList?.contains('red-answer-part')||inlinePink;
     const fw=(style.match(/font-weight\s*:\s*([^;]+)/i)||[])[1]||'';
     const numericWeight=Number.parseInt(fw,10);
@@ -12946,7 +12947,7 @@ function sanitizePrintRedEditorHtml(source,convertBoldToPink=false){
 function redEditorAttrs(item,field,enabled){
   if(!enabled||!item?.pair)return '';
   const encoded=encodeURIComponent(getPairKey(item.pair));
-  return ` contenteditable="true" role="textbox" aria-label="印刷用の文章。範囲を選択してボタンまたはCtrl+Zでピンク色にできます" spellcheck="false" data-redsheet-editor="true" data-redsheet-pair-key="${encoded}" data-redsheet-field="${field}"`;
+  return ` contenteditable="true" role="textbox" aria-label="印刷用の文章。範囲を選択してボタンまたはCtrl+Zで赤シート用の色にできます" spellcheck="false" data-redsheet-editor="true" data-redsheet-pair-key="${encoded}" data-redsheet-field="${field}"`;
 }
 function getSelectionIsInside(element,selection){
   if(!element||!selection||!selection.rangeCount||selection.isCollapsed)return false;
@@ -13061,7 +13062,7 @@ function markSelectedPrintTextPink(editorHint=null){
   try{extracted=range.extractContents()}catch(error){return false;}
   const span=document.createElement('span');
   span.className='red-answer-part';
-  span.style.color='#FFCCFF';
+  span.style.color='#FFE6E6';
   span.appendChild(extracted);
   range.collapse(true);
   range.insertNode(span);
@@ -13069,7 +13070,7 @@ function markSelectedPrintTextPink(editorHint=null){
   saveRedEditorElement(editor);
   window.__wrPrintRedSelectionBookmark=null;
   const status=document.getElementById('printRedEditorActionStatus');
-  if(status)status.textContent='選択部分をピンク色にしました。';
+  if(status)status.textContent='選択部分を赤シート用の色にしました。';
   return true;
 }
 function removePinkFromPrintFragment(fragment){
@@ -13084,7 +13085,7 @@ function removePinkFromPrintFragment(fragment){
   const styled=Array.from(fragment.querySelectorAll?.('[style]')||[]);
   styled.forEach(node=>{
     const color=(node.style?.color||'').replace(/\s/g,'').toLowerCase();
-    if(color==='#ffccff'||color==='rgb(255,204,255)'||color==='pink')node.style.removeProperty('color');
+    if(color==='#ffccff'||color==='#ffe6e6'||color==='rgb(255,204,255)'||color==='rgb(255,230,230)'||color==='pink')node.style.removeProperty('color');
     if(!node.getAttribute('style')?.trim())node.removeAttribute('style');
   });
 }
@@ -13176,7 +13177,7 @@ async function copyAllPrintRedEditorTextForAI(){
   });
   const preamble=[
     "次の問題集を、赤シート暗記用に整えてください。",
-    "重要語句・覚える必要のあるキーワードだけをMarkdownの太字（**このように**）にしてください。太字部分は後でピンク色にして赤シートで隠します。",
+    "重要語句・覚える必要のあるキーワードだけをMarkdownの太字（**このように**）にしてください。太字部分は後で赤シート用の色にして隠します。",
     "必ず守ること：問題文・答えの文章を修正、要約、省略しない。語順、表記、句読点をできるだけそのまま維持する。項目番号と【問題】【答え】【参考ヒント】のラベルを保ち、全項目を同じ順序ですべて返す。前置きや解説は付けない。",
     "重要語句を選ぶ際は、暗記の手がかりになる用語・人名・年代・定義の中心部分を優先し、文章全体を太字にしない。",
     "",
@@ -13266,7 +13267,7 @@ function initializePrintRedEditorHandlers(){
     else{html=printEscape(plain).replace(/\r\n?/g,'\n').replace(/\n/g,'<br>')}
     insertSafeHtmlAtCaret(editor,html);
     saveRedEditorElement(editor);
-    if(status)status.textContent=rich?'書式付きの文章を貼り付けました。太字部分はピンク色です。':'文章を貼り付けました。書式がないため、色は変更していません。';
+    if(status)status.textContent=rich?'書式付きの文章を貼り付けました。太字部分は赤シート用の色です。':'文章を貼り付けました。書式がないため、色は変更していません。';
   });
 }
 
@@ -13477,7 +13478,7 @@ function renderPrintPreview(){
   const minRows=Math.min(...rowCounts),maxRows=Math.max(...rowCounts);
   const pageDistribution=rowsSetting==="auto"?`自動調整：1ページ ${minRows===maxRows?maxRows:`${minRows}〜${maxRows}`}問`:`最大${rowsSetting}問（文章量に応じて少なくなる場合があります）`;
   const answerPages=includeAnswerKey&&format!=="qa"?`＋解答 ${keyPageCount}ページ` : "";
-  const redTargetNote=format==="red"?` 赤字対象：${[redSheetOptions.prompt?(redSheetOptions.promptMode==="partial"?"問題文の指定部分":redSheetOptions.promptMode==="editor"?"問題文の印刷画面編集部分":"問題文全体"):"",redSheetOptions.answer?(redSheetOptions.answerMode==="partial"?"答えの指定部分":redSheetOptions.answerMode==="editor"?"答えの印刷画面編集部分":"答え全体"):"",redSheetOptions.hint?"ヒント":""].filter(Boolean).join("・")||"なし"}（#FFCCFF）。${(redSheetOptions.answer&&redSheetOptions.answerMode==="partial")||(redSheetOptions.prompt&&redSheetOptions.promptMode==="partial")?" 指定部分がない文章は通常色で表示します。":""}`:"";
+  const redTargetNote=format==="red"?` 赤字対象：${[redSheetOptions.prompt?(redSheetOptions.promptMode==="partial"?"問題文の指定部分":redSheetOptions.promptMode==="editor"?"問題文の印刷画面編集部分":"問題文全体"):"",redSheetOptions.answer?(redSheetOptions.answerMode==="partial"?"答えの指定部分":redSheetOptions.answerMode==="editor"?"答えの印刷画面編集部分":"答え全体"):"",redSheetOptions.hint?"ヒント":""].filter(Boolean).join("・")||"なし"}（#FFE6E6）。${(redSheetOptions.answer&&redSheetOptions.answerMode==="partial")||(redSheetOptions.prompt&&redSheetOptions.promptMode==="partial")?" 指定部分がない文章は通常色で表示します。":""}`:"";
   const columnNote=(repeatCount>=8&&(format==="writing"||format==="copy"))?" 列数が多い場合はA4横向き・コンパクト設定がおすすめです。":"";
   const widthNote=columnWidths?` 問題欄${Math.round(columnWidths.prompt)}%${columnWidths.answerVisible?`・答え欄${Math.round(columnWidths.answer)}%`:""}（幅：${promptWidthSetting==="auto"?"問題文に応じて自動":"手動設定"}${columnWidths.answerVisible?(answerWidthSetting==="auto"?"／答えに応じて自動":"／答え欄は手動設定"):""}）。`:"";
   summary.textContent=`${formatLabels[format]}：${selected.length}問　／　${chunks.length}ページ ${answerPages}　／　${orientationLabel}　／　${getPrintDensityDescription(density)}。${pageDistribution}。${redTargetNote}${widthNote}${columnNote}印刷プレビューを確認してください。`;
