@@ -30,3 +30,12 @@
 
 - GitHub Pagesのサイト作成： https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site
 - GitHub Pagesとは： https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages
+
+
+## v111：まとめて勉強
+
+- 「その他」→「学習・記録」→「まとめて勉強」から複数の問題集を続けて学習できます。
+- 出題順・出題方向・問題数を選択できます。
+- 回答結果は元の各問題集の問題別成績・復習予定・学習履歴に反映されます。
+- 学習途中の状態は同じ端末・同じブラウザ内に保存され、再開できます。
+- 元の問題集の問題・答えは変更しません。
