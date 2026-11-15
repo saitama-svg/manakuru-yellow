@@ -1,4 +1,4 @@
-const CACHE_NAME = 'manakuru-yellow-v111-multi-study';
+const CACHE_NAME = 'manakuru-yellow-v112-multi-study-controls';
 const APP_SHELL = [
   './',
   './index.html',

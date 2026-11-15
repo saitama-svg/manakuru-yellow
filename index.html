@@ -3636,7 +3636,7 @@ body.mock-test-active .mascot{display:none!important;}
 </style>
 
 
-<style id="v111MultiStudyStyles">
+<style id="v112MultiStudyStyles">
 .multi-study-intro{margin:4px 0 18px;color:var(--muted,#66706c);line-height:1.7}
 .multi-study-resume{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 16px;padding:14px 16px;border:1px solid #e2cb70;border-radius:13px;background:#fff9df}
 .multi-study-resume p{margin:4px 0 0;color:#6b6245;font-size:13px}.multi-study-resume-actions{display:flex;flex-wrap:wrap;gap:8px}
@@ -3654,15 +3654,20 @@ body.mock-test-active .mascot{display:none!important;}
 .multi-study-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:14px 0}
 .multi-study-options label{display:grid;gap:6px;font-size:13px;font-weight:700}.multi-study-options select{width:100%;min-height:42px;padding:8px;border:1px solid var(--line,#d9e0dc);border-radius:9px;background:#fff;color:#24312d;font:inherit}
 .multi-study-footnote{margin:8px 0 14px;font-size:12px;line-height:1.65;color:var(--muted,#66706c)}.multi-study-start{width:100%;min-height:48px;font-size:15px;font-weight:900}
-.multi-study-session-top{display:flex;align-items:center;justify-content:space-between;gap:10px;font-weight:800;font-size:13px}.multi-study-source{color:var(--muted,#66706c);text-align:right;overflow-wrap:anywhere}
-.multi-study-progress-track{height:8px;margin:10px 0 18px;border-radius:99px;background:#e8ece9;overflow:hidden}.multi-study-progress-track>div{height:100%;width:0;background:#e4bd25;border-radius:inherit;transition:width .2s}
-.multi-study-question-card{max-width:860px;margin:0 auto;padding:clamp(18px,4vw,32px);border:1px solid var(--line,#d9e0dc);border-radius:16px;background:var(--panel,#fff);box-shadow:0 6px 22px rgba(30,50,42,.06);text-align:center}
-.multi-study-question-label{font-size:12px;letter-spacing:.08em;font-weight:900;color:var(--muted,#66706c)}.multi-study-question{min-height:110px;display:grid;place-items:center;padding:18px 0;font-size:clamp(20px,3vw,30px);font-weight:850;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}
-.multi-study-question-card>#multiStudyRevealBtn{min-width:180px;min-height:44px}.multi-study-answer-area{margin-top:18px;padding-top:18px;border-top:1px dashed var(--line,#d9e0dc)}.multi-study-answer{padding:14px 0;font-size:clamp(19px,2.8vw,27px);font-weight:850;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--teal,#126e61)}
-.multi-study-judge-prompt{margin:10px 0;font-size:13px;color:var(--muted,#66706c)}.multi-study-judge-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.multi-study-judge{min-width:140px;min-height:46px;padding:10px 14px;border:1px solid;border-radius:10px;background:#fff;font:inherit;font-weight:900;cursor:pointer}.multi-study-judge.is-correct{border-color:#93c7a3;color:#216a3b;background:#f1fbf3}.multi-study-judge.is-unsure{border-color:#e5ca7a;color:#876400;background:#fff9e8}.multi-study-judge.is-wrong{border-color:#e2a0a0;color:#a13333;background:#fff3f3}
+.multi-study-session{width:100%;max-width:1000px;margin:0 auto}
+.multi-study-session-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 auto 12px;font-weight:800;font-size:13px}
+.multi-study-source{display:inline-flex;align-items:center;max-width:65%;padding:6px 12px;border-radius:999px;background:#eef9f6;border:1px solid #cfe9e2;color:#31766b;overflow-wrap:anywhere}
+.multi-study-session .display{position:relative;overflow:hidden;width:100%;min-height:270px;margin:0 auto;cursor:pointer}
+.multi-study-session .display::after{content:"";position:absolute;inset:auto 0 0;height:46px;background:linear-gradient(180deg,rgba(255,255,255,0),rgba(216,246,234,.17));pointer-events:none}
+.multi-study-session .display .word{font-size:clamp(42px,6vw,88px)}
+.multi-study-session .round-progress{margin:0;padding:5px 11px;font-size:11px;font-weight:900;background:#f4f8f7;border-color:#e1ebe8;white-space:nowrap}
+.multi-study-session .answer-controls{margin-top:14px;gap:10px}
+.multi-study-session .check-btn{min-width:138px;min-height:48px;border-radius:15px;font-size:17px;box-shadow:0 5px 13px rgba(35,125,112,.07)}
+.multi-study-session .check-btn.correct{border:1px solid #c6ead4}.multi-study-session .check-btn.wrong{border:1px solid #f1d0d0}
+.multi-study-session .check-btn:focus-visible{transform:translateY(-1px)}
 .multi-study-session-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px;font-size:12px;color:var(--muted,#66706c)}
 .multi-study-result-heading{text-align:center;font-size:25px;font-weight:950;margin:12px 0}.multi-study-overall-result{margin:12px auto 22px;max-width:520px;padding:18px;border-radius:14px;background:#f6f7f3;text-align:center;font-weight:800;line-height:1.8}.multi-study-overall-result strong{font-size:28px}.multi-study-result h3{margin:18px 0 10px}.multi-study-results-table-wrap{overflow-x:auto}.multi-study-results-table{width:100%;border-collapse:collapse;min-width:520px}.multi-study-results-table th,.multi-study-results-table td{padding:10px;border-bottom:1px solid var(--line,#d9e0dc);text-align:center}.multi-study-results-table th:first-child,.multi-study-results-table td:first-child{text-align:left}.multi-study-results-table td:first-child{font-weight:750;max-width:300px;overflow-wrap:anywhere}.multi-study-result-actions{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:18px}
-@media(max-width:680px){.multi-study-resume,.multi-study-toolbar,.multi-study-session-footer{align-items:stretch;flex-direction:column}.multi-study-deck-list{grid-template-columns:1fr;max-height:300px}.multi-study-options{grid-template-columns:1fr}.multi-study-toolbar-actions{width:100%}.multi-study-toolbar-actions button{flex:1}.multi-study-judge{flex:1;min-width:110px}.multi-study-question{min-height:90px}}
+@media(max-width:680px){.multi-study-resume,.multi-study-toolbar,.multi-study-session-footer{align-items:stretch;flex-direction:column}.multi-study-deck-list{grid-template-columns:1fr;max-height:300px}.multi-study-options{grid-template-columns:1fr}.multi-study-toolbar-actions{width:100%}.multi-study-toolbar-actions button{flex:1}.multi-study-session-top{align-items:flex-start;flex-direction:column}.multi-study-source{max-width:100%}.multi-study-session .display{min-height:240px}.multi-study-session .display .word{font-size:clamp(34px,9vw,60px)}.multi-study-session .check-btn{flex:1;min-width:110px}}
 </style>
 
 </head>
@@ -4778,7 +4783,7 @@ Q2. 鎌倉幕府を開いた人物は？ → 源頼朝"></textarea>
 
     <section id="multiStudyView" class="panel" style="display:none;">
       <h2>📚 まとめて勉強</h2>
-      <p class="multi-study-intro">複数の問題集を選んで、1つの学習として続けて解けます。元の問題集は合体・変更されず、回答結果はそれぞれの問題集の成績に記録されます。</p>
+      <p class="multi-study-intro">複数の問題集を選んで、通常の一問一答と同じ画面・操作で続けて解けます。Enterで答えを表示し、A・D・Sキーまたは画面のボタンで判定します。元の問題集は変更されません。</p>
 
       <div id="multiStudyResumeNotice" class="multi-study-resume" hidden>
         <div><strong>前回の学習が途中です</strong><p id="multiStudyResumeText">保存された続きから再開できます。</p></div>
@@ -4802,20 +4807,21 @@ Q2. 鎌倉幕府を開いた人物は？ → 源頼朝"></textarea>
       </div>
 
       <div id="multiStudySession" class="multi-study-session" hidden>
-        <div class="multi-study-session-top"><span id="multiStudyProgressText">1 / 10問</span><span id="multiStudySourceLabel" class="multi-study-source">問題集名</span></div>
-        <div class="multi-study-progress-track"><div id="multiStudyProgressBar"></div></div>
-        <div class="multi-study-question-card">
-          <div class="multi-study-question-label">問題</div>
-          <div id="multiStudyQuestion" class="multi-study-question">問題文</div>
-          <button type="button" class="action sub" id="multiStudyRevealBtn">答えを見る</button>
-          <div id="multiStudyAnswerArea" class="multi-study-answer-area" hidden>
-            <div class="multi-study-question-label">答え</div>
-            <div id="multiStudyAnswer" class="multi-study-answer"></div>
-            <p class="multi-study-judge-prompt">自分の理解度を選んでください。</p>
-            <div class="multi-study-judge-actions"><button type="button" class="multi-study-judge is-correct" data-multi-result="correct">○ 自信あり</button><button type="button" class="multi-study-judge is-unsure" data-multi-result="unsure">△ 自信なし</button><button type="button" class="multi-study-judge is-wrong" data-multi-result="wrong">× 不正解</button></div>
-          </div>
+        <div class="multi-study-session-top">
+          <span id="multiStudySourceLabel" class="multi-study-source">問題集名</span>
+          <span id="multiStudyProgressText" class="round-progress visible">1 / 10　｜　○ 0　△ 0　× 0</span>
         </div>
-        <div class="multi-study-session-footer"><span>回答は各問題集の成績に保存されます。</span><button type="button" class="action sub" id="multiStudyStopBtn">学習を中止して選び直す</button></div>
+        <div class="display multi-study-display" id="multiStudyDisplay" role="button" tabindex="0" aria-label="カードを押すと答えを表示します">
+          <div class="word" id="multiStudyQuestion">問題文</div>
+          <div class="divider"></div>
+          <div class="hint" id="multiStudyHint">カードをクリック / タップ　・　Enterで答えを表示</div>
+        </div>
+        <div id="multiStudyAnswerControls" class="answer-controls" aria-label="正誤判定">
+          <button type="button" class="check-btn correct" id="multiStudyCorrectBtn"><span>○ 正解・自信あり</span><span class="shortcut-key" aria-hidden="true">A</span></button>
+          <button type="button" class="check-btn unsure" id="multiStudyUnsureBtn"><span>△ 正解・自信なし</span><span class="shortcut-key" aria-hidden="true">D</span></button>
+          <button type="button" class="check-btn wrong" id="multiStudyWrongBtn"><span>× 不正解</span><span class="shortcut-key" aria-hidden="true">S</span></button>
+        </div>
+        <div class="multi-study-session-footer"><span>Enter：答えを表示　／　A・D・S：正誤判定</span><button type="button" class="action sub" id="multiStudyStopBtn">学習を中止して選び直す</button></div>
       </div>
 
       <div id="multiStudyResult" class="multi-study-result" hidden>
@@ -11322,7 +11328,7 @@ function updatePageGuide(view){
     mockTest:{group:"学習・復習",title:"模擬テスト",hint:"問題をランダムに解答し、最後に自分で○・×を付けて成績に反映します。",needsPairs:true},
     whiteRecall:{group:"学習・復習",title:"白紙勉強法",hint:"範囲を選び、答えを見る前に覚えていることを書き出します。",needsPairs:true},
     blankStudy:{group:"学習・復習",title:"白紙勉強法",hint:"題名付きのノートを保存し、左側の手掛かりから右側の白紙へ思い出した内容を書き、何度でも挑戦できます。"},
-    multiStudy:{group:"学習・記録",title:"まとめて勉強",hint:"複数の問題集を選択し、1つの学習として続けて解けます。回答結果は各問題集の成績に記録されます。"},
+    multiStudy:{group:"学習・記録",title:"まとめて勉強",hint:"複数の問題集を選択して続けて学習できます。Enterで答えを表示し、A・D・Sキーで正誤判定できます。"},
     register:{group:"作成・管理",title:"問題登録",hint:"問題と答えをまとめて登録し、内容を確認してから適用します。"},
     manage:{group:"作成・管理",title:"問題管理",hint:"登録済みの問題を探して、内容を編集・整理できます。",needsPairs:true},
     tag:{group:"作成・管理",title:"分野・タグ",hint:"問題にタグを付けると、分野別や複数分野の学習に使えます。",needsPairs:true},
@@ -14345,8 +14351,8 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 </script>
 
 
-<script id="v111MultiStudyFeature">
-/* v111: 複数問題集を一時的に束ねて学ぶ機能。元の問題集データは変更しない。 */
+<script id="v112MultiStudyFeature">
+/* v112: まとめて勉強の表示とキーボード操作を通常の一問一答に統一。元の問題集データは変更しない。 */
 (()=>{
   "use strict";
   const $=id=>document.getElementById(id);
@@ -14484,17 +14490,33 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
     else{session.questionStartedAt=Date.now();renderSession();}
     return true;
   }
+  function revealAnswer(){
+    if(!session||session.completed||session.revealed)return;
+    session.revealed=true;
+    session.questionStartedAt=session.questionStartedAt||Date.now();
+    try{playSoundEffect("reveal");}catch(_e){}
+    persistSession();
+    renderSession();
+  }
+  function getSessionProgressText(){
+    const outcomes=Array.isArray(session?.outcomes)?session.outcomes.filter(Boolean):[];
+    const correct=outcomes.filter(x=>x.result==="correct").length;
+    const unsure=outcomes.filter(x=>x.result==="unsure").length;
+    const wrong=outcomes.filter(x=>x.result==="wrong").length;
+    return `${Math.min(session.cursor+1,session.items.length)} / ${session.items.length}　｜　○ ${correct}　△ ${unsure}　× ${wrong}`;
+  }
   function renderSession(){
     if(!session||session.completed){renderResult();return;}
     const item=session.items[session.cursor];if(!item){completeSession();return;}
     setViewMode("session");
-    $("multiStudyProgressText").textContent=`${session.cursor+1} / ${session.items.length}問`;
-    $("multiStudySourceLabel").textContent=item.deckTitle;
-    $("multiStudyProgressBar").style.width=`${Math.round((session.cursor/session.items.length)*100)}%`;
-    $("multiStudyQuestion").textContent=item.question;
-    $("multiStudyAnswer").textContent=item.answer;
-    $("multiStudyAnswerArea").hidden=!session.revealed;
-    $("multiStudyRevealBtn").hidden=session.revealed;
+    $("multiStudyProgressText").textContent=getSessionProgressText();
+    $("multiStudySourceLabel").textContent=`問題集：${item.deckTitle}`;
+    $("multiStudyQuestion").textContent=session.revealed?item.answer:item.question;
+    $("multiStudyHint").textContent=session.revealed
+      ?"自分の答えと比べて判定　・　A：正解・自信あり　D：正解・自信なし　S：不正解"
+      :"カードをクリック / タップ　・　Enterで答えを表示";
+    $("multiStudyAnswerControls").classList.toggle("visible",session.revealed);
+    $("multiStudyDisplay").setAttribute("aria-label",session.revealed?"答えを表示中":"カードを押すと答えを表示します");
     if(!session.questionStartedAt)session.questionStartedAt=Date.now();
     persistSession();
   }
@@ -14532,6 +14554,7 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
     if(!session||session.completed||session.revealed!==true)return;
     const item=session.items[session.cursor];if(!item)return;
     const now=Date.now();const durationMs=Math.max(0,now-(Number(session.questionStartedAt)||now));
+    try{playSoundEffect(outcome==="correct"?"correct":outcome==="unsure"?"unsure":"wrong");}catch(_e){}
     try{
       updateDeckProblemStat(item,outcome);
       try{updateDeckSpacedResult(item,outcome);}catch(spacedError){console.warn("まとめて勉強：復習予定は更新できませんでした",spacedError);}
@@ -14625,8 +14648,27 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
     $("multiStudyStartBtn")?.addEventListener("click",startSession);
     $("multiStudyResumeBtn")?.addEventListener("click",()=>{if(!resumeSession())alert("再開できる学習データが見つかりませんでした。");});
     $("multiStudyDiscardDraftBtn")?.addEventListener("click",discardDraft);
-    $("multiStudyRevealBtn")?.addEventListener("click",()=>{if(!session||session.completed)return;session.revealed=true;session.questionStartedAt=session.questionStartedAt||Date.now();persistSession();renderSession();});
-    $("multiStudyAnswerArea")?.addEventListener("click",e=>{const button=e.target.closest("button[data-multi-result]");if(button)saveOutcome(button.dataset.multiResult);});
+    $("multiStudyDisplay")?.addEventListener("click",revealAnswer);
+    $("multiStudyDisplay")?.addEventListener("keydown",event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();revealAnswer();}});
+    $("multiStudyCorrectBtn")?.addEventListener("click",()=>saveOutcome("correct"));
+    $("multiStudyUnsureBtn")?.addEventListener("click",()=>saveOutcome("unsure"));
+    $("multiStudyWrongBtn")?.addEventListener("click",()=>saveOutcome("wrong"));
+    document.addEventListener("keydown",event=>{
+      if($("multiStudyView")?.style.display==="none"||!session||session.completed)return;
+      if(event.repeat||event.isComposing||event.altKey||event.ctrlKey||event.metaKey)return;
+      const active=document.activeElement;
+      if(active&&(active.isContentEditable||["INPUT","TEXTAREA","SELECT"].includes(active.tagName)))return;
+      const key=String(event.key||"").toLowerCase();
+      if(key==="enter"){
+        if(!session.revealed){event.preventDefault();revealAnswer();}
+        return;
+      }
+      if(!session.revealed)return;
+      const outcome=key==="a"?"correct":key==="d"?"unsure":key==="s"?"wrong":null;
+      if(!outcome)return;
+      event.preventDefault();
+      saveOutcome(outcome);
+    });
     $("multiStudyStopBtn")?.addEventListener("click",()=>{if(confirm("学習を中止して問題集の選択に戻りますか？\nここまでの回答成績は保存されています。")){try{localStorage.removeItem(DRAFT_KEY);}catch(e){}session=null;savedDraftAvailable=false;renderMultiStudyPage();}});
     $("multiStudyAgainBtn")?.addEventListener("click",()=>{session=null;savedDraftAvailable=false;renderMultiStudyPage();});
     $("multiStudyLibraryBtn")?.addEventListener("click",()=>switchView("library"));
