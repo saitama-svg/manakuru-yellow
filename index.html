@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<!-- MANAKURU-YELLOW-BUILD: v110-print-redsheet-light -->
+<!-- MANAKURU-YELLOW-BUILD: v113-multi-study-handwriting-shortcuts -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="一問一答、復習、成績・弱点分析、問題集、白紙勉強法、模擬テストをまとめた学習ツール「マナクル YELLOW」です。">
@@ -3655,17 +3655,32 @@ body.mock-test-active .mascot{display:none!important;}
 .multi-study-options label{display:grid;gap:6px;font-size:13px;font-weight:700}.multi-study-options select{width:100%;min-height:42px;padding:8px;border:1px solid var(--line,#d9e0dc);border-radius:9px;background:#fff;color:#24312d;font:inherit}
 .multi-study-footnote{margin:8px 0 14px;font-size:12px;line-height:1.65;color:var(--muted,#66706c)}.multi-study-start{width:100%;min-height:48px;font-size:15px;font-weight:900}
 .multi-study-session{width:100%;max-width:1000px;margin:0 auto}
-.multi-study-session-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 auto 12px;font-weight:800;font-size:13px}
-.multi-study-source{display:inline-flex;align-items:center;max-width:65%;padding:6px 12px;border-radius:999px;background:#eef9f6;border:1px solid #cfe9e2;color:#31766b;overflow-wrap:anywhere}
-.multi-study-session .display{position:relative;overflow:hidden;width:100%;min-height:270px;margin:0 auto;cursor:pointer}
-.multi-study-session .display::after{content:"";position:absolute;inset:auto 0 0;height:46px;background:linear-gradient(180deg,rgba(255,255,255,0),rgba(216,246,234,.17));pointer-events:none}
-.multi-study-session .display .word{font-size:clamp(42px,6vw,88px)}
-.multi-study-session .round-progress{margin:0;padding:5px 11px;font-size:11px;font-weight:900;background:#f4f8f7;border-color:#e1ebe8;white-space:nowrap}
-.multi-study-session .answer-controls{margin-top:14px;gap:10px}
-.multi-study-session .check-btn{min-width:138px;min-height:48px;border-radius:15px;font-size:17px;box-shadow:0 5px 13px rgba(35,125,112,.07)}
-.multi-study-session .check-btn.correct{border:1px solid #c6ead4}.multi-study-session .check-btn.wrong{border:1px solid #f1d0d0}
-.multi-study-session .check-btn:focus-visible{transform:translateY(-1px)}
+.multi-study-session-top{display:flex;align-items:center;justify-content:flex-start;gap:10px;margin:0 auto 12px;font-weight:800;font-size:13px}
+.multi-study-source{display:inline-flex;align-items:center;max-width:100%;overflow-wrap:anywhere}
+/* 学習カード・手書き欄・判定ボタンは通常の一問一答と同じコンポーネントを使用。 */
+.multi-study-output-writing-layout{width:100%;min-width:0}
+.multi-study-output-writing-layout>.display,.multi-study-output-writing-layout>.handwriting-output-card{min-width:0}
+.multi-study-session .display{cursor:pointer}
+.multi-study-session .display .round-progress{margin:12px 0 0}
+.multi-study-session .study-stats{margin-top:12px}
+.multi-study-session .handwriting-output-card{max-width:100%}
+.multi-study-session .answer-controls{margin-top:18px;gap:14px}
 .multi-study-session-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px;font-size:12px;color:var(--muted,#66706c)}
+@media(min-width:800px){
+  .multi-study-output-writing-layout:has(>.multi-study-handwriting-card .handwriting-details[open]){display:grid;grid-template-columns:minmax(0,1.12fr) minmax(270px,.88fr);align-items:stretch;gap:16px;width:100%;min-width:0}
+  .multi-study-output-writing-layout:has(>.multi-study-handwriting-card .handwriting-details[open])>.display{grid-column:1;grid-row:1;width:100%;min-width:0;min-height:clamp(280px,35vh,390px);margin:0;padding:26px 18px 20px;border-radius:23px;background:rgba(255,255,255,.96);border:1px solid #e3f0ec;box-shadow:0 10px 30px rgba(42,104,93,.08)}
+  .multi-study-output-writing-layout:has(>.multi-study-handwriting-card .handwriting-details[open])>.handwriting-output-card{grid-column:2;grid-row:1;width:100%;min-width:0;max-width:100%;margin:0;align-self:start}
+  .multi-study-output-writing-layout:has(>.multi-study-handwriting-card .handwriting-details[open]) .handwriting-canvas-frame{height:clamp(230px,34vh,360px)}
+  .multi-study-output-writing-layout:has(>.multi-study-handwriting-card .handwriting-details[open]) .handwriting-toolbar{gap:6px}
+  .multi-study-output-writing-layout:has(>.multi-study-handwriting-card .handwriting-details[open]) .handwriting-control{padding:5px 6px!important;font-size:11px!important}
+  .multi-study-output-writing-layout:has(>.multi-study-handwriting-card .handwriting-details[open]) .handwriting-control input[type=color]{width:22px;height:22px}
+  .multi-study-output-writing-layout:has(>.multi-study-handwriting-card .handwriting-details[open]) .handwriting-tool-button{padding:7px 8px;font-size:11px}
+}
+@media(max-width:799px){
+  .multi-study-output-writing-layout:has(>.multi-study-handwriting-card .handwriting-details[open]){display:flex;flex-direction:column;align-items:stretch;gap:12px;width:100%;min-width:0}
+  .multi-study-output-writing-layout:has(>.multi-study-handwriting-card .handwriting-details[open])>.display,.multi-study-output-writing-layout:has(>.multi-study-handwriting-card .handwriting-details[open])>.handwriting-output-card{width:100%;min-width:0;max-width:100%;margin:0}
+  .multi-study-output-writing-layout:has(>.multi-study-handwriting-card .handwriting-details[open])>.display{padding:20px 14px;border-radius:18px;background:rgba(255,255,255,.96);border:1px solid #e3f0ec;box-shadow:0 8px 22px rgba(42,104,93,.07)}
+}
 .multi-study-result-heading{text-align:center;font-size:25px;font-weight:950;margin:12px 0}.multi-study-overall-result{margin:12px auto 22px;max-width:520px;padding:18px;border-radius:14px;background:#f6f7f3;text-align:center;font-weight:800;line-height:1.8}.multi-study-overall-result strong{font-size:28px}.multi-study-result h3{margin:18px 0 10px}.multi-study-results-table-wrap{overflow-x:auto}.multi-study-results-table{width:100%;border-collapse:collapse;min-width:520px}.multi-study-results-table th,.multi-study-results-table td{padding:10px;border-bottom:1px solid var(--line,#d9e0dc);text-align:center}.multi-study-results-table th:first-child,.multi-study-results-table td:first-child{text-align:left}.multi-study-results-table td:first-child{font-weight:750;max-width:300px;overflow-wrap:anywhere}.multi-study-result-actions{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:18px}
 @media(max-width:680px){.multi-study-resume,.multi-study-toolbar,.multi-study-session-footer{align-items:stretch;flex-direction:column}.multi-study-deck-list{grid-template-columns:1fr;max-height:300px}.multi-study-options{grid-template-columns:1fr}.multi-study-toolbar-actions{width:100%}.multi-study-toolbar-actions button{flex:1}.multi-study-session-top{align-items:flex-start;flex-direction:column}.multi-study-source{max-width:100%}.multi-study-session .display{min-height:240px}.multi-study-session .display .word{font-size:clamp(34px,9vw,60px)}.multi-study-session .check-btn{flex:1;min-width:110px}}
 </style>
@@ -4783,7 +4798,7 @@ Q2. 鎌倉幕府を開いた人物は？ → 源頼朝"></textarea>
 
     <section id="multiStudyView" class="panel" style="display:none;">
       <h2>📚 まとめて勉強</h2>
-      <p class="multi-study-intro">複数の問題集を選んで、通常の一問一答と同じ画面・操作で続けて解けます。Enterで答えを表示し、A・D・Sキーまたは画面のボタンで判定します。元の問題集は変更されません。</p>
+      <p class="multi-study-intro">複数の問題集を選び、通常の一問一答と同じ学習画面で続けて解けます。手書きスペースも使えます。Enterで答えを表示し、A・D・Sキーまたは画面のボタンで判定します。元の問題集は変更されません。</p>
 
       <div id="multiStudyResumeNotice" class="multi-study-resume" hidden>
         <div><strong>前回の学習が途中です</strong><p id="multiStudyResumeText">保存された続きから再開できます。</p></div>
@@ -4808,20 +4823,55 @@ Q2. 鎌倉幕府を開いた人物は？ → 源頼朝"></textarea>
 
       <div id="multiStudySession" class="multi-study-session" hidden>
         <div class="multi-study-session-top">
-          <span id="multiStudySourceLabel" class="multi-study-source">問題集名</span>
-          <span id="multiStudyProgressText" class="round-progress visible">1 / 10　｜　○ 0　△ 0　× 0</span>
+          <span id="multiStudySourceLabel" class="roulette-context-deck multi-study-source">📚 問題集名</span>
         </div>
-        <div class="display multi-study-display" id="multiStudyDisplay" role="button" tabindex="0" aria-label="カードを押すと答えを表示します">
-          <div class="word" id="multiStudyQuestion">問題文</div>
-          <div class="divider"></div>
-          <div class="hint" id="multiStudyHint">カードをクリック / タップ　・　Enterで答えを表示</div>
+        <div class="output-writing-layout multi-study-output-writing-layout" id="multiStudyOutputWritingLayout">
+          <div class="display multi-study-display" id="multiStudyDisplay" role="button" tabindex="0" aria-label="カードをクリック / タップ、またはEnterキーで答えを表示します">
+            <div class="word" id="multiStudyQuestion">問題文</div>
+            <div class="divider"></div>
+            <div class="hint" id="multiStudyHint">カードをクリック / タップ　・　Enterで答えを表示</div>
+            <div class="round-progress visible" id="multiStudyProgressText">1 / 10　｜　○ 0　△ 0　× 0</div>
+            <div class="study-stats" id="multiStudyStats" aria-live="polite">
+              <div class="study-stat streak" id="multiStudyStreakCard">
+                <div class="stat-label">🔥 連続正解数</div>
+                <div class="stat-main"><span class="stat-number" id="multiStudyStreakCount">0</span><span class="stat-unit">問</span></div>
+                <div class="stat-sub" id="multiStudyStreakSub">正解すると記録開始</div>
+              </div>
+              <div class="study-stat">
+                <div class="stat-label">🏆 自己ベスト</div>
+                <div class="stat-main"><span class="stat-number" id="multiStudyBestStreakCount">0</span><span class="stat-unit">問</span></div>
+                <div class="stat-sub">このセッション</div>
+              </div>
+              <div class="study-stat">
+                <div class="stat-label">📈 累計正答率</div>
+                <div class="stat-main"><span class="stat-number" id="multiStudyAccuracyPercent">—</span><span class="stat-unit" id="multiStudyAccuracyUnit"></span></div>
+                <div class="stat-sub" id="multiStudyTotalAnsweredText">まだ回答していません</div>
+              </div>
+            </div>
+          </div>
+          <div class="handwriting-card handwriting-output-card multi-study-handwriting-card" data-handwriting-pad="multiStudy">
+            <details class="handwriting-details" id="multiStudyHandwritingDetails">
+              <summary><span class="handwriting-summary-icon" aria-hidden="true">✍</span><span><strong>手書きスペース</strong><small>答えを思い出しながら書いてから、自己採点しましょう</small></span><span class="handwriting-chevron" aria-hidden="true">⌄</span></summary>
+              <div class="handwriting-content">
+                <div class="handwriting-toolbar" role="group" aria-label="手書き操作">
+                  <label class="handwriting-control">ペン色 <input type="color" class="handwriting-color" value="#243746" aria-label="ペンの色"></label>
+                  <label class="handwriting-control">太さ <select class="handwriting-width" aria-label="ペンの太さ"><option value="2">細</option><option value="4" selected>中</option><option value="7">太</option></select></label>
+                  <button type="button" class="handwriting-tool-button" data-writing-action="undo">↶ 1画戻す</button>
+                  <button type="button" class="handwriting-tool-button" data-writing-action="eraser" aria-pressed="false">消しゴム</button>
+                  <button type="button" class="handwriting-tool-button is-clear" data-writing-action="clear">全消去</button>
+                </div>
+                <div class="handwriting-canvas-frame"><canvas id="multiStudyHandwritingCanvas" class="handwriting-canvas" aria-label="まとめて勉強用手書きスペース。ペン、指、マウスで答えを書けます。" tabindex="0"></canvas></div>
+                <p class="handwriting-note">書いた内容は一時的なメモです。次の問題へ進むと消去され、成績には記録されません。</p>
+              </div>
+            </details>
+          </div>
         </div>
         <div id="multiStudyAnswerControls" class="answer-controls" aria-label="正誤判定">
           <button type="button" class="check-btn correct" id="multiStudyCorrectBtn"><span>○ 正解・自信あり</span><span class="shortcut-key" aria-hidden="true">A</span></button>
           <button type="button" class="check-btn unsure" id="multiStudyUnsureBtn"><span>△ 正解・自信なし</span><span class="shortcut-key" aria-hidden="true">D</span></button>
           <button type="button" class="check-btn wrong" id="multiStudyWrongBtn"><span>× 不正解</span><span class="shortcut-key" aria-hidden="true">S</span></button>
         </div>
-        <div class="multi-study-session-footer"><span>Enter：答えを表示　／　A・D・S：正誤判定</span><button type="button" class="action sub" id="multiStudyStopBtn">学習を中止して選び直す</button></div>
+        <div class="multi-study-session-footer"><span>Enter：答えを表示　／　A：正解　D：自信なし　S：不正解</span><button type="button" class="action sub" id="multiStudyStopBtn">学習を中止して選び直す</button></div>
       </div>
 
       <div id="multiStudyResult" class="multi-study-result" hidden>
@@ -11390,6 +11440,7 @@ function switchView(view){
   // 手書きは一時メモなので、学習画面から別画面へ移る際は内容を残さない。
   if(view!=="inputCard") clearHandwritingPad("input");
   if(view!=="roulette") clearHandwritingPad("output");
+  if(view!=="multiStudy") clearHandwritingPad("multiStudy");
   const inputViews=["inputCard","inputList","register","manage"];
   const outputViews=["roulette","spaced","timeAttack","mockTest","whiteRecall","blankStudy","multiStudy"];
   if(view!=="timeAttack" && timeAttackRunning){
@@ -12800,9 +12851,10 @@ function initHandwritingPad(kind, canvasId, detailsId){
 function initializeHandwritingPads(){
   initHandwritingPad("input","inputHandwritingCanvas","inputHandwritingDetails");
   initHandwritingPad("output","outputHandwritingCanvas","outputHandwritingDetails");
+  initHandwritingPad("multiStudy","multiStudyHandwritingCanvas","multiStudyHandwritingDetails");
 }
 function clearHandwritingPad(kind){const pad=handwritingPads[kind];if(pad)pad.clear();}
-function clearAllHandwriting(){clearHandwritingPad("input");clearHandwritingPad("output");}
+function clearAllHandwriting(){clearHandwritingPad("input");clearHandwritingPad("output");clearHandwritingPad("multiStudy");}
 
 initializeHandwritingPads();
 initializeUserPreferences();
@@ -12811,7 +12863,7 @@ initializeUserPreferences();
   const wide = window.matchMedia && window.matchMedia("(min-width: 800px)").matches;
   const enabled = document.body.dataset.userHandwriting !== "off";
   if (!wide || !enabled) return;
-  for (const id of ["inputHandwritingDetails", "outputHandwritingDetails"]) {
+  for (const id of ["inputHandwritingDetails", "outputHandwritingDetails", "multiStudyHandwritingDetails"]) {
     const details = document.getElementById(id);
     if (details) details.open = true;
   }
@@ -14352,7 +14404,7 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 
 
 <script id="v112MultiStudyFeature">
-/* v112: まとめて勉強の表示とキーボード操作を通常の一問一答に統一。元の問題集データは変更しない。 */
+/* v113: まとめて勉強に通常画面と同じ表示・手書き欄・安定した物理キー操作を実装。 */
 (()=>{
   "use strict";
   const $=id=>document.getElementById(id);
@@ -14480,11 +14532,13 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
       try{localStorage.removeItem(DRAFT_KEY);}catch(e){}
       savedDraftAvailable=false;
     }
+    clearHandwritingPad("multiStudy");
     session={format:"manakuru-multi-study",version:1,sessionId:(window.crypto&&crypto.randomUUID?crypto.randomUUID():`multi-${Date.now()}-${Math.random().toString(36).slice(2,8)}`),items,cursor:0,revealed:false,outcomes:[],startedAt:Date.now(),questionStartedAt:Date.now(),completed:false,historySaved:false};
     persistSession();renderSession();
   }
   function resumeSession(){
     const saved=loadSavedSession();if(!saved)return false;
+    clearHandwritingPad("multiStudy");
     session=saved;savedDraftAvailable=false;
     if(session.cursor>=session.items.length){session.completed=true;completeSession();}
     else{session.questionStartedAt=Date.now();renderSession();}
@@ -14498,27 +14552,51 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
     persistSession();
     renderSession();
   }
+  function getSessionOutcomes(){
+    return Array.isArray(session?.outcomes)?session.outcomes.slice(0,session.cursor).filter(Boolean):[];
+  }
   function getSessionProgressText(){
-    const outcomes=Array.isArray(session?.outcomes)?session.outcomes.filter(Boolean):[];
-    const correct=outcomes.filter(x=>x.result==="correct").length;
+    const outcomes=getSessionOutcomes();
+    const correct=outcomes.filter(x=>x.result==="correct"||x.result==="unsure").length;
     const unsure=outcomes.filter(x=>x.result==="unsure").length;
     const wrong=outcomes.filter(x=>x.result==="wrong").length;
-    return `${Math.min(session.cursor+1,session.items.length)} / ${session.items.length}　｜　○ ${correct}　△ ${unsure}　× ${wrong}`;
+    return `${Math.min(session.cursor+1,session.items.length)} / ${session.items.length}　｜　○ ${correct-unsure}　△ ${unsure}　× ${wrong}`;
+  }
+  function updateSessionStats(){
+    const outcomes=getSessionOutcomes();
+    let correct=0,unsure=0,wrong=0,currentStreak=0,bestStreak=0,run=0;
+    for(const entry of outcomes){
+      if(entry.result==="wrong"){wrong++;run=0;currentStreak=0;}
+      else{
+        correct++;
+        if(entry.result==="unsure"){unsure++;run=0;currentStreak=0;}
+        else{run++;currentStreak=run;bestStreak=Math.max(bestStreak,run);}
+      }
+    }
+    const total=correct+wrong;
+    $("multiStudyStreakCount").textContent=String(currentStreak);
+    $("multiStudyStreakSub").textContent=currentStreak===0?"正解すると記録開始":"今の連続記録";
+    $("multiStudyBestStreakCount").textContent=String(bestStreak);
+    $("multiStudyAccuracyPercent").textContent=total?String(Math.round(correct/total*1000)/10):"—";
+    $("multiStudyAccuracyUnit").textContent=total?"%":"";
+    $("multiStudyTotalAnsweredText").textContent=total?`累計 ${total}問　｜　○ ${correct-unsure}　△ ${unsure}　× ${wrong}`:"まだ回答していません";
   }
   function renderSession(){
     if(!session||session.completed){renderResult();return;}
     const item=session.items[session.cursor];if(!item){completeSession();return;}
     setViewMode("session");
     $("multiStudyProgressText").textContent=getSessionProgressText();
-    $("multiStudySourceLabel").textContent=`問題集：${item.deckTitle}`;
+    $("multiStudySourceLabel").textContent=`📚 ${item.deckTitle}`;
     $("multiStudyQuestion").textContent=session.revealed?item.answer:item.question;
     $("multiStudyHint").textContent=session.revealed
       ?"自分の答えと比べて判定　・　A：正解・自信あり　D：正解・自信なし　S：不正解"
       :"カードをクリック / タップ　・　Enterで答えを表示";
     $("multiStudyAnswerControls").classList.toggle("visible",session.revealed);
-    $("multiStudyDisplay").setAttribute("aria-label",session.revealed?"答えを表示中":"カードを押すと答えを表示します");
+    $("multiStudyDisplay").setAttribute("aria-label",session.revealed?"答えを表示中":"カードをクリック / タップ、またはEnterキーで答えを表示します");
+    updateSessionStats();
     if(!session.questionStartedAt)session.questionStartedAt=Date.now();
     persistSession();
+    requestAnimationFrame(()=>handwritingPads.multiStudy?.redraw?.());
   }
   function updateDeckProblemStat(item,outcome){
     const key=getDeckStatsStorageKey(item.deckId);if(!key)throw new Error("問題集の成績保存先が確認できません。");
@@ -14560,6 +14638,7 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
       try{updateDeckSpacedResult(item,outcome);}catch(spacedError){console.warn("まとめて勉強：復習予定は更新できませんでした",spacedError);}
     }catch(error){alert(`回答を記録できませんでした。\n${String(error?.message||error)}\n\n問題を飛ばさず、保存状態を確認してください。`);return;}
     session.outcomes[session.cursor]={result:outcome,answeredAt:now,durationMs};
+    clearHandwritingPad("multiStudy");
     session.cursor++;session.revealed=false;session.questionStartedAt=Date.now();
     persistSession();
     if(session.cursor>=session.items.length)completeSession();else renderSession();
@@ -14587,6 +14666,7 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
   }
   function completeSession(){
     if(!session)return;
+    clearHandwritingPad("multiStudy");
     session.completed=true;session.revealed=false;
     let historySaved=true;
     if(!session.historySaved){
@@ -14633,6 +14713,7 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
     const hasProgress=!!(session&&session.outcomes?.some(Boolean))||!!(saved&&saved.outcomes?.some(Boolean));
     if(hasProgress&&!confirm("途中までのまとめて勉強を破棄しますか？\n回答済みの成績は各問題集に残ります。"))return;
     try{localStorage.removeItem(DRAFT_KEY);}catch(e){}
+    clearHandwritingPad("multiStudy");
     session=null;savedDraftAvailable=false;renderMultiStudyPage();
   }
   function bind(){
@@ -14654,22 +14735,23 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
     $("multiStudyUnsureBtn")?.addEventListener("click",()=>saveOutcome("unsure"));
     $("multiStudyWrongBtn")?.addEventListener("click",()=>saveOutcome("wrong"));
     document.addEventListener("keydown",event=>{
-      if($("multiStudyView")?.style.display==="none"||!session||session.completed)return;
-      if(event.repeat||event.isComposing||event.altKey||event.ctrlKey||event.metaKey)return;
-      const active=document.activeElement;
-      if(active&&(active.isContentEditable||["INPUT","TEXTAREA","SELECT"].includes(active.tagName)))return;
-      const key=String(event.key||"").toLowerCase();
+      const view=$("multiStudyView");
+      if(!view||view.hidden||getComputedStyle(view).display==="none"||!session||session.completed)return;
+      if(event.repeat||event.isComposing||event.keyCode===229||event.altKey||event.ctrlKey||event.metaKey)return;
+      const target=event.target;
+      if(target&&(target.isContentEditable||target.closest?.('input,textarea,select,[contenteditable="true"]')))return;
+      // event.codeを優先し、日本語IME中でも物理キーA/D/Sを安定して判定する。
+      const key=event.code==="KeyA"?"a":event.code==="KeyD"?"d":event.code==="KeyS"?"s":event.code==="Enter"?"enter":String(event.key||"").toLowerCase();
       if(key==="enter"){
-        if(!session.revealed){event.preventDefault();revealAnswer();}
+        if(!session.revealed){event.preventDefault();event.stopPropagation();revealAnswer();}
         return;
       }
       if(!session.revealed)return;
       const outcome=key==="a"?"correct":key==="d"?"unsure":key==="s"?"wrong":null;
       if(!outcome)return;
-      event.preventDefault();
-      saveOutcome(outcome);
-    });
-    $("multiStudyStopBtn")?.addEventListener("click",()=>{if(confirm("学習を中止して問題集の選択に戻りますか？\nここまでの回答成績は保存されています。")){try{localStorage.removeItem(DRAFT_KEY);}catch(e){}session=null;savedDraftAvailable=false;renderMultiStudyPage();}});
+      event.preventDefault();event.stopPropagation();saveOutcome(outcome);
+    },true);
+    $("multiStudyStopBtn")?.addEventListener("click",()=>{if(confirm("学習を中止して問題集の選択に戻りますか？\nここまでの回答成績は保存されています。")){try{localStorage.removeItem(DRAFT_KEY);}catch(e){}clearHandwritingPad("multiStudy");session=null;savedDraftAvailable=false;renderMultiStudyPage();}});
     $("multiStudyAgainBtn")?.addEventListener("click",()=>{session=null;savedDraftAvailable=false;renderMultiStudyPage();});
     $("multiStudyLibraryBtn")?.addEventListener("click",()=>switchView("library"));
   }
