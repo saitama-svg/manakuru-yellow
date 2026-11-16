@@ -1,4 +1,4 @@
-const CACHE_NAME = 'manakuru-yellow-v113-multi-study-handwriting-shortcuts';
+const CACHE_NAME = 'manakuru-yellow-v114-multi-study-balanced-deck-selection';
 const APP_SHELL = [
   './',
   './index.html',

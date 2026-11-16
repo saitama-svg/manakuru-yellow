@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<!-- MANAKURU-YELLOW-BUILD: v113-multi-study-handwriting-shortcuts -->
+<!-- MANAKURU-YELLOW-BUILD: v114-multi-study-balanced-deck-selection -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="一問一答、復習、成績・弱点分析、問題集、白紙勉強法、模擬テストをまとめた学習ツール「マナクル YELLOW」です。">
@@ -4817,7 +4817,7 @@ Q2. 鎌倉幕府を開いた人物は？ → 源頼朝"></textarea>
           <label>出題方向<select id="multiStudyDirection"><option value="deck" selected>各問題集の設定に合わせる</option><option value="forward">問題 → 答え</option><option value="reverse">答え → 問題</option><option value="random">方向をランダム</option></select></label>
           <label>問題数<select id="multiStudyCount"><option value="all" selected>選択した問題集の全問</option><option value="10">10問</option><option value="20">20問</option><option value="30">30問</option><option value="50">50問</option><option value="100">100問</option><option value="200">200問</option></select></label>
         </div>
-        <div id="multiStudyFootnote" class="multi-study-footnote">※ 最大1,000問まで選択できます。学習中の回答は、各問題集の問題別成績に反映されます。複数問題集をまとめて解いた履歴も、それぞれの問題集に記録されます。</div>
+        <div id="multiStudyFootnote" class="multi-study-footnote">※ 最大1,000問まで選択できます。問題数を指定した場合も、選択した各問題集からできるだけ均等に出題します。選択した冊数より少ない問題数は指定できません。回答は各問題集の成績・復習予定・学習履歴に記録されます。</div>
         <button type="button" class="action main multi-study-start" id="multiStudyStartBtn">📚 この内容で学習を開始</button>
       </div>
 
@@ -14404,7 +14404,7 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 
 
 <script id="v112MultiStudyFeature">
-/* v113: まとめて勉強に通常画面と同じ表示・手書き欄・安定した物理キー操作を実装。 */
+/* v114: 指定問題数でも選択した各問題集からバランスよく出題する。 */
 (()=>{
   "use strict";
   const $=id=>document.getElementById(id);
@@ -14492,35 +14492,63 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
     try{
       const raw=localStorage.getItem(DRAFT_KEY);if(!raw)return null;
       const parsed=JSON.parse(raw);
-      if(!parsed||parsed.format!=="manakuru-multi-study"||parsed.version!==1||!Array.isArray(parsed.items)||!parsed.items.length||parsed.items.length>MAX_MULTI_QUESTIONS)return null;
+      if(!parsed||parsed.format!=="manakuru-multi-study"||![1,2].includes(parsed.version)||!Array.isArray(parsed.items)||!parsed.items.length||parsed.items.length>MAX_MULTI_QUESTIONS)return null;
       if(!Number.isInteger(parsed.cursor)||parsed.cursor<0||parsed.cursor>parsed.items.length)return null;
       const validItems=parsed.items.every(item=>item&&typeof item.deckId==="string"&&typeof item.deckTitle==="string"&&typeof item.question==="string"&&typeof item.answer==="string"&&typeof item.direction==="string");
       if(!validItems)return null;
       parsed.outcomes=Array.isArray(parsed.outcomes)?parsed.outcomes.slice(0,parsed.items.length):[];
       parsed.revealed=parsed.revealed===true;
       parsed.startedAt=Number(parsed.startedAt)||Date.now();
+      // v113以前は指定問題数を選ぶと先頭の問題集だけに偏る場合があるため、旧途中データは再開させず新方式で開始する。
+      parsed.legacySelection=parsed.version!==2||parsed.selectionRule!=="round-robin-by-deck-v1";
       return parsed;
     }catch(e){return null;}
   }
   function makeQuestionItems(){
     const selected=getAvailableDecks().filter(deck=>selectedDeckIds.has(deck.id));
     if(!selected.length){alert("問題集を1つ以上選択してください。");return null;}
-    let items=[];
     const directionChoice=$("multiStudyDirection").value;
-    for(const deck of selected){
-      const pairsForDeck=safeMultiParseWords(deck.words);
-      for(let i=0;i<pairsForDeck.length;i++){
-        const [a,b]=pairsForDeck[i];
+    const pools=selected.map(deck=>{
+      const pairs=safeMultiParseWords(deck.words);
+      const items=pairs.map(([a,b],i)=>{
         let direction=directionChoice==="deck"?deck.direction:directionChoice;
         if(direction==="random")direction=Math.random()<0.5?"forward":"reverse";
         if(!["forward","reverse"].includes(direction))direction="forward";
-        items.push({deckId:deck.id,deckTitle:deck.title,question:direction==="reverse"?b:a,answer:direction==="reverse"?a:b,sourceQuestion:a,sourceAnswer:b,pairKey:getPairKey([a,b]),direction,sourceIndex:i});
-      }
+        return {deckId:deck.id,deckTitle:deck.title,question:direction==="reverse"?b:a,answer:direction==="reverse"?a:b,sourceQuestion:a,sourceAnswer:b,pairKey:getPairKey([a,b]),direction,sourceIndex:i};
+      });
+      return {deck,items};
+    }).filter(pool=>pool.items.length>0);
+    if(!pools.length){alert("選択した問題集に出題できる問題がありません。");return null;}
+    const totalAvailable=pools.reduce((sum,pool)=>sum+pool.items.length,0);
+    if(totalAvailable>MAX_MULTI_QUESTIONS&&$("multiStudyCount").value==="all"){
+      alert(`選択した問題集は合計${totalAvailable}問です。全問学習は最大${MAX_MULTI_QUESTIONS}問までです。問題数を指定するか、選択する問題集を減らしてください。`);return null;
     }
+    const orderChoice=$("multiStudyOrder").value;
+    if(orderChoice==="shuffle")pools.forEach(pool=>shuffleArray(pool.items));
     const countValue=$("multiStudyCount").value;
-    if(countValue!=="all")items=items.slice(0,Math.max(1,Number(countValue)||10));
-    else if(items.length>MAX_MULTI_QUESTIONS){alert(`選択した問題集は合計${items.length}問です。全問学習は最大${MAX_MULTI_QUESTIONS}問までです。問題数を指定するか、選択する問題集を減らしてください。`);return null;}
-    if($("multiStudyOrder").value==="shuffle")shuffleArray(items);
+    const targetCount=countValue==="all"?totalAvailable:Math.min(totalAvailable,Math.max(1,Number(countValue)||10));
+    if(targetCount<pools.length){
+      alert(`現在${pools.length}冊の問題集が選択されています。すべての問題集から出題するには、問題数を${pools.length}問以上にしてください。`);
+      return null;
+    }
+    // 問題数を絞る場合は、各問題集から1問ずつ順番に選び、各冊が必ず出題に含まれるようにする。
+    // 問題集の問題数が少ない場合は、その分を残りの問題集へ自動的に振り分ける。
+    const chosenByDeck=pools.map(pool=>[]);
+    let chosenCount=0;
+    while(chosenCount<targetCount){
+      let addedInThisRound=false;
+      for(let i=0;i<pools.length&&chosenCount<targetCount;i++){
+        const nextIndex=chosenByDeck[i].length;
+        if(nextIndex<pools[i].items.length){
+          chosenByDeck[i].push(pools[i].items[nextIndex]);
+          chosenCount++;
+          addedInThisRound=true;
+        }
+      }
+      if(!addedInThisRound)break;
+    }
+    let items=chosenByDeck.flat();
+    if(orderChoice==="shuffle")shuffleArray(items);
     return items;
   }
   function startSession(){
@@ -14528,16 +14556,20 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
     const existingDraft=!session?loadSavedSession():null;
     if(existingDraft){
       const answered=(existingDraft.outcomes||[]).filter(Boolean).length;
-      if(!confirm(`途中の学習（${existingDraft.cursor} / ${existingDraft.items.length}問回答済み）があります。回答済みの成績は残りますが、途中の続きは破棄して新しく始めますか？`))return;
+      const message=existingDraft.legacySelection
+        ?`旧方式の途中データ（${existingDraft.cursor} / ${existingDraft.items.length}問）があります。新方式では選択した各問題集から出題するため、旧方式の続きは再開できません。回答済みの問題別成績は保存されています。旧途中データを破棄して、新しく始めますか？`
+        :`途中の学習（${existingDraft.cursor} / ${existingDraft.items.length}問回答済み）があります。回答済みの成績は残りますが、途中の続きは破棄して新しく始めますか？`;
+      if(!confirm(message))return;
       try{localStorage.removeItem(DRAFT_KEY);}catch(e){}
       savedDraftAvailable=false;
     }
     clearHandwritingPad("multiStudy");
-    session={format:"manakuru-multi-study",version:1,sessionId:(window.crypto&&crypto.randomUUID?crypto.randomUUID():`multi-${Date.now()}-${Math.random().toString(36).slice(2,8)}`),items,cursor:0,revealed:false,outcomes:[],startedAt:Date.now(),questionStartedAt:Date.now(),completed:false,historySaved:false};
+    session={format:"manakuru-multi-study",version:2,selectionRule:"round-robin-by-deck-v1",sourceDeckIds:[...new Set(items.map(item=>item.deckId))],sessionId:(window.crypto&&crypto.randomUUID?crypto.randomUUID():`multi-${Date.now()}-${Math.random().toString(36).slice(2,8)}`),items,cursor:0,revealed:false,outcomes:[],startedAt:Date.now(),questionStartedAt:Date.now(),completed:false,historySaved:false};
     persistSession();renderSession();
   }
   function resumeSession(){
     const saved=loadSavedSession();if(!saved)return false;
+    if(saved.legacySelection){alert("この途中データは旧方式で作成されています。回答済みの成績は保存されています。『破棄して選び直す』を押して、新方式で学習を始めてください。");return false;}
     clearHandwritingPad("multiStudy");
     session=saved;savedDraftAvailable=false;
     if(session.cursor>=session.items.length){session.completed=true;completeSession();}
@@ -14703,10 +14735,20 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
     setViewMode("setup");renderDeckList();
     const saved=savedDraftAvailable?loadSavedSession():null;
     const notice=$("multiStudyResumeNotice");
+    const resumeButton=$("multiStudyResumeBtn");
     if(saved){
-      $("multiStudyResumeText").textContent=`${saved.cursor} / ${saved.items.length}問まで回答済みです。続きから再開できます。`;
+      if(saved.legacySelection){
+        $("multiStudyResumeText").textContent=`旧方式の途中データ（${saved.cursor} / ${saved.items.length}問）があります。回答済みの成績は保存済みです。新方式で学習するには破棄して選び直してください。`;
+        if(resumeButton){resumeButton.disabled=true;resumeButton.textContent="旧方式のため再開できません";}
+      }else{
+        $("multiStudyResumeText").textContent=`${saved.cursor} / ${saved.items.length}問まで回答済みです。続きから再開できます。`;
+        if(resumeButton){resumeButton.disabled=false;resumeButton.textContent="続きから再開";}
+      }
       notice.hidden=false;
-    }else notice.hidden=true;
+    }else{
+      notice.hidden=true;
+      if(resumeButton){resumeButton.disabled=false;resumeButton.textContent="続きから再開";}
+    }
   }
   function discardDraft(){
     const saved=loadSavedSession();
