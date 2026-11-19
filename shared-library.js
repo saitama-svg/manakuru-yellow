@@ -58,7 +58,7 @@ function renderSharedLibraryCards(){
     const isInitialSample=String(set.reviewStatus||"").includes("初期サンプル");
     const badgeText=isInitialSample?"初期サンプル":"投稿問題集";
     const badgeClass=isInitialSample?"demo":"published";
-    const preview=isSelected?`<div class="shared-set-preview" aria-label="問題と解答のプレビュー">${set.questions.slice(0,5).map((q,i)=>`<div class="shared-preview-row"><div class="shared-preview-q"><span class="shared-preview-index">${i+1}.</span>${escapeHtml(q.question)}</div><div class="shared-preview-a">答え：${escapeHtml(q.answer)}</div></div>`).join("")}${set.questions.length>5?`<p>ほか${set.questions.length-5}問あります。</p>`:""}<p class="shared-library-count">作成：${escapeHtml(set.author||"不明")} · ${escapeHtml(set.rightsNote||"")}</p></div>`:"";
+    const preview=isSelected?`<div class="shared-set-preview" aria-label="問題・解答・ポイントのプレビュー">${set.questions.slice(0,5).map((q,i)=>`<div class="shared-preview-row"><div class="shared-preview-q"><span class="shared-preview-index">${i+1}.</span>${escapeHtml(q.question)}</div><div class="shared-preview-a">答え：${escapeHtml(q.answer)}</div>${q.point?`<div class="shared-preview-point"><strong>核となるポイント</strong><span>${escapeHtml(q.point)}</span></div>`:""}</div>`).join("")}${set.questions.length>5?`<p>ほか${set.questions.length-5}問あります。</p>`:""}<p class="shared-library-count">作成：${escapeHtml(set.author||"不明")} · ${escapeHtml(set.rightsNote||"")}</p></div>`:"";
     return `<article class="shared-set-card" data-shared-set="${escapeHtml(set.id)}"><div class="shared-set-meta"><span class="shared-set-chip">${escapeHtml(set.subject||"その他")}</span><span class="shared-set-chip">${escapeHtml(set.grade||"学年指定なし")}</span><span class="shared-set-chip">${set.questions.length}問</span><span class="shared-set-chip ${badgeClass}">${badgeText}</span></div><h3>${escapeHtml(set.title)}</h3><p>${escapeHtml(set.description||"")}</p><p>単元：${escapeHtml(set.topic||"未分類")} · 難易度：${escapeHtml(set.level||"標準")}</p><div class="shared-set-actions"><button class="action sub" type="button" data-shared-action="preview" data-set-id="${escapeHtml(set.id)}">${isSelected?"プレビューを閉じる":"内容を確認"}</button><button class="action main" type="button" data-shared-action="copy" data-set-id="${escapeHtml(set.id)}">自分の問題集に追加</button></div>${preview}</article>`;
   }).join("");
 }
@@ -72,9 +72,17 @@ function copySharedSetToPersonalLibrary(setId){
   if(name===null)return;
   const title=safeDeckTitle(name);
   if(!title){alert("問題集名を入力してください。");return;}
-  const words=shared.questions.slice(0,MAX).map(q=>`${String(q.question).replace(/[\r\n\t]+/g," ").trim()}\t${String(q.answer).replace(/[\r\n\t]+/g," ").trim()}`).filter(line=>line.split("\t")[0]&&line.split("\t")[1]).join("\n");
+  const answerPoints={};
+  const validLines=shared.questions.slice(0,MAX).map(q=>{
+    const question=String(q.question).replace(/[\r\n\t]+/g," ").trim();
+    const answer=String(q.answer).replace(/\r\n|\r|\n/g,"　→　").replace(/\t+/g," ").trim();
+    const point=String(q.point||"").trim().slice(0,3000);
+    if(question&&answer&&point)answerPoints[`${question}\u0000${answer}`]=point;
+    return question&&answer?`${question}\t${answer}`:"";
+  }).filter(Boolean);
+  const words=validLines.join("\n");
   if(!words){alert("取り込める問題がありません。");return;}
-  const deck={id:makeDeckId(),title,words,direction:"forward",questionCount:"all",testDate:"",spacedReviewEnabled:true,spacedReviewPausedAt:0,hints:{},redParts:{},redSheetPrintEdits:{},folder:"",archived:false,sortOrder:getNewDeckSortOrder(""),createdAt:Date.now(),updatedAt:Date.now()};
+  const deck={id:makeDeckId(),title,words,direction:"forward",questionCount:"all",testDate:"",spacedReviewEnabled:true,spacedReviewPausedAt:0,hints:{},answerPoints,redParts:{},redSheetPrintEdits:{},folder:"",archived:false,sortOrder:getNewDeckSortOrder(""),createdAt:Date.now(),updatedAt:Date.now()};
   deckLibrary.push(deck);
   if(!saveDeckLibrary()){
     deckLibrary=deckLibrary.filter(item=>item.id!==deck.id);

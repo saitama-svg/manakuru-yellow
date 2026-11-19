@@ -978,7 +978,7 @@ button,input,textarea,select{touch-action:manipulation}
 .display .divider{
   box-shadow:0 2px 8px rgba(38,185,168,.14);
 }
-.display .hint{
+ .display .hint{
   display:inline-flex;
   align-items:center;
   justify-content:center;
@@ -989,6 +989,9 @@ button,input,textarea,select{touch-action:manipulation}
   font-size:13px;
   color:#58726d;
 }
+.display .word .round-answer-main{font:inherit;white-space:pre-wrap;overflow-wrap:anywhere}
+.display .word .round-answer-point{width:min(850px,94%);margin:20px auto 0;padding:13px 17px;border:1px solid #e3ebe8;border-radius:13px;background:#f7faf9;color:#5e6c68;font-family:Arial,"Yu Gothic","Meiryo",sans-serif;font-size:clamp(13px,1.45vw,17px);font-weight:500;line-height:1.7;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere}
+.display .word .round-answer-point strong{display:block;margin-bottom:3px;color:#4f625d;font-size:11px;font-weight:800;letter-spacing:.04em}
 .round-progress{
   padding:6px 12px;
   border-radius:999px;
@@ -1564,6 +1567,9 @@ input:focus,textarea:focus,select:focus{box-shadow:0 0 0 4px rgba(38,185,168,.09
 .input-card-separator{height:4px;width:54px;border-radius:99px;background:#b9e9d8;}
 .input-card-answer{font-size:clamp(19px,2.2vw,29px);font-weight:850;color:#365f53;line-height:1.55;white-space:pre-wrap;max-width:100%}
 .input-card-answer.is-hidden{display:none}
+.input-card-point{width:min(760px,100%);padding:12px 15px;border:1px solid #e5ece9;border-radius:12px;background:#f7faf9;color:#5f6c68;font-family:Arial,"Yu Gothic","Meiryo",sans-serif;font-size:13px;font-weight:500;line-height:1.7;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere}
+.input-card-point[hidden]{display:none!important}
+.input-card-point strong{display:block;margin-bottom:3px;color:#53645f;font-size:11px;font-weight:800}
 .input-card-face>small{color:#82918e;font-size:12px;line-height:1.5;font-weight:650}
 .input-card-controls{display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:10px;margin:15px 0 0}
 .input-primary-button,.input-secondary-button,.input-status-button,.input-clear-button{border-radius:12px;border:1px solid #dbe8e3;padding:11px 15px;font:inherit;font-size:13px;font-weight:850;cursor:pointer;transition:transform .12s ease,background .15s ease,box-shadow .15s ease;}
@@ -3510,7 +3516,7 @@ body.mock-test-active .mascot{display:none!important;}
 .shared-set-card h3{font-size:18px;line-height:1.4;margin:0;color:#243430}.shared-set-card p{margin:0;color:#66736f;line-height:1.55;font-size:13px}
 .shared-set-meta{display:flex;flex-wrap:wrap;gap:6px}.shared-set-chip{font-size:11px;border-radius:999px;background:#f1f5f3;color:#4b6059;padding:5px 8px;font-weight:750}.shared-set-chip.demo{background:#fff2bc;color:#785d00}.shared-set-chip.published{background:#dff5e8;color:#1b6947}
 .shared-set-actions{display:flex;gap:8px;margin-top:auto}.shared-set-actions .action{flex:1;min-width:0;font-size:13px;padding:10px 12px}
-.shared-set-preview{border-top:1px solid #e7ecea;padding-top:12px;margin-top:3px}.shared-preview-row{padding:10px 0;border-bottom:1px solid #eef1ef}.shared-preview-row:last-child{border-bottom:0}.shared-preview-q{font-weight:800;color:#263632;line-height:1.5}.shared-preview-a{margin-top:5px;color:#31724f;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}.shared-preview-index{font-size:11px;color:#89948f;margin-right:6px}.shared-library-status{padding:13px;border-radius:12px;background:#f5f7f6;color:#5b6b65;font-size:13px;line-height:1.6}.shared-library-status.error{background:#fff0ef;color:#9b3028}.shared-library-note{margin-top:18px;border-left:4px solid #e5bd36;padding:10px 12px;background:#fffaf0;border-radius:0 12px 12px 0;font-size:12px;color:#655d3b;line-height:1.7}
+.shared-set-preview{border-top:1px solid #e7ecea;padding-top:12px;margin-top:3px}.shared-preview-row{padding:10px 0;border-bottom:1px solid #eef1ef}.shared-preview-row:last-child{border-bottom:0}.shared-preview-q{font-weight:800;color:#263632;line-height:1.5}.shared-preview-a{margin-top:5px;color:#31724f;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}.shared-preview-point{margin:7px 0 2px 22px;padding:8px 10px;border-left:3px solid #d9e3df;background:#f7faf9;color:#64716d;font-family:Arial,"Yu Gothic","Meiryo",sans-serif;font-size:12px;font-weight:500;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}.shared-preview-point strong{display:block;margin-bottom:2px;color:#53645f;font-size:10px;font-weight:800}.shared-preview-index{font-size:11px;color:#89948f;margin-right:6px}.shared-library-status{padding:13px;border-radius:12px;background:#f5f7f6;color:#5b6b65;font-size:13px;line-height:1.6}.shared-library-status.error{background:#fff0ef;color:#9b3028}.shared-library-note{margin-top:18px;border-left:4px solid #e5bd36;padding:10px 12px;background:#fffaf0;border-radius:0 12px 12px 0;font-size:12px;color:#655d3b;line-height:1.7}
 @media(max-width:700px){.shared-library-hero{align-items:flex-start;padding:16px}.shared-library-hero h3{font-size:18px}.shared-library-controls{grid-template-columns:1fr}.shared-library-grid{grid-template-columns:1fr}.shared-set-card{padding:15px}.shared-set-actions{flex-direction:column}}
 /* v104: 自分の問題集から投稿申請、みんなの問題集から誤り報告へ分離 */
 .library-submission-callout{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 18px;padding:14px 16px;border:1px solid #ecd995;border-radius:15px;background:linear-gradient(180deg,#fffdf4 0%,#fff8df 100%)}
@@ -3842,6 +3848,7 @@ body.mock-test-active .mascot{display:none!important;}
             <strong id="inputCardQuestion">問題を登録すると、ここに表示されます。</strong>
             <span class="input-card-separator" aria-hidden="true"></span>
             <span id="inputCardAnswer" class="input-card-answer is-hidden"></span>
+            <div id="inputCardPoint" class="input-card-point" hidden></div>
             <small id="inputCardHint">カードを押すか「答えを見る」を押してください</small>
             <span class="input-hint-zone" id="inputCardHintZone">
               <button type="button" class="input-hint-toggle" id="inputCardHintToggle" hidden>💡 ヒントを見る</button>
@@ -6778,6 +6785,7 @@ function normalizeDeck(raw){
     spacedReviewEnabled:raw.spacedReviewEnabled !== false,
     spacedReviewPausedAt:Math.max(0,Number(raw.spacedReviewPausedAt)||0),
     hints:normalizeProblemHintMap(raw.hints),
+    answerPoints:normalizeProblemHintMap(raw.answerPoints),
     redParts:redPartsForPairs(raw.redParts, words.split(/\r?\n/).filter(line=>line.trim()).map(line=>{const tab=line.indexOf("\t");return tab<0?[line.trim(),""]:[line.slice(0,tab).trim(),line.slice(tab+1).trim()];})),
     redSheetPrintEdits:normalizePrintRedEditorEditsMap(raw.redSheetPrintEdits,words),
     folder:safeFolderName(raw.folder),
@@ -6927,6 +6935,7 @@ function buildDeckFromCurrentForm(id){
     spacedReviewEnabled:existing?.spacedReviewEnabled !== false,
     spacedReviewPausedAt:existing?.spacedReviewPausedAt || 0,
     hints:hintsForPairs(existing?.hints,pairs),
+    answerPoints:hintsForPairs(existing?.answerPoints,pairs),
     redParts:redPartsForPairs(existing?.redParts,pairs),
     redSheetPrintEdits:normalizePrintRedEditorEditsMap(existing?.redSheetPrintEdits,normalizedWords),
     folder:existing?.folder || "",
@@ -7673,7 +7682,7 @@ function initializeDeckLibrary(){
           copyTitle=`${baseTitle}（コピー${n}）`;
         }
       }
-      deck={id:makeDeckId(),title:copyTitle,words,hints:hintsForPairs(embeddedData?.hints,pairs),redParts:redPartsForPairs(embeddedData?.redParts,pairs),direction:directionSelect?.value||"forward",questionCount:questionCountSelect?.value||"all",createdAt:Date.now(),updatedAt:Date.now()};
+      deck={id:makeDeckId(),title:copyTitle,words,hints:hintsForPairs(embeddedData?.hints,pairs),answerPoints:hintsForPairs(embeddedData?.answerPoints,pairs),redParts:redPartsForPairs(embeddedData?.redParts,pairs),direction:directionSelect?.value||"forward",questionCount:questionCountSelect?.value||"all",createdAt:Date.now(),updatedAt:Date.now()};
       deckLibrary.push(deck); saveDeckLibrary();
 
       setActiveDeckId(deck.id);
@@ -7765,6 +7774,12 @@ function getProblemHint(pair){
   const deck=getCurrentDeck();
   const hints=normalizeProblemHintMap(deck?.hints);
   return String(hints[getPairKey(pair)]||"");
+}
+function getProblemAnswerPoint(pair){
+  if(!pair) return "";
+  const deck=getCurrentDeck();
+  const points=normalizeProblemHintMap(deck?.answerPoints);
+  return String(points[getPairKey(pair)]||"");
 }
 function setProblemHint(pair,value){
   if(!pair) return false;
@@ -9567,6 +9582,19 @@ function updateRoundProgress(){
   roundProgress.classList.add("visible");
 }
 
+function renderRoundAnswerWithPoint(answer,pair){
+  const pointText=getProblemAnswerPoint(pair);
+  if(!pointText){screen.textContent=answer;return;}
+  const answerNode=document.createElement("div");
+  answerNode.className="round-answer-main";
+  answerNode.textContent=answer;
+  const pointNode=document.createElement("div");
+  pointNode.className="round-answer-point";
+  const label=document.createElement("strong");label.textContent="核となるポイント";
+  const body=document.createElement("span");body.textContent=pointText;
+  pointNode.append(label,body);
+  screen.replaceChildren(answerNode,pointNode);
+}
 function getPresentedPair(){
   const mode=presentationModes[index] || "forward";
   return mode === "reverse"
@@ -9680,7 +9708,8 @@ function resumeSavedRoundCheckpoint(){
   resetVisualState();
   switchView("roulette");
   const presented=getPresentedPair();
-  screen.textContent=showingQuestion?presented.question:presented.answer;
+  if(showingQuestion)screen.textContent=presented.question;
+  else renderRoundAnswerWithPoint(presented.answer,pairs[index]);
   updateRoundProgress();updateRoundReviewBadge();updateStudyStats();
   answerControls.classList.toggle("visible",!showingQuestion);
   document.querySelector(".display .hint").textContent=showingQuestion?"カードをクリック / タップ　・　Enterで答えを表示":"自分の答えと比べて判定　・　A：正解・自信あり　D：正解・自信なし　S：不正解";
@@ -9719,7 +9748,7 @@ function showAnswer(){
   showingQuestion=false;
   playSoundEffect("reveal");
   const presented=getPresentedPair();
-  screen.textContent=presented.answer;
+  renderRoundAnswerWithPoint(presented.answer,pairs[index]);
   updateRoundProgress();
   answerControls.classList.add("visible");
   document.querySelector(".display .hint").textContent="自分の答えと比べて判定　・　A：正解・自信あり　D：正解・自信なし　S：不正解";
@@ -10682,6 +10711,7 @@ function exportCurrentDeck(){
     words:deck.words,
     tags:normalizeTagsArray(pairTags,pairs.length),
     hints:normalizeProblemHintMap(deck.hints),
+    answerPoints:hintsForPairs(deck.answerPoints,pairs),
     redParts:redPartsForPairs(deck.redParts,pairs),
     redSheetPrintEdits:normalizePrintRedEditorEditsMap(deck.redSheetPrintEdits,deck.words),
     direction:deck.direction,
@@ -10736,6 +10766,7 @@ function importDeckFile(file){
         direction:["forward","reverse","random"].includes(payload.direction) ? payload.direction : "forward",
         questionCount:["all","10","20","50"].includes(payload.questionCount) ? payload.questionCount : "all",
         hints:hintsForPairs(payload.hints,words.split(/\r?\n/).filter(Boolean).map(line=>{const tab=line.indexOf("\t");return [line.slice(0,tab).trim(),line.slice(tab+1).trim()];})),
+        answerPoints:hintsForPairs(payload.answerPoints,words.split(/\r?\n/).filter(Boolean).map(line=>{const tab=line.indexOf("\t");return [line.slice(0,tab).trim(),line.slice(tab+1).trim()];})),
         redParts:redPartsForPairs(payload.redParts,words.split(/\r?\n/).filter(Boolean).map(line=>{const tab=line.indexOf("\t");return [line.slice(0,tab).trim(),line.slice(tab+1).trim()];})),
         redSheetPrintEdits:normalizePrintRedEditorEditsMap(payload.redSheetPrintEdits,words),
         folder:"",archived:false,sortOrder:getNewDeckSortOrder(""),
@@ -10943,7 +10974,18 @@ function renderInputCard(){
   const answerEl=document.getElementById("inputCardAnswer");
   answerEl.textContent=answer;
   answerEl.classList.toggle("is-hidden",!revealed);
-  document.getElementById("inputCardHint").textContent=revealed?"答えを確認したら、理解度を記録できます。":"カードを押すか「答えを見る」を押してください";
+  const pointEl=document.getElementById("inputCardPoint");
+  const pointText=getProblemAnswerPoint(pair);
+  if(pointEl){
+    pointEl.replaceChildren();
+    if(pointText){
+      const label=document.createElement("strong");label.textContent="核となるポイント";
+      const body=document.createElement("span");body.textContent=pointText;
+      pointEl.append(label,body);
+    }
+    pointEl.hidden=!revealed||!pointText;
+  }
+  document.getElementById("inputCardHint").textContent=revealed?"答えとポイントを確認したら、理解度を記録できます。":"カードを押すか「答えを見る」を押してください";
   document.getElementById("inputCardReveal").textContent=revealed?"答えを隠す":"答えを見る";
   const hintText=getProblemHint(pair);
   const hintToggle=document.getElementById("inputCardHintToggle");
@@ -12076,6 +12118,7 @@ document.getElementById("makeUrlBtn").onclick=()=>{
     words: normalizedWords,
     tags: normalizeTagsArray(pairTags,pairs.length),
     hints: hintsForPairs(getCurrentDeck()?.hints,pairs),
+    answerPoints:hintsForPairs(getCurrentDeck()?.answerPoints,pairs),
     redParts:redPartsForPairs(getCurrentDeck()?.redParts,pairs),
     redSheetPrintEdits:normalizePrintRedEditorEditsMap(getCurrentDeck()?.redSheetPrintEdits,normalizedWords),
     direction: directionSelect ? directionSelect.value : "forward",
@@ -12197,6 +12240,7 @@ function addDeckFromShareUrl(){
     archived:false,
     sortOrder:getNewDeckSortOrder(""),
     hints:hintsForPairs(payload.hints,importedPairs),
+    answerPoints:hintsForPairs(payload.answerPoints,importedPairs),
     redParts:redPartsForPairs(payload.redParts,importedPairs),
     redSheetPrintEdits:normalizePrintRedEditorEditsMap(payload.redSheetPrintEdits,decoded.words),
     createdAt:now,
@@ -12270,6 +12314,7 @@ document.getElementById("saveHtmlBtn").onclick=()=>{
     words: normalizedWords,
     tags: normalizeTagsArray(pairTags,pairs.length),
     hints: hintsForPairs(getCurrentDeck()?.hints,pairs),
+    answerPoints:hintsForPairs(getCurrentDeck()?.answerPoints,pairs),
     redParts:redPartsForPairs(getCurrentDeck()?.redParts,pairs),
     direction: directionSelect ? directionSelect.value : "forward",
     questionCount: questionCountSelect ? questionCountSelect.value : "all"
