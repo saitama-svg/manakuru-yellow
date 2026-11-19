@@ -1,4 +1,4 @@
-const CACHE_NAME = 'manakuru-yellow-v115-quadratic-study-points';
+const CACHE_NAME = 'manakuru-yellow-v116-quadratic-readable-display';
 const APP_SHELL = [
   './',
   './index.html',
