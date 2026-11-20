@@ -2,7 +2,7 @@
   "format": "manakuru-shared-library",
   "version": 1,
   "updatedAt": "2026-11-20",
-  "note": "既存の問題集を保持し、中3数学の二次関数・平方完成と最大値最小値30問を追加。各問に解答と核となるポイントを収録。",
+  "note": "既存の問題集を保持し、中3数学の二次関数・平方完成と最大値最小値30問を追加。各問に解答と核となるポイントを収録。 家庭科「5大栄養素」の食品分類29問を追加。",
   "sets": [
     {
       "id": "history-modern-japan-001",
@@ -2483,6 +2483,136 @@
           "question": "壁に沿って24mの柵を使い、長方形の囲いを作る。壁に垂直な2辺をそれぞれx mとするとき、面積Sの最大値と、そのときのxを求めなさい。",
           "answer": "壁に沿わない残りの1辺は 24−2x m。\nS＝x(24−2x)＝−2x²＋24x\n ＝−2(x−6)²＋72。\n長さが正なので 0＜x＜12。\n頂点x＝6は範囲内。\n\n答え：最大値72m²、x＝6m",
           "point": "柵の長さは3辺分だけ。壁に沿う辺まで柵を使うと考えないこと。また、残りの辺24−2xも正という条件からxの範囲を決める。"
+        }
+      ]
+    },
+    {
+      "id": "home-economics-five-major-nutrients-001",
+      "title": "家庭科　5大栄養素",
+      "subject": "家庭科",
+      "grade": "学年を問わない",
+      "topic": "栄養素",
+      "level": "基礎",
+      "description": "五大栄養素（炭水化物・脂質・タンパク質・ビタミン・ミネラル）と、それぞれに関係する食品例を確認する基礎問題集です。",
+      "author": "投稿者（匿名）",
+      "reviewStatus": "投稿者本人による公開許可確認済み",
+      "rightsNote": "申請情報に基づき公開。投稿者の氏名などの個人情報は公開用データに含めていません。",
+      "questions": [
+        {
+          "question": "白米",
+          "answer": "炭水化物"
+        },
+        {
+          "question": "食パン",
+          "answer": "炭水化物"
+        },
+        {
+          "question": "うどん",
+          "answer": "炭水化物"
+        },
+        {
+          "question": "さつまいも",
+          "answer": "炭水化物"
+        },
+        {
+          "question": "バナナ",
+          "answer": "炭水化物"
+        },
+        {
+          "question": "コーンフレーク",
+          "answer": "炭水化物"
+        },
+        {
+          "question": "バター",
+          "answer": "脂質"
+        },
+        {
+          "question": "オリーブオイル",
+          "answer": "脂質"
+        },
+        {
+          "question": "マヨネーズ",
+          "answer": "脂質"
+        },
+        {
+          "question": "アーモンド",
+          "answer": "脂質"
+        },
+        {
+          "question": "アボカド",
+          "answer": "脂質"
+        },
+        {
+          "question": "ベーコン",
+          "answer": "脂質"
+        },
+        {
+          "question": "鶏むね肉",
+          "answer": "タンパク質"
+        },
+        {
+          "question": "鮭（サケ）",
+          "answer": "タンパク質"
+        },
+        {
+          "question": "納豆",
+          "answer": "タンパク質"
+        },
+        {
+          "question": "木綿豆腐",
+          "answer": "タンパク質"
+        },
+        {
+          "question": "ギリシャヨーグルト",
+          "answer": "タンパク質"
+        },
+        {
+          "question": "ほうれん草",
+          "answer": "ビタミン"
+        },
+        {
+          "question": "ブロッコリー",
+          "answer": "ビタミン"
+        },
+        {
+          "question": "トマト",
+          "answer": "ビタミン"
+        },
+        {
+          "question": "にんじん",
+          "answer": "ビタミン"
+        },
+        {
+          "question": "キウイフルーツ",
+          "answer": "ビタミン"
+        },
+        {
+          "question": "豚ヒレ肉",
+          "answer": "ビタミン"
+        },
+        {
+          "question": "牛乳",
+          "answer": "ミネラル"
+        },
+        {
+          "question": "しらす干し",
+          "answer": "ミネラル"
+        },
+        {
+          "question": "あさり",
+          "answer": "ミネラル"
+        },
+        {
+          "question": "わかめ",
+          "answer": "ミネラル"
+        },
+        {
+          "question": "牡蠣",
+          "answer": "ミネラル"
+        },
+        {
+          "question": "干しひじき",
+          "answer": "ミネラル"
         }
       ]
     }

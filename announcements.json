@@ -5,6 +5,21 @@
   "note": "公開済みのお知らせは削除せず、履歴として残してください。新しいお知らせは一意のidを付けて先頭に追加します。",
   "announcements": [
     {
+      "id": "auto-new-sets-1e6398f",
+      "type": "new-sets",
+      "date": "2026-11-20",
+      "title": "新しい問題集が追加されました",
+      "body": "みんなの問題集に「家庭科　5大栄養素」が追加されました。",
+      "items": [
+        {
+          "title": "家庭科　5大栄養素",
+          "subject": "家庭科",
+          "grade": "学年を問わない",
+          "topic": "栄養素"
+        }
+      ]
+    },
+    {
       "id": "2026-11-20-quadratic-functions-30-with-key-points",
       "type": "update",
       "date": "2026-11-20",
