@@ -1,9 +1,36 @@
 {
   "format": "manakuru-announcements",
   "version": 1,
-  "updatedAt": "2026-11-20",
+  "updatedAt": "2026-11-21",
   "note": "公開済みのお知らせは削除せず、履歴として残してください。新しいお知らせは一意のidを付けて先頭に追加します。",
   "announcements": [
+    {
+      "id": "auto-new-sets-ftmrxg",
+      "type": "new-sets",
+      "date": "2026-11-21",
+      "title": "新しい問題集が追加されました",
+      "body": "みんなの問題集に「技術　電気回路」「保体　健康と環境」「AI時代の幼児期の遊びと生きる力」の3種類の問題集が追加されました。",
+      "items": [
+        {
+          "title": "技術　電気回路",
+          "subject": "技術",
+          "grade": "中学3年",
+          "topic": "電気回路・電子部品"
+        },
+        {
+          "title": "保体　健康と環境",
+          "subject": "保健体育",
+          "grade": "中学3年",
+          "topic": "感染症・環境と健康・医薬品"
+        },
+        {
+          "title": "AI時代の幼児期の遊びと生きる力",
+          "subject": "家庭科",
+          "grade": "学年未指定",
+          "topic": "AI時代・幼児期の遊び"
+        }
+      ]
+    },
     {
       "id": "auto-new-sets-1jjh57c",
       "type": "new-sets",
