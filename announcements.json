@@ -1,9 +1,24 @@
 {
   "format": "manakuru-announcements",
   "version": 1,
-  "updatedAt": "2026-11-21",
+  "updatedAt": "2026-11-24",
   "note": "公開済みのお知らせは削除せず、履歴として残してください。新しいお知らせは一意のidを付けて先頭に追加します。",
   "announcements": [
+    {
+      "id": "2026-11-24-new-set-science-biology-junior3",
+      "type": "new-sets",
+      "date": "2026-11-24",
+      "title": "新しい問題集が追加されました",
+      "body": "みんなの問題集に「理科生物」が追加されました。",
+      "items": [
+        {
+          "title": "理科生物",
+          "subject": "理科",
+          "grade": "中学3年",
+          "topic": "生物（細胞分裂・生殖・遺伝・進化・生態系）"
+        }
+      ]
+    },
     {
       "id": "auto-new-sets-ftmrxg",
       "type": "new-sets",
