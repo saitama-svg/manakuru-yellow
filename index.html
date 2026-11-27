@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<!-- MANAKURU-YELLOW-BUILD: v116-quadratic-functions-readable-display -->
+<!-- MANAKURU-YELLOW-BUILD: v117-custom-navigation-shortcuts-multi-study-wrong-review -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="一問一答、復習、成績・弱点分析、問題集、白紙勉強法、模擬テストをまとめた学習ツール「マナクル YELLOW」です。">
@@ -3642,6 +3642,16 @@ body.mock-test-active .mascot{display:none!important;}
 </style>
 
 
+<style id="v117CustomizationStyles">
+.navigation-customization-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:10px 0 4px}
+.navigation-customization-row{display:flex;align-items:center;justify-content:space-between;gap:10px;min-width:0;padding:10px 12px;border:1px solid #dce9e4;border-radius:12px;background:#fbfefd}
+.navigation-customization-row strong{min-width:0;font-size:13px;color:#36524c;overflow-wrap:anywhere}
+.navigation-customization-row select{flex:0 0 130px;min-width:0;padding:8px 9px;border:1px solid #d5e5df;border-radius:9px;background:#fff;color:#294a43;font:inherit;font-size:12px;font-weight:750}
+.navigation-customization-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:12px}
+.navigation-customization-actions .user-preference-status{flex:1 1 220px}
+@media(max-width:680px){.navigation-customization-list{grid-template-columns:1fr}.navigation-customization-row select{flex-basis:118px}}
+</style>
+
 <style id="v112MultiStudyStyles">
 .multi-study-intro{margin:4px 0 18px;color:var(--muted,#66706c);line-height:1.7}
 .multi-study-resume{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 16px;padding:14px 16px;border:1px solid #e2cb70;border-radius:13px;background:#fff9df}
@@ -3839,7 +3849,7 @@ body.quadratic-30-readable-display #rouletteView .display .round-progress {
     <details class="utility-menu" id="utilityNav">
       <summary id="utilityMenuSummary">☰ その他</summary>
       <div class="utility-list utility-list-organized" aria-label="その他の機能">
-        <section class="utility-section" aria-label="追加の学習機能">
+        <section class="utility-section" id="utilityLearningSection" aria-label="追加の学習機能">
           <div class="utility-section-title">学習・記録</div>
           <button id="multiStudyTab" data-view="multiStudy" title="複数の問題集を選び、続けて学習する">📚 まとめて勉強</button>
           <button id="mockTestTab" data-view="mockTest" title="指定数の問題をまとめて解き、最後に採点する">📝 模擬テスト</button>
@@ -3848,14 +3858,18 @@ body.quadratic-30-readable-display #rouletteView .display .round-progress {
           <button id="timeAttackTab" data-view="timeAttack">⏱ タイムアタック</button>
         </section>
         <div class="utility-section-divider" role="separator"></div>
-        <section class="utility-section" aria-label="問題の作成と管理">
+        <section class="utility-section" id="utilityLibrarySection" aria-label="問題集・共有">
+          <div class="utility-section-title">問題集・共有</div>
+        </section>
+        <div class="utility-section-divider" role="separator"></div>
+        <section class="utility-section" id="utilityCreateSection" aria-label="問題の作成と管理">
           <div class="utility-section-title">問題の作成・管理</div>
           <button id="manageTab" data-view="manage">🛠 問題管理</button>
           <button id="tagTab" data-view="tag">🏷️ 分野・タグ</button>
           <button id="urlTab" data-view="url">🔗 共有・追加</button>
         </section>
         <div class="utility-section-divider" role="separator"></div>
-        <section class="utility-section" aria-label="設定とデータ管理">
+        <section class="utility-section" id="utilitySettingsSection" aria-label="設定とデータ管理">
           <div class="utility-section-title">設定・データ</div>
           <button id="printTab" data-view="print">🖨 印刷</button>
           <button id="appearanceTab" data-view="appearance">🎨 デザイン設定</button>
@@ -4131,9 +4145,9 @@ body.quadratic-30-readable-display #rouletteView .display .round-progress {
       </div>
       </div>
       <div class="answer-controls" id="answerControls">
-        <button class="check-btn correct" id="correctBtn" type="button"><span>○ 正解・自信あり</span><span class="shortcut-key" aria-hidden="true">A</span></button>
-        <button class="check-btn unsure" id="unsureCorrectBtn" type="button"><span>△ 正解・自信なし</span><span class="shortcut-key" aria-hidden="true">D</span></button>
-        <button class="check-btn wrong" id="wrongBtn" type="button"><span>× 不正解</span><span class="shortcut-key" aria-hidden="true">S</span></button>
+        <button class="check-btn correct" id="correctBtn" type="button"><span>○ 正解・自信あり</span><span class="shortcut-key" data-shortcut-action="correct" aria-hidden="true">A</span></button>
+        <button class="check-btn unsure" id="unsureCorrectBtn" type="button"><span>△ 正解・自信なし</span><span class="shortcut-key" data-shortcut-action="unsure" aria-hidden="true">D</span></button>
+        <button class="check-btn wrong" id="wrongBtn" type="button"><span>× 不正解</span><span class="shortcut-key" data-shortcut-action="wrong" aria-hidden="true">S</span></button>
       </div>
       <div class="round-summary" id="roundSummary">
         <div class="summary-title" id="summaryTitle">🎉 1周終了！</div>
@@ -4598,6 +4612,31 @@ Q2. 鎌倉幕府を開いた人物は？ → 源頼朝"></textarea>
         <div class="note">「ランダム」は問題ごとに「言葉 → 意味」と「意味 → 言葉」をランダムに切り替えます。</div>
         <div class="note" style="margin-top:5px;">※問題の途中で設定を変更した場合は、ルーレット画面の「↻ リセット」を押すと新しい設定が反映され、最初から始まります。</div>
       </div>
+      <div class="study-settings" id="navigationCustomizationSettings">
+        <div class="study-settings-title">上部メニューのカスタマイズ</div>
+        <p class="note" style="margin:0 0 10px;">よく使う機能を上部メニューに表示し、あまり使わない機能は「その他」に移せます。初期配置は現在のマナクルと同じです。変更はいつでもやり直せます。</p>
+        <div id="navigationCustomizationList" class="navigation-customization-list" aria-label="メニューの表示場所"></div>
+        <div class="navigation-customization-actions">
+          <button type="button" class="action sub" id="resetNavigationLayoutBtn">初期配置に戻す</button>
+          <button type="button" class="action main" id="saveNavigationLayoutBtn">メニュー配置を保存</button>
+          <span id="navigationLayoutStatus" class="user-preference-status" aria-live="polite">変更後に「メニュー配置を保存」を押してください。</span>
+        </div>
+      </div>
+      <div class="study-settings" id="keyboardShortcutSettings">
+        <div class="study-settings-title">キーボードショートカットのカスタマイズ</div>
+        <p class="note" style="margin:0 0 10px;">アウトプット学習・まとめて勉強・タイムアタックで使うキーを変更できます。初期設定はEnter・A・D・Sです。4つの操作に同じキーは割り当てられません。</p>
+        <div class="user-preference-grid">
+          <div class="user-preference-field"><label for="shortcutRevealSelect">答えを表示</label><select id="shortcutRevealSelect"></select></div>
+          <div class="user-preference-field"><label for="shortcutCorrectSelect">正解・自信あり</label><select id="shortcutCorrectSelect"></select></div>
+          <div class="user-preference-field"><label for="shortcutUnsureSelect">正解・自信なし</label><select id="shortcutUnsureSelect"></select></div>
+          <div class="user-preference-field"><label for="shortcutWrongSelect">不正解</label><select id="shortcutWrongSelect"></select></div>
+        </div>
+        <div class="navigation-customization-actions">
+          <button type="button" class="action sub" id="resetKeyboardShortcutsBtn">初期キーに戻す</button>
+          <button type="button" class="action main" id="saveKeyboardShortcutsBtn">キー設定を保存</button>
+          <span id="keyboardShortcutStatus" class="user-preference-status" aria-live="polite">変更したキーは保存後すぐに反映されます。</span>
+        </div>
+      </div>
       <div class="row">
         <button class="action main" id="saveSettingsBtn">設定を保存</button>
       </div>
@@ -4896,7 +4935,7 @@ Q2. 鎌倉幕府を開いた人物は？ → 源頼朝"></textarea>
 
     <section id="multiStudyView" class="panel" style="display:none;">
       <h2>📚 まとめて勉強</h2>
-      <p class="multi-study-intro">複数の問題集を選び、通常の一問一答と同じ学習画面で続けて解けます。手書きスペースも使えます。Enterで答えを表示し、A・D・Sキーまたは画面のボタンで判定します。元の問題集は変更されません。</p>
+      <p class="multi-study-intro">複数の問題集を選び、通常の一問一答と同じ学習画面で続けて解けます。手書きスペースも使えます。キーボード操作は「学習設定」で自分の使いやすいキーに変更できます。元の問題集は変更されません。</p>
 
       <div id="multiStudyResumeNotice" class="multi-study-resume" hidden>
         <div><strong>前回の学習が途中です</strong><p id="multiStudyResumeText">保存された続きから再開できます。</p></div>
@@ -4965,19 +5004,19 @@ Q2. 鎌倉幕府を開いた人物は？ → 源頼朝"></textarea>
           </div>
         </div>
         <div id="multiStudyAnswerControls" class="answer-controls" aria-label="正誤判定">
-          <button type="button" class="check-btn correct" id="multiStudyCorrectBtn"><span>○ 正解・自信あり</span><span class="shortcut-key" aria-hidden="true">A</span></button>
-          <button type="button" class="check-btn unsure" id="multiStudyUnsureBtn"><span>△ 正解・自信なし</span><span class="shortcut-key" aria-hidden="true">D</span></button>
-          <button type="button" class="check-btn wrong" id="multiStudyWrongBtn"><span>× 不正解</span><span class="shortcut-key" aria-hidden="true">S</span></button>
+          <button type="button" class="check-btn correct" id="multiStudyCorrectBtn"><span>○ 正解・自信あり</span><span class="shortcut-key" data-shortcut-action="correct" aria-hidden="true">A</span></button>
+          <button type="button" class="check-btn unsure" id="multiStudyUnsureBtn"><span>△ 正解・自信なし</span><span class="shortcut-key" data-shortcut-action="unsure" aria-hidden="true">D</span></button>
+          <button type="button" class="check-btn wrong" id="multiStudyWrongBtn"><span>× 不正解</span><span class="shortcut-key" data-shortcut-action="wrong" aria-hidden="true">S</span></button>
         </div>
-        <div class="multi-study-session-footer"><span>Enter：答えを表示　／　A：正解　D：自信なし　S：不正解</span><button type="button" class="action sub" id="multiStudyStopBtn">学習を中止して選び直す</button></div>
+        <div class="multi-study-session-footer"><span id="multiStudyShortcutHelp">Enter：答えを表示　／　A：正解・自信あり　D：正解・自信なし　S：不正解</span><button type="button" class="action sub" id="multiStudyStopBtn">学習を中止して選び直す</button></div>
       </div>
 
       <div id="multiStudyResult" class="multi-study-result" hidden>
-        <div class="multi-study-result-heading">🎉 まとめて勉強 完了！</div>
+        <div class="multi-study-result-heading" id="multiStudyResultHeading">🎉 まとめて勉強 完了！</div>
         <div id="multiStudyOverallResult" class="multi-study-overall-result"></div>
         <h3>問題集ごとの結果</h3>
         <div class="multi-study-results-table-wrap"><table class="multi-study-results-table"><thead><tr><th>問題集</th><th>問題数</th><th>○</th><th>△</th><th>×</th><th>正答率</th></tr></thead><tbody id="multiStudyResultsBody"></tbody></table></div>
-        <div class="multi-study-result-actions"><button type="button" class="action main" id="multiStudyAgainBtn">別の問題集で学習する</button><button type="button" class="action sub" id="multiStudyLibraryBtn">問題集を見る</button></div>
+        <div class="multi-study-result-actions"><button type="button" class="action main" id="multiStudyWrongReviewBtn" hidden>× 間違えた問題を解き直す</button><button type="button" class="action sub" id="multiStudyAgainBtn">別の問題集で学習する</button><button type="button" class="action sub" id="multiStudyLibraryBtn">問題集を見る</button></div>
       </div>
     </section>
 
@@ -5100,8 +5139,8 @@ Q2. 鎌倉幕府を開いた人物は？ → 源頼朝"></textarea>
         <div class="time-attack-controls">
           <button class="time-attack-control next" id="timeAttackStartBtn" type="button">▶ スタート</button>
           <button class="time-attack-control next" id="timeAttackShowAnswerBtn" type="button" style="display:none;">答えを見る</button>
-          <button class="time-attack-control correct" id="timeAttackCorrectBtn" type="button" style="display:none;">○ 正解 <span class="shortcut-key">A</span></button>
-          <button class="time-attack-control wrong" id="timeAttackWrongBtn" type="button" style="display:none;">× 不正解 <span class="shortcut-key">S</span></button>
+          <button class="time-attack-control correct" id="timeAttackCorrectBtn" type="button" style="display:none;">○ 正解 <span class="shortcut-key" data-shortcut-action="correct">A</span></button>
+          <button class="time-attack-control wrong" id="timeAttackWrongBtn" type="button" style="display:none;">× 不正解 <span class="shortcut-key" data-shortcut-action="wrong">S</span></button>
           <button class="time-attack-control next" id="timeAttackStopBtn" type="button" style="display:none;">■ 中止</button>
           <button class="time-attack-control next" id="timeAttackRetryBtn" type="button" style="display:none;">もう一度</button>
         </div>
@@ -5309,7 +5348,7 @@ Q2. 鎌倉幕府を開いた人物は？ → 源頼朝"></textarea>
               <li>問題が出たら、答えを思い出してからカードをクリック／タップするか <strong>Enter</strong> で答えを表示します。</li>
               <li>自分の答えと比べ、ボタンかキーボードで判定します。</li>
             </ol>
-            <div class="usage-shortcuts"><span class="usage-key">A：正解・自信あり</span><span class="usage-key">D：正解・自信なし</span><span class="usage-key">S：不正解</span><span class="usage-key">Enter：答えを表示</span></div>
+            <div class="usage-shortcuts"><span class="usage-key"><b data-shortcut-action="correct">A</b>：正解・自信あり</span><span class="usage-key"><b data-shortcut-action="unsure">D</b>：正解・自信なし</span><span class="usage-key"><b data-shortcut-action="wrong">S</b>：不正解</span><span class="usage-key"><b data-shortcut-action="reveal">Enter</b>：答えを表示</span></div>
             <p>通常のルーレットは、設定した問題を1周の中で重複させずに出題します。1周が終わると結果が表示され、「間違えた問題だけ解き直す」「間違えた問題をカードで確認」「弱点問題を解く」「おまかせ学習」「もう一周する」を選べます。</p>
             <p><strong>「正解・自信なし」も正解として記録</strong>されますが、まだ定着していない可能性があるため、弱点や復習候補として優先されます。</p>
           </div>
@@ -7384,7 +7423,7 @@ function resetLearningForDeck(){
   started=false; index=-1; lastIndex=-1; remainingIndices=[]; activeIndices=[];
   roundCorrectIndices=[];roundUnsureIndices=[];roundWrongIndices=[]; roundComplete=false; presentationModes={}; showingQuestion=true;
   resetStudyStats(); resetStudyMode(); resetVisualState();
-  document.querySelector(".display .hint").textContent="カードをクリック / タップ　・　Enterで次に";
+  document.querySelector(".display .hint").textContent=window.getManakuruShortcutText?window.getManakuruShortcutText("question"):"カードをクリック / タップ　・　Enterで次に";
   screen.innerHTML='<span class="placeholder">カードをクリック / タップ</span>';
 }
 
@@ -8777,6 +8816,7 @@ function historyModeLabel(mode){
     : mode === "smartBalanced" ? "📚 おまかせ：バランス"
     : mode === "smartReview" ? "🔄 おまかせ：総復習"
     : mode === "mockTest" ? "📝 模擬テスト"
+    : mode === "multiStudyWrongReview" ? "🔁 まとめて勉強・間違い直し"
     : mode === "multiStudy" ? "📚 まとめて勉強"
     : mode === "testPlan" ? "📅 テスト対策"
     : "🎯 通常";
@@ -9747,7 +9787,7 @@ function invalidateRoundAfterProblemEdit(){
   clearInMemoryRoundState();
   clearRoundCheckpointForDeck(currentDeckId);
   screen.innerHTML='<span class="placeholder">問題が更新されました。新しい内容で学習を始めてください。</span>';
-  document.querySelector(".display .hint").textContent="カードをクリック / タップ　・　Enterで次に";
+  document.querySelector(".display .hint").textContent=window.getManakuruShortcutText?window.getManakuruShortcutText("question"):"カードをクリック / タップ　・　Enterで次に";
   updateRouletteContext();
 }
 function saveRoundCheckpoint(){
@@ -9818,7 +9858,7 @@ function resumeSavedRoundCheckpoint(){
   else renderRoundAnswerWithPoint(presented.answer,pairs[index]);
   updateRoundProgress();updateRoundReviewBadge();updateStudyStats();
   answerControls.classList.toggle("visible",!showingQuestion);
-  document.querySelector(".display .hint").textContent=showingQuestion?"カードをクリック / タップ　・　Enterで答えを表示":"自分の答えと比べて判定　・　A：正解・自信あり　D：正解・自信なし　S：不正解";
+  document.querySelector(".display .hint").textContent=window.getManakuruShortcutText?window.getManakuruShortcutText(showingQuestion?"question":"answer"):(showingQuestion?"カードをクリック / タップ　・　Enterで答えを表示":"自分の答えと比べて判定　・　A：正解・自信あり　D：正解・自信なし　S：不正解");
   renderRoundCheckpointNotice();saveRoundCheckpoint();
 }
 
@@ -9846,7 +9886,7 @@ function showQuestion(animateFromAnswer=false){
   if(animateFromAnswer) triggerCardTransitionFeedback(document.getElementById("rouletteView"));
   updateRoundProgress();
   updateRoundReviewBadge();
-  document.querySelector(".display .hint").textContent="カードをクリック / タップ　・　Enterで次に";
+  document.querySelector(".display .hint").textContent=window.getManakuruShortcutText?window.getManakuruShortcutText("question"):"カードをクリック / タップ　・　Enterで次に";
   saveRoundCheckpoint();
 }
 
@@ -9857,7 +9897,7 @@ function showAnswer(){
   renderRoundAnswerWithPoint(presented.answer,pairs[index]);
   updateRoundProgress();
   answerControls.classList.add("visible");
-  document.querySelector(".display .hint").textContent="自分の答えと比べて判定　・　A：正解・自信あり　D：正解・自信なし　S：不正解";
+  document.querySelector(".display .hint").textContent=window.getManakuruShortcutText?window.getManakuruShortcutText("answer"):"自分の答えと比べて判定　・　A：正解・自信あり　D：正解・自信なし　S：不正解";
   saveRoundCheckpoint();
 }
 
@@ -10028,18 +10068,24 @@ wrongListToggle.addEventListener("click",(e)=>{
 // Enterキーでもルーレットを進める（入力欄・ボタン上では各操作を優先）
 document.addEventListener("keydown", (e)=>{
   const active = document.activeElement;
-  if(active && ["INPUT","TEXTAREA","BUTTON"].includes(active.tagName)) return;
+  if(active && ["INPUT","TEXTAREA","SELECT"].includes(active.tagName)) return;
+  if(active?.isContentEditable) return;
+  // 学習画面内のボタンにフォーカスが残っていても、設定したショートカットを優先する。
+  // 学習画面以外のボタン操作は従来どおりブラウザに任せる。
+  if(active?.tagName==="BUTTON" && !active.closest("#rouletteView, #timeAttackView")) return;
 
   const timeAttackView = document.getElementById("timeAttackView");
+  const bindings=window.getManakuruShortcutBindings?window.getManakuruShortcutBindings():{reveal:"Enter",correct:"A",unsure:"D",wrong:"S"};
+  const key=window.getManakuruShortcutEventKey?window.getManakuruShortcutEventKey(e):String(e.key||"").toUpperCase();
+
   if(timeAttackView.style.display !== "none" && timeAttackRunning){
-    const key=e.key.toLowerCase();
-    if(key === "a" || key === "s"){
+    if(key===bindings.correct || key===bindings.wrong){
       if(timeAttackShowingQuestion) return;
       e.preventDefault();
-      recordTimeAttackAnswer(key === "a");
+      recordTimeAttackAnswer(key===bindings.correct);
       return;
     }
-    if(key === "enter" && timeAttackShowingQuestion){
+    if(key===bindings.reveal && timeAttackShowingQuestion){
       e.preventDefault();
       showTimeAttackAnswer();
       return;
@@ -10049,19 +10095,17 @@ document.addEventListener("keydown", (e)=>{
   const rouletteView = document.getElementById("rouletteView");
   if(rouletteView.style.display === "none") return;
 
-  const key=e.key.toLowerCase();
-  if(key === "a" || key === "s" || key === "d"){
+  if(key===bindings.correct || key===bindings.unsure || key===bindings.wrong){
     if(showingQuestion || index===-1 || roundComplete) return;
     e.preventDefault();
-    recordAnswer(key === "a" ? true : key === "d" ? "unsure" : false);
+    recordAnswer(key===bindings.correct?true:key===bindings.unsure?"unsure":false);
     return;
   }
 
-  if(key !== "enter") return;
-  if(roundComplete) return;
+  if(key!==bindings.reveal || roundComplete) return;
   e.preventDefault();
   step();
-});
+}, true);
 
 function forceScrollTop(){
   // 適用ボタンなどにフォーカスが残っていると、ブラウザが
@@ -10245,7 +10289,7 @@ function showTimeAttackQuestion(){
   timeAttackShowAnswerBtn.style.display="inline-block";
   timeAttackCorrectBtn.style.display="none";
   timeAttackWrongBtn.style.display="none";
-  timeAttackHint.textContent="自分の答えを思い出したら「答えを見る」";
+  timeAttackHint.textContent=window.getManakuruShortcutText?window.getManakuruShortcutText("timeAttackQuestion"):"自分の答えを思い出したら「答えを見る」";
   updateTimeAttackProgress();
 }
 
@@ -10258,7 +10302,7 @@ function showTimeAttackAnswer(){
   timeAttackShowAnswerBtn.style.display="none";
   timeAttackCorrectBtn.style.display="inline-block";
   timeAttackWrongBtn.style.display="inline-block";
-  timeAttackHint.textContent="自分の答えと比べて、○ / × を選択　・　A：正解　S：不正解";
+  timeAttackHint.textContent=window.getManakuruShortcutText?window.getManakuruShortcutText("timeAttackAnswer"):"自分の答えと比べて、○ / × を選択　・　A：正解　S：不正解";
 }
 
 function updateTimeAttackTimer(){
@@ -11526,7 +11570,7 @@ function updatePageGuide(view){
     mockTest:{group:"学習・復習",title:"模擬テスト",hint:"問題をランダムに解答し、最後に自分で○・×を付けて成績に反映します。",needsPairs:true},
     whiteRecall:{group:"学習・復習",title:"白紙勉強法",hint:"範囲を選び、答えを見る前に覚えていることを書き出します。",needsPairs:true},
     blankStudy:{group:"学習・復習",title:"白紙勉強法",hint:"題名付きのノートを保存し、左側の手掛かりから右側の白紙へ思い出した内容を書き、何度でも挑戦できます。"},
-    multiStudy:{group:"学習・記録",title:"まとめて勉強",hint:"複数の問題集を選択して続けて学習できます。Enterで答えを表示し、A・D・Sキーで正誤判定できます。"},
+    multiStudy:{group:"学習・記録",title:"まとめて勉強",hint:"複数の問題集を選択して続けて学習できます。キーボード操作は「学習設定」で変更できます。終了後は間違えた問題だけを解き直せます。"},
     register:{group:"作成・管理",title:"問題登録",hint:"問題と答えをまとめて登録し、内容を確認してから適用します。"},
     manage:{group:"作成・管理",title:"問題管理",hint:"登録済みの問題を探して、内容を編集・整理できます。",needsPairs:true},
     tag:{group:"作成・管理",title:"分野・タグ",hint:"問題にタグを付けると、分野別や複数分野の学習に使えます。",needsPairs:true},
@@ -11967,7 +12011,7 @@ document.getElementById("resetStudyBtn").onclick=(e)=>{
   resetStudyMode();
 
   resetVisualState();
-  document.querySelector(".display .hint").textContent="カードをクリック / タップ　・　Enterで次に";
+  document.querySelector(".display .hint").textContent=window.getManakuruShortcutText?window.getManakuruShortcutText("question"):"カードをクリック / タップ　・　Enterで次に";
   screen.innerHTML='<span class="placeholder">カードをクリック / タップ</span>';
   updateRouletteContext();
   switchView("roulette");
@@ -12128,7 +12172,7 @@ document.getElementById("applyBtn").onclick=()=>{
   resetStudyStats();
   resetStudyMode();
   resetVisualState();
-  document.querySelector(".display .hint").textContent="カードをクリック / タップ　・　Enterで次に";
+  document.querySelector(".display .hint").textContent=window.getManakuruShortcutText?window.getManakuruShortcutText("question"):"カードをクリック / タップ　・　Enterで次に";
   screen.innerHTML='<span class="placeholder">カードをクリック / タップ</span>';
   updateRouletteContext();
   switchView("roulette");
@@ -12161,7 +12205,7 @@ document.getElementById("clearBtn").onclick=()=>{
   resetStudyStats();
   resetStudyMode();
   resetVisualState();
-  document.querySelector(".display .hint").textContent="カードをクリック / タップ　・　Enterで次に";
+  document.querySelector(".display .hint").textContent=window.getManakuruShortcutText?window.getManakuruShortcutText("question"):"カードをクリック / タップ　・　Enterで次に";
   screen.innerHTML='<span class="placeholder">問題を読み込んでください</span>';
   switchView("register");
 };
@@ -14643,7 +14687,7 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
     try{
       const raw=localStorage.getItem(DRAFT_KEY);if(!raw)return null;
       const parsed=JSON.parse(raw);
-      if(!parsed||parsed.format!=="manakuru-multi-study"||![1,2].includes(parsed.version)||!Array.isArray(parsed.items)||!parsed.items.length||parsed.items.length>MAX_MULTI_QUESTIONS)return null;
+      if(!parsed||parsed.format!=="manakuru-multi-study"||![1,2,3].includes(parsed.version)||!Array.isArray(parsed.items)||!parsed.items.length||parsed.items.length>MAX_MULTI_QUESTIONS)return null;
       if(!Number.isInteger(parsed.cursor)||parsed.cursor<0||parsed.cursor>parsed.items.length)return null;
       const validItems=parsed.items.every(item=>item&&typeof item.deckId==="string"&&typeof item.deckTitle==="string"&&typeof item.question==="string"&&typeof item.answer==="string"&&typeof item.direction==="string");
       if(!validItems)return null;
@@ -14651,7 +14695,9 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
       parsed.revealed=parsed.revealed===true;
       parsed.startedAt=Number(parsed.startedAt)||Date.now();
       // v113以前は指定問題数を選ぶと先頭の問題集だけに偏る場合があるため、旧途中データは再開させず新方式で開始する。
-      parsed.legacySelection=parsed.version!==2||parsed.selectionRule!=="round-robin-by-deck-v1";
+      parsed.legacySelection=parsed.version<2||parsed.selectionRule!=="round-robin-by-deck-v1";
+      parsed.sessionType=parsed.sessionType==="wrongReview"?"wrongReview":"normal";
+      parsed.reviewRound=Math.max(0,Number(parsed.reviewRound)||0);
       return parsed;
     }catch(e){return null;}
   }
@@ -14715,7 +14761,7 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
       savedDraftAvailable=false;
     }
     clearHandwritingPad("multiStudy");
-    session={format:"manakuru-multi-study",version:2,selectionRule:"round-robin-by-deck-v1",sourceDeckIds:[...new Set(items.map(item=>item.deckId))],sessionId:(window.crypto&&crypto.randomUUID?crypto.randomUUID():`multi-${Date.now()}-${Math.random().toString(36).slice(2,8)}`),items,cursor:0,revealed:false,outcomes:[],startedAt:Date.now(),questionStartedAt:Date.now(),completed:false,historySaved:false};
+    session={format:"manakuru-multi-study",version:3,selectionRule:"round-robin-by-deck-v1",sessionType:"normal",reviewRound:0,sourceDeckIds:[...new Set(items.map(item=>item.deckId))],sessionId:(window.crypto&&crypto.randomUUID?crypto.randomUUID():`multi-${Date.now()}-${Math.random().toString(36).slice(2,8)}`),items,cursor:0,revealed:false,outcomes:[],startedAt:Date.now(),questionStartedAt:Date.now(),completed:false,historySaved:false};
     persistSession();renderSession();
   }
   function resumeSession(){
@@ -14771,11 +14817,13 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
     $("multiStudyProgressText").textContent=getSessionProgressText();
     $("multiStudySourceLabel").textContent=`📚 ${item.deckTitle}`;
     $("multiStudyQuestion").textContent=session.revealed?item.answer:item.question;
-    $("multiStudyHint").textContent=session.revealed
+    $("multiStudyHint").textContent=window.getManakuruShortcutText?window.getManakuruShortcutText(session.revealed?"answer":"question"):session.revealed
       ?"自分の答えと比べて判定　・　A：正解・自信あり　D：正解・自信なし　S：不正解"
       :"カードをクリック / タップ　・　Enterで答えを表示";
+    const shortcutHelp=$("multiStudyShortcutHelp");if(shortcutHelp&&window.getManakuruShortcutText)shortcutHelp.textContent=window.getManakuruShortcutText("legend");
     $("multiStudyAnswerControls").classList.toggle("visible",session.revealed);
-    $("multiStudyDisplay").setAttribute("aria-label",session.revealed?"答えを表示中":"カードをクリック / タップ、またはEnterキーで答えを表示します");
+    const revealKey=window.getManakuruShortcutBindings?window.getManakuruShortcutBindings().reveal:"Enter";
+    $("multiStudyDisplay").setAttribute("aria-label",session.revealed?"答えを表示中":`カードをクリック / タップ、または${revealKey}キーで答えを表示します`);
     updateSessionStats();
     if(!session.questionStartedAt)session.questionStartedAt=Date.now();
     persistSession();
@@ -14841,7 +14889,7 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
       if(raw){parsed=JSON.parse(raw);if(!parsed||!Array.isArray(parsed.items))throw new Error(`「${g.title}」の学習履歴を読み取れません。`);}
       if(session.sessionId&&parsed.items.some(item=>item&&item.multiStudySessionId===session.sessionId))continue;
       const accuracy=g.total?Math.round((g.correct/g.total)*1000)/10:0;
-      parsed.items.push({timestamp,mode:"multiStudy",multiStudySessionId:session.sessionId||"",total:g.total,correct:g.correct,unsure:g.unsure,wrong:g.wrong,accuracy,durationMs:g.durationMs});
+      parsed.items.push({timestamp,mode:session.sessionType==="wrongReview"?"multiStudyWrongReview":"multiStudy",multiStudySessionId:session.sessionId||"",total:g.total,correct:g.correct,unsure:g.unsure,wrong:g.wrong,accuracy,durationMs:g.durationMs});
       parsed.items=parsed.items.filter(item=>item&&Number(item.total)>0).slice(-100);
       const serialized=JSON.stringify({version:1,items:parsed.items,savedAt:timestamp});localStorage.setItem(key,serialized);
       if(localStorage.getItem(key)!==serialized)throw new Error(`「${g.title}」の学習履歴を保存できませんでした。`);
@@ -14868,13 +14916,36 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
     $("multiStudyOverallResult").replaceChildren();
     const strong=document.createElement("strong");strong.textContent=`${rate}%`;
     const line=document.createElement("div");line.textContent=`${answered}問中 ${totalCorrect}問正解（自信あり ${totalCorrect-totalUnsure}・自信なし ${totalUnsure}）／不正解 ${totalWrong}問`;
-    $("multiStudyOverallResult").append(strong,line);
+    const reviewNote=document.createElement("div");
+    reviewNote.style.cssText="margin-top:8px;font-size:12px;color:#6b7772;font-weight:650;";
+    if(session.sessionType==="wrongReview"&&totalWrong===0)reviewNote.textContent="間違えた問題をすべて正解できました。よく復習できています！";
+    else if(session.sessionType==="wrongReview")reviewNote.textContent="まだ不正解の問題があります。もう一度解き直せます。";
+    $("multiStudyOverallResult").append(strong,line,reviewNote);
+    const heading=$("multiStudyResultHeading");if(heading)heading.textContent=session.sessionType==="wrongReview"?"🔁 間違い直し 完了！":"🎉 まとめて勉強 完了！";
+    const wrongReviewButton=$("multiStudyWrongReviewBtn");
+    if(wrongReviewButton){wrongReviewButton.hidden=totalWrong===0;wrongReviewButton.textContent=session.sessionType==="wrongReview"?`× 残った間違いをもう一度解く（${totalWrong}問）`:`× 間違えた問題を解き直す（${totalWrong}問）`;}
     const body=$("multiStudyResultsBody");body.replaceChildren();
     for(const g of grouped.values()){
       const tr=document.createElement("tr");const values=[g.title,String(g.total),String(g.correct-g.unsure),String(g.unsure),String(g.wrong),`${Math.round(g.correct/g.total*1000)/10}%`];
       values.forEach((value,i)=>{const td=document.createElement("td");td.textContent=value;if(i===0)td.title=value;tr.appendChild(td);});body.appendChild(tr);
     }
   }
+  function startWrongReview(){
+    if(!session||!session.completed)return;
+    const wrongItems=session.items.filter((item,index)=>session.outcomes[index]?.result==="wrong");
+    if(!wrongItems.length){alert("間違えた問題はありません。すべて正解できています。");return;}
+    const previousRound=Math.max(0,Number(session.reviewRound)||0);
+    const reviewItems=wrongItems.map(item=>({...item}));
+    clearHandwritingPad("multiStudy");
+    session={
+      format:"manakuru-multi-study",version:3,selectionRule:"round-robin-by-deck-v1",sessionType:"wrongReview",reviewRound:previousRound+1,
+      sourceDeckIds:[...new Set(reviewItems.map(item=>item.deckId))],
+      sessionId:(window.crypto&&crypto.randomUUID?crypto.randomUUID():`multi-review-${Date.now()}-${Math.random().toString(36).slice(2,8)}`),
+      items:reviewItems,cursor:0,revealed:false,outcomes:[],startedAt:Date.now(),questionStartedAt:Date.now(),completed:false,historySaved:false
+    };
+    persistSession();renderSession();
+  }
+
   function renderMultiStudyPage(){
     if(!initialized){
       loadSelections();
@@ -14923,7 +14994,6 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
     $("multiStudyResumeBtn")?.addEventListener("click",()=>{if(!resumeSession())alert("再開できる学習データが見つかりませんでした。");});
     $("multiStudyDiscardDraftBtn")?.addEventListener("click",discardDraft);
     $("multiStudyDisplay")?.addEventListener("click",revealAnswer);
-    $("multiStudyDisplay")?.addEventListener("keydown",event=>{if(event.key==="Enter"||event.key===" "){event.preventDefault();revealAnswer();}});
     $("multiStudyCorrectBtn")?.addEventListener("click",()=>saveOutcome("correct"));
     $("multiStudyUnsureBtn")?.addEventListener("click",()=>saveOutcome("unsure"));
     $("multiStudyWrongBtn")?.addEventListener("click",()=>saveOutcome("wrong"));
@@ -14933,23 +15003,179 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
       if(event.repeat||event.isComposing||event.keyCode===229||event.altKey||event.ctrlKey||event.metaKey)return;
       const target=event.target;
       if(target&&(target.isContentEditable||target.closest?.('input,textarea,select,[contenteditable="true"]')))return;
-      // event.codeを優先し、日本語IME中でも物理キーA/D/Sを安定して判定する。
-      const key=event.code==="KeyA"?"a":event.code==="KeyD"?"d":event.code==="KeyS"?"s":event.code==="Enter"?"enter":String(event.key||"").toLowerCase();
-      if(key==="enter"){
+      const bindings=window.getManakuruShortcutBindings?window.getManakuruShortcutBindings():{reveal:"Enter",correct:"A",unsure:"D",wrong:"S"};
+      const key=window.getManakuruShortcutEventKey?window.getManakuruShortcutEventKey(event):String(event.key||"").toUpperCase();
+      if(key===bindings.reveal){
         if(!session.revealed){event.preventDefault();event.stopPropagation();revealAnswer();}
         return;
       }
       if(!session.revealed)return;
-      const outcome=key==="a"?"correct":key==="d"?"unsure":key==="s"?"wrong":null;
+      const outcome=key===bindings.correct?"correct":key===bindings.unsure?"unsure":key===bindings.wrong?"wrong":null;
       if(!outcome)return;
       event.preventDefault();event.stopPropagation();saveOutcome(outcome);
     },true);
     $("multiStudyStopBtn")?.addEventListener("click",()=>{if(confirm("学習を中止して問題集の選択に戻りますか？\nここまでの回答成績は保存されています。")){try{localStorage.removeItem(DRAFT_KEY);}catch(e){}clearHandwritingPad("multiStudy");session=null;savedDraftAvailable=false;renderMultiStudyPage();}});
+    $("multiStudyWrongReviewBtn")?.addEventListener("click",startWrongReview);
     $("multiStudyAgainBtn")?.addEventListener("click",()=>{session=null;savedDraftAvailable=false;renderMultiStudyPage();});
     $("multiStudyLibraryBtn")?.addEventListener("click",()=>switchView("library"));
   }
   window.renderMultiStudyPage=renderMultiStudyPage;
   bind();
+})();
+</script>
+
+
+
+<script id="v117CustomizationFeature">
+(()=>{
+  "use strict";
+  const $=id=>document.getElementById(id);
+  const NAV_LAYOUT_KEY=`${STORAGE_PREFIX}:navigationLayout`;
+  const SHORTCUT_KEY=`${STORAGE_PREFIX}:keyboardShortcuts`;
+  const DEFAULT_SHORTCUTS={reveal:"Enter",correct:"A",unsure:"D",wrong:"S"};
+  const KEY_OPTIONS=["Enter","Space",..."ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""),..."0123456789".split("")];
+  const NAV_ITEMS=[
+    {id:"inputCardTab",label:"カード学習",default:"top",topGroup:"input",section:"utilityLearningSection"},
+    {id:"inputListTab",label:"一覧学習",default:"top",topGroup:"input",section:"utilityLearningSection"},
+    {id:"rouletteTab",label:"一問一答",default:"top",topGroup:"output",section:"utilityLearningSection"},
+    {id:"spacedTab",label:"今日の復習",default:"top",topGroup:"output",section:"utilityLearningSection"},
+    {id:"statsTab",label:"成績・弱点",default:"top",topGroup:"common",section:"utilityLearningSection"},
+    {id:"libraryTab",label:"問題集",default:"top",topGroup:"common",section:"utilityLibrarySection"},
+    {id:"sharedLibraryTab",label:"みんなの問題集",default:"top",topGroup:"common",section:"utilityLibrarySection"},
+    {id:"registerTab",label:"問題登録",default:"top",topGroup:"common",section:"utilityCreateSection"},
+    {id:"settingsTab",label:"学習設定",default:"top",topGroup:"common",section:"utilitySettingsSection"},
+    {id:"multiStudyTab",label:"まとめて勉強",default:"other",topGroup:"common",section:"utilityLearningSection"},
+    {id:"mockTestTab",label:"模擬テスト",default:"other",topGroup:"common",section:"utilityLearningSection"},
+    {id:"blankStudyTab",label:"白紙勉強法",default:"other",topGroup:"common",section:"utilityLearningSection"},
+    {id:"timeAttackTab",label:"タイムアタック",default:"other",topGroup:"common",section:"utilityLearningSection"},
+    {id:"manageTab",label:"問題管理",default:"other",topGroup:"common",section:"utilityCreateSection"},
+    {id:"tagTab",label:"分野・タグ",default:"other",topGroup:"common",section:"utilityCreateSection"},
+    {id:"urlTab",label:"共有・追加",default:"other",topGroup:"common",section:"utilityCreateSection"},
+    {id:"printTab",label:"印刷",default:"other",topGroup:"common",section:"utilitySettingsSection"},
+    {id:"appearanceTab",label:"デザイン設定",default:"other",topGroup:"common",section:"utilitySettingsSection"},
+    {id:"dataManagementTab",label:"データ管理",default:"other",topGroup:"common",section:"utilitySettingsSection"},
+    {id:"usageTab",label:"使い方",default:"other",topGroup:"common",section:"utilitySettingsSection"}
+  ];
+  const defaultNavLayout=()=>Object.fromEntries(NAV_ITEMS.map(item=>[item.id,item.default]));
+  function readNavLayout(){
+    try{const raw=JSON.parse(localStorage.getItem(NAV_LAYOUT_KEY)||"null");const base=defaultNavLayout();if(raw&&raw.version===1&&raw.placements&&typeof raw.placements==="object"){for(const item of NAV_ITEMS)if(raw.placements[item.id]==="top"||raw.placements[item.id]==="other")base[item.id]=raw.placements[item.id];}return base;}catch(_e){return defaultNavLayout();}
+  }
+  let navLayout=readNavLayout();
+  let pendingNavLayout={...navLayout};
+  function applyNavLayout(layout){
+    const groups={input:$("inputNavGroup"),output:$("outputNavGroup"),common:document.querySelector(".nav-common-group")};
+    for(const item of NAV_ITEMS){
+      const button=$(item.id);if(!button)continue;
+      if(layout[item.id]==="top"){const target=groups[item.topGroup];if(target)target.appendChild(button);}
+      else{const target=$(item.section);if(target)target.appendChild(button);}
+    }
+    ["utilityLearningSection","utilityLibrarySection","utilityCreateSection","utilitySettingsSection"].forEach(id=>{
+      const section=$(id);if(!section)return;const hasButton=!!section.querySelector("button[data-view]:not([hidden])");section.hidden=!hasButton;
+    });
+    const utility=$("utilityNav");
+    if(utility){
+      const sections=[...utility.querySelectorAll(":scope > .utility-list > .utility-section")];
+      const visible=sections.filter(section=>!section.hidden);
+      utility.hidden=visible.length===0;
+      utility.querySelectorAll(":scope > .utility-list > .utility-section-divider").forEach(divider=>{
+        const prev=divider.previousElementSibling,next=divider.nextElementSibling;divider.hidden=!(prev&&!prev.hidden&&next&&!next.hidden);
+      });
+    }
+  }
+  function renderNavLayoutControls(){
+    const list=$("navigationCustomizationList");if(!list)return;list.replaceChildren();
+    for(const item of NAV_ITEMS){
+      const row=document.createElement("label");row.className="navigation-customization-row";
+      const name=document.createElement("strong");name.textContent=item.label;
+      const select=document.createElement("select");select.dataset.navPlacement=item.id;select.setAttribute("aria-label",`${item.label}の表示場所`);
+      const top=document.createElement("option");top.value="top";top.textContent="上のメニュー";
+      const other=document.createElement("option");other.value="other";other.textContent="その他";
+      select.append(top,other);select.value=pendingNavLayout[item.id]||item.default;
+      select.addEventListener("change",()=>{pendingNavLayout[item.id]=select.value;const status=$("navigationLayoutStatus");if(status)status.textContent="未保存の変更があります。保存するとメニューに反映されます。";});
+      row.append(name,select);list.appendChild(row);
+    }
+  }
+  function saveNavLayout(){
+    const next={...pendingNavLayout};
+    try{localStorage.setItem(NAV_LAYOUT_KEY,JSON.stringify({version:1,placements:next,savedAt:Date.now()}));}
+    catch(_e){const status=$("navigationLayoutStatus");if(status)status.textContent="保存できませんでした。ブラウザの保存領域を確認してください。";return;}
+    navLayout=next;pendingNavLayout={...next};applyNavLayout(navLayout);renderNavLayoutControls();
+    const status=$("navigationLayoutStatus");if(status)status.textContent="メニュー配置を保存しました。上部メニューと「その他」に反映されています。";
+  }
+  function resetNavLayout(){
+    try{localStorage.removeItem(NAV_LAYOUT_KEY);}catch(_e){}
+    navLayout=defaultNavLayout();pendingNavLayout={...navLayout};applyNavLayout(navLayout);renderNavLayoutControls();
+    const status=$("navigationLayoutStatus");if(status)status.textContent="初期配置に戻しました。必要なら、この状態を保存できます。";
+  }
+
+  function normalizeShortcuts(raw){
+    const next={...DEFAULT_SHORTCUTS};
+    for(const action of Object.keys(next)){const value=String(raw?.[action]||"");if(KEY_OPTIONS.includes(value))next[action]=value;}
+    return next;
+  }
+  function readShortcuts(){try{return normalizeShortcuts(JSON.parse(localStorage.getItem(SHORTCUT_KEY)||"null"));}catch(_e){return {...DEFAULT_SHORTCUTS};}}
+  let shortcuts=readShortcuts();
+  function getShortcutLabel(value){return value==="Space"?"Space" : value;}
+  function getEventShortcutKey(event){
+    const code=String(event?.code||"");
+    if(/^Key[A-Z]$/.test(code))return code.slice(3);
+    if(/^Digit[0-9]$/.test(code))return code.slice(5);
+    if(code==="Enter"||code==="NumpadEnter")return "Enter";
+    if(code==="Space")return "Space";
+    const key=String(event?.key||"");
+    if(key===" ")return "Space";
+    if(key==="Enter")return "Enter";
+    return key.length===1?key.toUpperCase():key;
+  }
+  function getShortcutText(mode){
+    const b=shortcuts;
+    if(mode==="question")return `カードをクリック / タップ　・　${getShortcutLabel(b.reveal)}で答えを表示`;
+    if(mode==="timeAttackQuestion")return `自分の答えを思い出したら「答えを見る」　・　${b.reveal}でも表示できます`;
+    if(mode==="timeAttackAnswer")return `自分の答えと比べて、○ / × を選択　・　${b.correct}：正解　${b.wrong}：不正解`;
+    if(mode==="legend")return `${b.reveal}：答えを表示　／　${b.correct}：正解・自信あり　${b.unsure}：正解・自信なし　${b.wrong}：不正解`;
+    return `自分の答えと比べて判定　・　${b.correct}：正解・自信あり　${b.unsure}：正解・自信なし　${b.wrong}：不正解`;
+  }
+  window.getManakuruShortcutBindings=()=>({...shortcuts});
+  window.getManakuruShortcutEventKey=getEventShortcutKey;
+  window.getManakuruShortcutText=getShortcutText;
+  function populateShortcutSelects(){
+    const map={reveal:"shortcutRevealSelect",correct:"shortcutCorrectSelect",unsure:"shortcutUnsureSelect",wrong:"shortcutWrongSelect"};
+    for(const [action,id] of Object.entries(map)){const select=$(id);if(!select)continue;select.replaceChildren();for(const value of KEY_OPTIONS){const option=document.createElement("option");option.value=value;option.textContent=getShortcutLabel(value);select.appendChild(option);}select.value=shortcuts[action];}
+  }
+  function refreshShortcutDisplays(){
+    document.querySelectorAll("[data-shortcut-action]").forEach(node=>{const action=node.dataset.shortcutAction;if(shortcuts[action])node.textContent=getShortcutLabel(shortcuts[action]);});
+    const rouletteHint=document.querySelector("#rouletteView .display .hint");
+    if(rouletteHint&&$("rouletteView")?.style.display!=="none"&&window.getManakuruShortcutText){rouletteHint.textContent=window.getManakuruShortcutText(showingQuestion?"question":"answer");}
+    const multiControls=$("multiStudyAnswerControls");
+    const multiHint=$("multiStudyHint");
+    if(multiHint&&$("multiStudyView")&&!$("multiStudyView").hidden&&getComputedStyle($("multiStudyView")).display!=="none"){multiHint.textContent=window.getManakuruShortcutText(multiControls?.classList.contains("visible")?"answer":"question");}
+    const multiHelp=$("multiStudyShortcutHelp");if(multiHelp)multiHelp.textContent=getShortcutText("legend");
+    if(timeAttackHint&&timeAttackRunning)timeAttackHint.textContent=getShortcutText(timeAttackShowingQuestion?"timeAttackQuestion":"timeAttackAnswer");
+  }
+  function renderShortcutSettings(){populateShortcutSelects();refreshShortcutDisplays();}
+  function readShortcutControls(){return {reveal:$("shortcutRevealSelect")?.value||"Enter",correct:$("shortcutCorrectSelect")?.value||"A",unsure:$("shortcutUnsureSelect")?.value||"D",wrong:$("shortcutWrongSelect")?.value||"S"};}
+  function saveShortcuts(){
+    const next=readShortcutControls();const values=Object.values(next);
+    if(values.some(value=>!KEY_OPTIONS.includes(value))){const status=$("keyboardShortcutStatus");if(status)status.textContent="使用できないキーが含まれています。選び直してください。";return;}
+    if(new Set(values).size!==values.length){const status=$("keyboardShortcutStatus");if(status)status.textContent="同じキーが複数の操作に割り当てられています。別々のキーを選んでください。";return;}
+    try{localStorage.setItem(SHORTCUT_KEY,JSON.stringify({version:1,...next,savedAt:Date.now()}));}
+    catch(_e){const status=$("keyboardShortcutStatus");if(status)status.textContent="保存できませんでした。ブラウザの保存領域を確認してください。";return;}
+    shortcuts=next;refreshShortcutDisplays();
+    const status=$("keyboardShortcutStatus");if(status)status.textContent=`キー設定を保存しました：${getShortcutText("legend")}`;
+  }
+  function resetShortcuts(){
+    try{localStorage.removeItem(SHORTCUT_KEY);}catch(_e){}
+    shortcuts={...DEFAULT_SHORTCUTS};renderShortcutSettings();
+    const status=$("keyboardShortcutStatus");if(status)status.textContent="初期キー（Enter・A・D・S）に戻しました。";
+  }
+
+  applyNavLayout(navLayout);
+  renderNavLayoutControls();
+  renderShortcutSettings();
+  $("saveNavigationLayoutBtn")?.addEventListener("click",saveNavLayout);
+  $("resetNavigationLayoutBtn")?.addEventListener("click",resetNavLayout);
+  $("saveKeyboardShortcutsBtn")?.addEventListener("click",saveShortcuts);
+  $("resetKeyboardShortcutsBtn")?.addEventListener("click",resetShortcuts);
 })();
 </script>
 

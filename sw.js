@@ -1,4 +1,4 @@
-const CACHE_NAME = 'manakuru-yellow-v116-quadratic-readable-display';
+const CACHE_NAME = 'manakuru-yellow-v117-custom-menu-shortcuts-wrong-review';
 const APP_SHELL = [
   './',
   './index.html',
